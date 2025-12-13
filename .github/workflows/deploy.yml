@@ -1,11 +1,10 @@
 name: Deploy site
 
 on:
-  # Automatic deployment disabled - uncomment below to enable automatic deployment on push/PR
-  # push:
-  #   branches:
-  #     - master
-  #     - main
+  # Automatic deployment on push to main branch
+  push:
+    branches:
+      - main
   #   paths:
   #     - "assets/**"
   #     - "**.html"
@@ -88,8 +87,8 @@ jobs:
           npm install -g purgecss
           purgecss -c purgecss.config.js
       - name: Deploy 🚀
-        # Uncomment the line below if you re-enable pull_request trigger above
-        # if: github.event_name != 'pull_request'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           folder: _site
+          branch: gh-pages
+          clean: true

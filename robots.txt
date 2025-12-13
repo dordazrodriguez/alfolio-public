@@ -1,0 +1,4 @@
+User-agent: *
+Disallow:
+
+Sitemap: https://dordazrodriguez.github.io/alfolio-public/sitemap.xml

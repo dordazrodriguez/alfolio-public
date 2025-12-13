@@ -1,0 +1,140 @@
+/* Home page styles */
+.home-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  margin: 0 auto;
+  text-align: center;
+  overflow: visible; /* Changed from hidden to allow overflow */
+  animation: fadeIn 0.8s ease-in-out;
+  position: relative;
+}
+
+/* Network Background */
+.network-background {
+  position: fixed; /* Changed from absolute to fixed */
+  top: 0;
+  left: 0;
+  width: 100vw; /* Use viewport width */
+  height: 100vh; /* Use viewport height */
+  z-index: -1;
+  opacity: 0.8;
+  pointer-events: none; /* Ensure it doesn't interfere with clicks */
+  will-change: contents; /* Optimize for animations */
+  backface-visibility: hidden; /* Prevent flickering */
+  transform: translateZ(0); /* Force hardware acceleration */
+}
+
+/* Prevent scrollbars on body */
+body {
+  overflow-x: hidden; /* Prevent horizontal scrollbar */
+}
+
+/* Ensure the main container doesn't cause scrollbars */
+.container-fluid {
+  padding-left: 0;
+  padding-right: 0;
+  overflow-x: hidden;
+}
+
+.home-content {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 0 1rem;
+  position: relative;
+  z-index: 2;
+}
+
+/* Add a subtle text shadow to improve readability over the background */
+.home-title, .home-subtitle, .home-description {
+  text-shadow: 0 0 10px rgba(var(--global-bg-color-rgb), 0.5);
+}
+
+.home-title {
+  font-size: 3rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.home-subtitle {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+  color: var(--global-theme-color);
+}
+
+.home-description {
+  font-size: 1.25rem;
+  margin-bottom: 2rem;
+  line-height: 1.6;
+}
+
+.home-cta {
+  margin-top: 2rem;
+}
+
+.home-cta .btn-primary {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  font-size: 1.1rem;
+  font-weight: 500;
+  background-color: var(--global-theme-color);
+  color: white;
+  border-radius: 0.5rem;
+  text-decoration: none;
+  transition: transform 0.2s, background-color 0.3s;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.home-cta .btn-primary:hover {
+  background-color: var(--global-hover-color);
+  transform: translateY(-2px);
+  box-shadow: 0 6px 8px rgba(0, 0, 0, 0.15);
+}
+
+.home-cta .btn-primary:active {
+  transform: translateY(0);
+}
+
+.text-primary {
+  color: var(--global-theme-color);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .home-title {
+    font-size: 2.5rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.5rem;
+  }
+  
+  .home-description {
+    font-size: 1.1rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .home-title {
+    font-size: 2rem;
+  }
+  
+  .home-subtitle {
+    font-size: 1.25rem;
+  }
+}

@@ -1,0 +1,173 @@
+/* Project cards container */
+.projects-container {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  padding: 1rem;
+}
+
+/* Project card styles */
+.project-card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  transition: transform 0.3s ease;
+}
+
+.project-card:hover {
+  transform: translateY(-5px);
+}
+
+.project-card .card {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  background: #2a2f352b; /* Solid dark background for better contrast */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.project-card .card:hover {
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Card image container */
+.project-card .card-img-container {
+  position: relative;
+  padding-top: 56.25%; /* 16:9 Aspect Ratio */
+  overflow: hidden;
+}
+
+.project-card .card-img-top {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Card body */
+.project-card .card-body {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 1.25rem;
+  position: relative;
+  z-index: 2;
+  background: rgba(0,0,0,0.6); /* darker contrast for better readability */
+}
+
+.project-card .card-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  color: #fff !important;
+  text-shadow: 0 1px 2px rgba(0,0,0,0.8);
+  padding: 0 0.5rem;
+  margin-top: 0.5rem;
+}
+
+/* Force project card text to be visible */
+.project-card .card-body .card-text,
+.project-card .card-text,
+.projects-container .card-text,
+#projects .card-text {
+  /* Theme-aware colors are now handled in projects2.md */
+  opacity: 1 !important;
+  -webkit-text-fill-color: currentColor !important;
+  margin-bottom: 1rem !important;
+  font-size: 0.95rem !important;
+  line-height: 1.6 !important;
+  display: -webkit-box !important;
+  -webkit-line-clamp: 3 !important;
+  -webkit-box-orient: vertical !important;
+  overflow: hidden !important;
+  text-overflow: ellipsis !important;
+  text-shadow: 0 1px 1px rgba(0,0,0,0.8) !important;
+  /* Standard property for line-clamp */
+  line-clamp: 3 !important;
+  -webkit-line-clamp: 3 !important;
+  /* Ensure text is visible */
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+  font-weight: 400 !important;
+  padding: 0 0.5rem !important;
+  white-space: normal !important;
+  min-height: 3.2rem; /* ensure space for at least two lines */
+}
+
+/* Tags */
+.project-card .tags {
+  margin-top: auto;
+  padding-top: 0.75rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.project-card .badge {
+  font-size: 0.75rem;
+  padding: 0.4em 0.8em;
+  font-weight: 500;
+  background-color: rgba(0, 0, 0, 0.4) !important;
+  color: #fff !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  border-radius: 4px;
+  transition: all 0.2s ease;
+  text-shadow: none !important;
+}
+
+/* GitHub icon */
+.project-card .github-icon {
+  margin-bottom: 0.75rem;
+}
+
+.project-card .gh-icon {
+  font-size: 1.25rem;
+  color: #24292e;
+}
+
+.project-card .stars {
+  margin-left: 0.5rem;
+  font-size: 0.85rem;
+  color: #6a737d;
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .projects-container {
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+    padding: 0.5rem;
+  }
+  
+  .project-card .card-body {
+    padding: 1rem;
+  }
+  
+  .project-card .card-title {
+    font-size: 1.1rem;
+  }
+  
+  .project-card .card-text {
+    font-size: 0.9rem;
+    -webkit-line-clamp: 2;
+    line-clamp: 2;
+  }
+}
+
+@media (max-width: 576px) {
+  .projects-container {
+    grid-template-columns: 1fr;
+    max-width: 100%;
+    padding: 0.5rem;
+  }
+  
+  .project-card {
+    margin-bottom: 1rem;
+  }
+}

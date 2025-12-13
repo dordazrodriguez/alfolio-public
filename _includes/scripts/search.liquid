@@ -1,0 +1,943 @@
+{% if site.search_enabled %}
+  <script type="module" src="{{ '/assets/js/search/ninja-keys.min.js' | relative_url | bust_file_cache }}"></script>
+  <ninja-keys hideBreadcrumbs noAutoLoadMdIcons placeholder="Type to start searching"></ninja-keys>
+  <script>
+    let theme = determineComputedTheme();
+    const ninjaKeys = document.querySelector('ninja-keys');
+
+    if (theme === 'dark') {
+      ninjaKeys.classList.add('dark');
+    } else {
+      ninjaKeys.classList.remove('dark');
+    }
+
+    const openSearchModal = () => {
+      // collapse navbarNav if expanded on mobile
+      const $navbarNav = $('#navbarNav');
+      if ($navbarNav.hasClass('show')) {
+        $navbarNav.collapse('hide');
+      }
+      ninjaKeys.open();
+    };
+  </script>
+  <script>
+    // get the ninja-keys element
+    const ninja = document.querySelector('ninja-keys');
+
+    // add the home and posts menu items
+    ninja.data = [
+      {%- for page in site.pages -%}
+        {%- if page.permalink == '/' -%}{%- assign about_title = page.title -%}{%- endif -%}
+      {%- endfor -%}
+      {
+        id: "nav-{{ about_title | slugify }}",
+        title: "{{ about_title }}",
+        section: "Navigation",
+        handler: () => {
+          window.location.href = "{{ '/' | relative_url }}";
+        },
+      },
+      {%- assign sorted_pages = site.pages | sort: "nav_order" -%}
+      {%- for p in sorted_pages -%}
+        {%- if p.nav and p.autogen == null -%}
+          {%- if p.dropdown -%}
+            {%- for child in p.children -%}
+              {%- unless child.title == 'divider' -%}
+                {
+                  {%- assign title = child.title | escape -%}
+                  {%- if child.permalink contains "/blog/" -%}{%- assign url = "/blog/" -%} {%- else -%}{%- assign url = child.url -%}{%- endif -%}
+                  id: "dropdown-{{ title | slugify }}",
+                  title: "{{ title }}",
+                  description: "{{ child.description | strip_html | strip_newlines | escape }}",
+                  section: "Dropdown",
+                  handler: () => {
+                    window.location.href = "{{ url | relative_url }}";
+                  },
+                },
+              {%- endunless -%}
+            {%- endfor -%}
+
+          {%- else -%}
+            {
+              {%- assign title = p.title | escape -%}
+              {%- if p.permalink contains "/blog/" -%}{%- assign url = "/blog/" -%} {%- else -%}{%- assign url = p.url -%}{%- endif -%}
+              id: "nav-{{ title | slugify }}",
+              title: "{{ title }}",
+              description: "{{ p.description | strip_html | strip_newlines | escape }}",
+              section: "Navigation",
+              handler: () => {
+                window.location.href = "{{ url | relative_url }}";
+              },
+            },
+          {%- endif -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- for post in site.posts -%}
+        {
+          {%- assign title = post.title | escape -%}
+          {%- assign tags = post.tags | join: ' ' | downcase -%}
+          id: "post-{{ title | slugify }}",
+          {% if post.redirect == blank %}
+            title: "{{ title }}",
+          {% elsif post.redirect contains '://' %}
+            // TODO: fix the svg icon position for external posts
+            // title: '{{ title }} <svg width="2rem" height="2rem" top=".5rem" viewBox="0 0 40 40" xmlns="http://www.w3.org/2000/svg"><path d="M17 13.5v6H5v-12h6m3-3h6v6m0-6-9 9" class="icon_svg-stroke" stroke="#999" stroke-width="1.5" fill="none" fill-rule="evenodd" stroke-linecap="round" stroke-linejoin="round"></path></svg>',
+            title: "{{ title }}",
+          {% else %}
+            title: "{{ title }}",
+          {% endif %}
+          description: "{{ post.description | strip_html | strip_newlines | escape }}{% if tags %} {{ tags }}{% endif %}",
+          section: "Posts",
+          keywords: "{{ title | downcase }} {{ post.description | strip_html | strip_newlines | downcase }}{% if tags %} {{ tags }}{% endif %}",
+          handler: () => {
+            {% if post.redirect == blank %}
+              window.location.href = "{{ post.url | relative_url }}";
+            {% elsif post.redirect contains '://' %}
+              window.open("{{ post.redirect }}", "_blank");
+            {% else %}
+              window.location.href = "{{ post.redirect | relative_url }}";
+            {% endif %}
+          },
+        },
+      {%- endfor -%}
+      {%- assign news = site.news | reverse -%}
+      {%- for item in news -%}
+        {
+          {%- if item.inline -%}
+            {%- assign title = item.content | remove: '<p>' | remove: '</p>' | escape | strip -%}
+          {%- else -%}
+            {%- assign title = item.title | escape -%}
+          {%- endif -%}
+          id: "news-{{ title | slugify }}",
+          title: '{{ title | emojify }}',
+          description: "{{ item.description | strip_html | strip_newlines | escape }}",
+          section: "News",
+          {%- unless item.inline -%}
+            handler: () => {
+              window.location.href = "{{ item.url | relative_url }}";
+            },
+          {%- endunless -%}
+        },
+      {%- endfor -%}
+      {%- for collection in site.collections -%}
+        {%- if collection.label != 'news' and collection.label != 'posts' -%}
+          {%- for item in collection.docs -%}
+            {
+              {%- if item.inline -%}
+                {%- assign title = item.content | remove: '<p>' | remove: '</p>' | escape | strip -%}
+              {%- else -%}
+                {%- assign title = item.title | escape -%}
+              {%- endif -%}
+              {%- assign item_tags = item.tags | join: ' ' | downcase -%}
+              id: "{{ collection.label }}-{{ title | slugify }}",
+              title: '{{ title | emojify }}',
+              description: "{{ item.description | strip_html | strip_newlines | escape }}{% if item_tags %} {{ item_tags }}{% endif %}",
+              section: "{{ collection.label | capitalize }}",
+              keywords: "{{ title | downcase }} {{ item.description | strip_html | strip_newlines | downcase }}{% if item_tags %} {{ item_tags }}{% endif %}",
+              {%- unless item.inline -%}
+                handler: () => {
+                  window.location.href = "{{ item.url | relative_url }}";
+                },
+              {%- endunless -%}
+            },
+          {%- endfor -%}
+        {%- endif -%}
+      {%- endfor -%}
+      {%- if site.socials_in_search -%}
+        {%- if site.email -%}
+          {
+            id: 'socials-email',
+            title: 'Send email',
+            section: 'Socials',
+            handler: () => {
+              window.open("mailto:{{ site.email | encode_email }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.telegram_username -%}
+          {
+            id: 'socials-telegram',
+            title: 'Telegram',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://telegram.me/{{ site.telegram_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.whatsapp_number -%}
+          {
+            id: 'socials-whatsapp',
+            title: 'WhatsApp',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://wa.me/{{ site.whatsapp_number }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.orcid_id -%}
+          {
+            id: 'socials-orcid',
+            title: 'ORCID',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://orcid.org/{{ site.orcid_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.scholar_userid -%}
+          {
+            id: 'socials-google-scholar',
+            title: 'Google Scholar',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://scholar.google.com/citations?user={{ site.scholar_userid }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.semanticscholar_id -%}
+          {
+            id: 'socials-semantic-scholar',
+            title: 'Semantic Scholar',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.semanticscholar.org/author/{{ site.semanticscholar_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.publons_id -%}
+          {
+            id: 'socials-publons',
+            title: 'Publons',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://publons.com/a/{{ site.publons_id }}/", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.lattes_id -%}
+          {
+            id: 'socials-lattes',
+            title: 'Lattes',
+            section: 'Socials',
+            handler: () => {
+              window.open("http://lattes.cnpq.br/{{ site.lattes_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.osf_id -%}
+          {
+            id: 'socials-open-science-framework',
+            title: 'Open Science Framework',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://osf.io/{{ site.osf_id }}/", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.research_gate_profile -%}
+          {
+            id: 'socials-researchgate',
+            title: 'ResearchGate',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.researchgate.net/profile/{{site.research_gate_profile}}/", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.ieee_id -%}
+          {
+            id: 'socials-ieee-xplore',
+            title: 'IEEE Xplore',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://ieeexplore.ieee.org/author/{{site.ieee_id}}/", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.acm_id -%}
+          {
+            id: 'socials-acm-dl',
+            title: 'ACM DL',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://dl.acm.org/profile/{{site.acm_id}}/", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.scopus_id -%}
+          {
+            id: 'socials-scopus',
+            title: 'Scopus',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.scopus.com/authid/detail.uri?authorId={{site.scopus_id}}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.github_username -%}
+          {
+            id: 'socials-github',
+            title: 'GitHub',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://github.com/{{ site.github_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.linkedin_username -%}
+          {
+            id: 'socials-linkedin',
+            title: 'LinkedIn',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.linkedin.com/in/{{ site.linkedin_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.x_username -%}
+          {
+            id: 'socials-x',
+            title: 'X',
+            description: 'Twitter',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://twitter.com/{{ site.x_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.mastodon_username -%}
+          {
+            id: 'socials-mastodon',
+            title: 'Mastodon',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://{{ site.mastodon_username  }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.medium_username -%}
+          {
+            id: 'socials-medium',
+            title: 'Medium',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://medium.com/@{{ site.medium_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.quora_username -%}
+          {
+            id: 'socials-quora',
+            title: 'Quora',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.quora.com/profile/{{ site.quora_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.flickr_id -%}
+          {
+            id: 'socials-flickr',
+            title: 'Flickr',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.flickr.com/{{ site.flickr_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.blogger_url -%}
+          {
+            id: 'socials-blogger',
+            title: 'Blogger',
+            section: 'Socials',
+            handler: () => {
+              window.open("{{ site.blogger_url }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.work_url -%}
+          {
+            id: 'socials-work',
+            title: 'work',
+            section: 'Socials',
+            handler: () => {
+              window.open("{{ site.work_url }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.wikidata_id -%}
+          {
+            id: 'socials-wikidata',
+            title: 'Wikidata',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.wikidata.org/wiki/{{ site.wikidata_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.wikipedia_id -%}
+          {
+            id: 'socials-wikipedia',
+            title: 'Wikipedia',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://wikipedia.org/wiki/User:{{ site.wikipedia_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.strava_userid -%}
+          {
+            id: 'socials-strava',
+            title: 'Strava',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.strava.com/athletes/{{ site.strava_userid }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.keybase_username -%}
+          {
+            id: 'socials-keybase',
+            title: 'Keybase',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://keybase.io/{{ site.keybase_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.gitlab_username -%}
+          {
+            id: 'socials-gitlab',
+            title: 'GitLab',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://gitlab.com/{{ site.gitlab_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.dblp_url -%}
+          {
+            id: 'socials-dblp',
+            title: 'DBLP',
+            section: 'Socials',
+            handler: () => {
+              window.open("{{ site.dblp_url }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.stackoverflow_id -%}
+          {
+            id: 'socials-stackoverflow',
+            title: 'Stackoverflow',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://stackoverflow.com/users/{{ site.stackoverflow_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.kaggle_id -%}
+          {
+            id: 'socials-kaggle',
+            title: 'Kaggle',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.kaggle.com/{{ site.kaggle_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.lastfm_id -%}
+          {
+            id: 'socials-last-fm',
+            title: 'Last FM',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.last.fm/user/{{ site.lastfm_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.spotify_id -%}
+          {
+            id: 'socials-spotify',
+            title: 'Spotify',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://open.spotify.com/user/{{ site.spotify_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.pinterest_id -%}
+          {
+            id: 'socials-pinterest',
+            title: 'Pinterest',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.pinterest.com/{{ site.pinterest_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.unsplash_id -%}
+          {
+            id: 'socials-unsplash',
+            title: 'Unsplash',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://unsplash.com/@{{ site.unsplash_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.instagram_id -%}
+          {
+            id: 'socials-instagram',
+            title: 'Instagram',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://instagram.com/{{ site.instagram_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.facebook_id -%}
+          {
+            id: 'socials-facebook',
+            title: 'Facebook',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://facebook.com/{{ site.facebook_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.bluesky_url -%}
+          {
+            id: 'socials-bluesky',
+            title: 'Bluesky',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://bsky.app/profile/{{ site.bluesky_url }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.youtube_id -%}
+          {
+            id: 'socials-youtube',
+            title: 'YouTube',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://youtube.com/@{{ site.youtube_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.discord_id -%}
+          {
+            id: 'socials-discord',
+            title: 'Discord',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://discord.com/users/{{ site.discord_id }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.zotero_username -%}
+          {
+            id: 'socials-zotero',
+            title: 'Zotero',
+            section: 'Socials',
+            handler: () => {
+              window.open("https://www.zotero.org/{{ site.zotero_username }}", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- if site.rss_icon -%}
+          {
+            id: 'socials-rss',
+            title: 'RSS Feed',
+            section: 'Socials',
+            handler: () => {
+              window.open("{{ site.baseurl }}/feed.xml", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- comment -%}
+        {%- if site.wechat_qr -%}
+          // check how to add wechat qr code
+          {
+            id: 'socials-wechat',
+            title: 'WeChat',
+            section: 'Socials',
+            handler: () => {
+              window.open("", "_blank");
+            },
+          },
+        {%- endif -%}
+        {%- endcomment -%}
+      {%- endif -%}
+      {%- if site.enable_darkmode -%}
+        {
+          id: 'light-theme',
+          title: 'Change theme to light',
+          description: 'Change the theme of the site to Light',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("light");
+          },
+        },
+        {
+          id: 'dark-theme',
+          title: 'Change theme to dark',
+          description: 'Change the theme of the site to Dark',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("dark");
+          },
+        },
+        {
+          id: 'system-theme',
+          title: 'Use system default theme',
+          description: 'Change the theme of the site to System Default',
+          section: 'Theme',
+          handler: () => {
+            setThemeSetting("system");
+          },
+        },
+      {%- endif -%}
+    ];
+    
+    // Custom relevance-based sorting for search results
+    // This ensures exact keyword matches appear first, regardless of section/category
+    (function() {
+      let lastQuery = '';
+      let sortInterval = null;
+      const originalData = [...ninja.data]; // Keep a copy of original data
+      
+      // Function to calculate relevance score
+      function calculateRelevanceScore(item, query) {
+        if (!query) return 0;
+        
+        const queryLower = query.toLowerCase().trim();
+        const queryWords = queryLower.split(/\s+/).filter(w => w.length > 0);
+        const title = (item.title || '').toLowerCase();
+        const desc = (item.description || '').toLowerCase();
+        const keywords = (item.keywords || '').toLowerCase();
+        const searchableText = `${title} ${desc} ${keywords}`.toLowerCase();
+        
+        let score = 0;
+        
+        // Exact title match gets highest score
+        if (title === queryLower) {
+          score += 1000;
+        }
+        // Title contains full query
+        else if (title.includes(queryLower)) {
+          score += 500;
+        }
+        // Title starts with query
+        else if (title.startsWith(queryLower)) {
+          score += 300;
+        }
+        
+        // Individual word matches in title (more words = higher score)
+        queryWords.forEach(word => {
+          if (title.includes(word)) {
+            score += 100;
+          }
+        });
+        
+        // Keywords field matches (high weight)
+        if (keywords.includes(queryLower)) {
+          score += 200;
+        }
+        queryWords.forEach(word => {
+          if (keywords.includes(word)) {
+            score += 75;
+          }
+        });
+        
+        // Description matches (lower weight than title)
+        if (desc.includes(queryLower)) {
+          score += 50;
+        }
+        queryWords.forEach(word => {
+          if (desc.includes(word)) {
+            score += 25;
+          }
+        });
+        
+        return score;
+      }
+      
+      // Function to re-sort results by relevance
+      function resortResultsByRelevance(query) {
+        if (!query || query.trim() === '') return;
+        
+        const queryLower = query.toLowerCase().trim();
+        
+        // Access ninja-keys internal filtered results
+        setTimeout(() => {
+          try {
+            const shadowRoot = ninja.shadowRoot;
+            if (!shadowRoot) return;
+            
+            // Try multiple selectors to find the results container
+            let resultsContainer = shadowRoot.querySelector('[role="listbox"]');
+            if (!resultsContainer) {
+              resultsContainer = shadowRoot.querySelector('ul');
+            }
+            if (!resultsContainer) {
+              resultsContainer = shadowRoot.querySelector('div[class*="list"]');
+            }
+            if (!resultsContainer) {
+              // Try to find any container with multiple children
+              const allDivs = shadowRoot.querySelectorAll('div');
+              for (let div of allDivs) {
+                if (div.children.length > 2) {
+                  resultsContainer = div;
+                  break;
+                }
+              }
+            }
+            
+            if (!resultsContainer) {
+              console.log('Could not find results container');
+              return;
+            }
+            
+            // Get ALL children recursively - ninja-keys might nest items
+            const allElements = Array.from(resultsContainer.querySelectorAll('*'));
+            const resultItems = [];
+            
+            // Find items that look like search results (have click handlers or specific structure)
+            allElements.forEach(el => {
+              // Skip if it's a section header or container
+              const text = (el.textContent || '').trim();
+              const isHeader = ['Projects', 'Posts', 'Navigation', 'News', 'Theme', 'Socials'].some(s => text === s);
+              
+              if (!isHeader && el.children.length <= 2 && text.length > 0) {
+                // Check if this element has a title-like structure
+                const hasTitle = el.querySelector('[class*="title"]') || 
+                                el.querySelector('h3, h4, h5') ||
+                                (el.textContent && el.textContent.length > 5);
+                
+                if (hasTitle && !resultItems.includes(el)) {
+                  resultItems.push(el);
+                }
+              }
+            });
+            
+            // If we didn't find nested items, use direct children
+            if (resultItems.length === 0) {
+              resultItems.push(...Array.from(resultsContainer.children));
+            }
+            
+            if (resultItems.length === 0) {
+              console.log('No result items found');
+              return;
+            }
+            
+            // Calculate scores and match with data
+            const itemsWithScores = resultItems.map(element => {
+              // Extract text content
+              const fullText = (element.textContent || '').trim();
+              const lines = fullText.split('\n').map(l => l.trim()).filter(l => l.length > 0);
+              const titleText = lines[0] || fullText.substring(0, 100);
+              const descText = lines.slice(1).join(' ') || '';
+              
+              // Find matching data item
+              let dataItem = null;
+              for (let d of ninja.data) {
+                const dTitle = (d.title || '').trim();
+                if (dTitle && (
+                  dTitle === titleText ||
+                  dTitle.toLowerCase() === titleText.toLowerCase() ||
+                  titleText.toLowerCase().includes(dTitle.toLowerCase()) ||
+                  dTitle.toLowerCase().includes(titleText.toLowerCase())
+                )) {
+                  dataItem = d;
+                  break;
+                }
+              }
+              
+              if (!dataItem) {
+                dataItem = { 
+                  title: titleText, 
+                  description: descText, 
+                  keywords: `${titleText} ${descText}`.toLowerCase() 
+                };
+              }
+              
+              const score = calculateRelevanceScore(dataItem, queryLower);
+              
+              return { element, score, dataItem, titleText };
+            });
+            
+            // Filter out items with score 0 (not relevant)
+            const relevantItems = itemsWithScores.filter(item => item.score > 0);
+            
+            // Sort by score (highest first)
+            relevantItems.sort((a, b) => b.score - a.score);
+            
+            // Instead of clearing, try to reorder in place
+            // First, collect all parent containers (sections)
+            const sectionContainers = new Map();
+            relevantItems.forEach(({ element }) => {
+              let parent = element.parentElement;
+              while (parent && parent !== resultsContainer) {
+                if (!sectionContainers.has(parent)) {
+                  sectionContainers.set(parent, []);
+                }
+                parent = parent.parentElement;
+              }
+            });
+            
+            // If we have section containers, we need to flatten
+            // Otherwise, just reorder direct children
+            if (sectionContainers.size === 0) {
+              // Simple case: direct children
+              relevantItems.forEach(({ element }) => {
+                resultsContainer.appendChild(element);
+              });
+            } else {
+              // Complex case: we have nested sections
+              // Try to find the actual item containers
+              const allItemContainers = [];
+              sectionContainers.forEach((items, container) => {
+                const children = Array.from(container.children);
+                children.forEach(child => {
+                  if (relevantItems.some(ri => ri.element === child || child.contains(ri.element))) {
+                    allItemContainers.push(child);
+                  }
+                });
+              });
+              
+              // Create a flat list by extracting items from sections
+              const flatList = document.createDocumentFragment();
+              relevantItems.forEach(({ element }) => {
+                // Try to find the actual clickable item
+                let itemToMove = element;
+                if (element.querySelector('[role="option"]')) {
+                  itemToMove = element.querySelector('[role="option"]');
+                }
+                flatList.appendChild(itemToMove.cloneNode(true));
+              });
+              
+              // Try to replace the container content
+              if (resultsContainer.children.length > 0) {
+                // Clear existing content
+                while (resultsContainer.firstChild) {
+                  resultsContainer.removeChild(resultsContainer.firstChild);
+                }
+                resultsContainer.appendChild(flatList);
+              }
+            }
+            
+            console.log(`Re-sorted ${relevantItems.length} results for query: "${query}"`, relevantItems.map(i => ({ title: i.titleText, score: i.score })));
+            
+          } catch (e) {
+            console.warn('Error re-sorting search results:', e);
+          }
+        }, 300);
+      }
+      
+      // Listen for search input changes and DOM mutations
+      function setupSearchListener() {
+        const shadowRoot = ninja.shadowRoot;
+        if (!shadowRoot) {
+          // Retry if shadow root not ready
+          setTimeout(setupSearchListener, 100);
+          return;
+        }
+        
+        const searchInput = shadowRoot.querySelector('input[type="text"]');
+        if (searchInput) {
+          // Track current query
+          let currentQuery = '';
+          
+          searchInput.addEventListener('input', function(e) {
+            currentQuery = this.value;
+            lastQuery = currentQuery;
+            
+            const queryLower = currentQuery.toLowerCase().trim();
+            
+            if (queryLower) {
+              // Modify data to prioritize relevance: calculate scores and sort data array
+              const dataWithScores = originalData.map(item => {
+                const score = calculateRelevanceScore(item, queryLower);
+                return {
+                  ...item,
+                  _relevanceScore: score,
+                  // Remove section for highly relevant items so they appear together
+                  section: score > 100 ? 'Results' : item.section
+                };
+              });
+              
+              // Sort by relevance score (highest first)
+              dataWithScores.sort((a, b) => b._relevanceScore - a._relevanceScore);
+              
+              // Remove score property and update ninja.data
+              ninja.data = dataWithScores.map(({ _relevanceScore, ...item }) => item);
+              
+              // Force ninja-keys to refresh
+              if (ninja.requestUpdate) {
+                ninja.requestUpdate();
+              }
+              
+              // Also trigger DOM re-sort as backup
+              if (sortInterval) {
+                clearTimeout(sortInterval);
+              }
+              sortInterval = setTimeout(() => {
+                resortResultsByRelevance(currentQuery);
+              }, 300);
+            } else {
+              // Reset to original data when query is empty
+              ninja.data = [...originalData];
+              if (ninja.requestUpdate) {
+                ninja.requestUpdate();
+              }
+            }
+          });
+          
+          // Also use MutationObserver to catch any DOM changes
+          const observer = new MutationObserver((mutations) => {
+            // Only act if there are actual changes and we have a query
+            if (lastQuery && lastQuery.trim()) {
+              let hasRelevantChanges = false;
+              
+              mutations.forEach(mutation => {
+                if (mutation.addedNodes.length > 0 || mutation.removedNodes.length > 0) {
+                  hasRelevantChanges = true;
+                }
+              });
+              
+              if (hasRelevantChanges) {
+                // Debounce the resort
+                if (sortInterval) {
+                  clearTimeout(sortInterval);
+                }
+                sortInterval = setTimeout(() => {
+                  resortResultsByRelevance(lastQuery);
+                }, 200);
+              }
+            }
+          });
+          
+          // Observe the entire shadow root for changes
+          observer.observe(shadowRoot, {
+            childList: true,
+            subtree: true
+          });
+          
+        } else {
+          // Retry if input not found
+          setTimeout(setupSearchListener, 100);
+        }
+      }
+      
+      // Start listening once ninja-keys is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', () => {
+          setTimeout(setupSearchListener, 500);
+        });
+      } else {
+        setTimeout(setupSearchListener, 500);
+      }
+    })();
+  </script>
+{% endif %}

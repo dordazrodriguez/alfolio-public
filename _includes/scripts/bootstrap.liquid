@@ -1,0 +1,128 @@
+<!-- Bootsrap & MDB scripts -->
+<script src="{{ '/assets/js/bootstrap.bundle.min.js' | relative_url }}"></script>
+<!-- <script src="{{ '/assets/js/mdb.min.js' | relative_url }}"></script> -->
+<script
+  src="{{ site.third_party_libraries.mdb.url.js }}"
+  integrity="{{ site.third_party_libraries.mdb.integrity.js }}"
+  crossorigin="anonymous"
+></script>
+<script>
+  // Fix mobile menu closing
+  (function() {
+    function closeMobileMenu() {
+      const navbarNav = document.getElementById('navbarNav');
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      
+      if (!navbarNav) return;
+      
+      // Use Bootstrap's collapse method if available
+      if (typeof $ !== 'undefined' && $.fn.collapse) {
+        $(navbarNav).collapse('hide');
+      } else if (typeof bootstrap !== 'undefined' && bootstrap.Collapse) {
+        const bsCollapse = bootstrap.Collapse.getInstance(navbarNav);
+        if (bsCollapse) {
+          bsCollapse.hide();
+        } else {
+          new bootstrap.Collapse(navbarNav, { toggle: false }).hide();
+        }
+      } else {
+        // Fallback: manually close
+        navbarNav.classList.remove('show');
+        if (navbarToggler) {
+          navbarToggler.classList.add('collapsed');
+          navbarToggler.setAttribute('aria-expanded', 'false');
+        }
+      }
+    }
+    
+    function initMobileMenu() {
+      const navbarNav = document.getElementById('navbarNav');
+      const navbarToggler = document.querySelector('.navbar-toggler');
+      
+      if (!navbarNav || !navbarToggler) return;
+      
+      // Close menu when clicking nav links on mobile
+      const navLinks = document.querySelectorAll('#navbarNav .nav-link, #navbarNav .dropdown-item, #navbarNav button');
+      navLinks.forEach(function(link) {
+        link.addEventListener('click', function(e) {
+          // Don't close if it's a dropdown toggle
+          if (link.classList.contains('dropdown-toggle') || link.closest('.dropdown-toggle')) {
+            return;
+          }
+          
+          // Check if we're on mobile (menu is expanded)
+          if (navbarNav.classList.contains('show')) {
+            // Small delay to allow navigation to happen
+            setTimeout(closeMobileMenu, 150);
+          }
+        });
+      });
+      
+      // Ensure toggle button properly closes menu
+      // Use Bootstrap's collapse events to sync state
+      navbarNav.addEventListener('hidden.bs.collapse', function() {
+        if (navbarToggler) {
+          navbarToggler.classList.add('collapsed');
+          navbarToggler.setAttribute('aria-expanded', 'false');
+        }
+      });
+      
+      navbarNav.addEventListener('shown.bs.collapse', function() {
+        if (navbarToggler) {
+          navbarToggler.classList.remove('collapsed');
+          navbarToggler.setAttribute('aria-expanded', 'true');
+        }
+      });
+      
+      // Handle toggle button click manually
+      navbarToggler.addEventListener('click', function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+        
+        const isOpen = navbarNav.classList.contains('show');
+        
+        if (isOpen) {
+          // Close the menu
+          if (typeof $ !== 'undefined' && $.fn.collapse) {
+            $(navbarNav).collapse('hide');
+          } else if (typeof bootstrap !== 'undefined') {
+            let bsCollapse = bootstrap.Collapse.getInstance(navbarNav);
+            if (!bsCollapse) {
+              bsCollapse = new bootstrap.Collapse(navbarNav, { toggle: false });
+            }
+            bsCollapse.hide();
+          } else {
+            // Manual close
+            navbarNav.classList.remove('show');
+            navbarToggler.classList.add('collapsed');
+            navbarToggler.setAttribute('aria-expanded', 'false');
+          }
+        } else {
+          // Open the menu
+          if (typeof $ !== 'undefined' && $.fn.collapse) {
+            $(navbarNav).collapse('show');
+          } else if (typeof bootstrap !== 'undefined') {
+            let bsCollapse = bootstrap.Collapse.getInstance(navbarNav);
+            if (!bsCollapse) {
+              bsCollapse = new bootstrap.Collapse(navbarNav, { toggle: false });
+            }
+            bsCollapse.show();
+          } else {
+            // Manual open
+            navbarNav.classList.add('show');
+            navbarToggler.classList.remove('collapsed');
+            navbarToggler.setAttribute('aria-expanded', 'true');
+          }
+        }
+      });
+    }
+    
+    // Initialize when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initMobileMenu);
+    } else {
+      // DOM already loaded, wait a bit for Bootstrap to initialize
+      setTimeout(initMobileMenu, 100);
+    }
+  })();
+</script>

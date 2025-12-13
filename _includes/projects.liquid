@@ -1,0 +1,72 @@
+<div class="project-card" data-category="{{ project.category }}" data-keywords="{{ project.keywords | join: ',' }}">
+  <a href="{% if project.redirect %}{{ project.redirect }}{% else %}{{ project.url | relative_url }}{% endif %}" class="project-card-link">
+    <div class="card">
+      {% if project.img or project.video %}
+      <div class="card-img-container">
+        {% if project.img %}
+          {% include figure.liquid
+            loading="eager"
+            path=project.img
+            sizes="(max-width: 768px) 100vw, 50vw"
+            alt="{{ project.title }} thumbnail"
+            class="card-img-top"
+          %}
+        {% elsif project.video %}
+          <video autoplay muted loop playsinline class="card-video">
+            <source src="{{ project.video }}" type="video/mp4">
+            Your browser does not support the video tag.
+          </video>
+        {% endif %}
+      </div>
+      {% endif %}
+      
+      <div class="card-body">
+        <h3 class="card-title">{{ project.title }}</h3>
+        <p class="card-text">
+          {% if project.description %}
+            {{ project.description }}
+          {% elsif project.description_short %}
+            {{ project.description_short }}
+          {% elsif project.excerpt %}
+            {{ project.excerpt | strip_html | truncate: 150 }}
+          {% endif %}
+        </p>
+        
+        {% if project.link %}
+        <div class="github-icon">
+          <a href="{{ project.link }}" class="github-link" aria-label="View Project Link" data-toggle="tooltip" title="Project Link">
+            <i class="fa-brands fa-github gh-icon"></i>
+            {% if project.github_stars %}
+            <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+              <i class="fa-solid fa-star"></i>
+              <span id="{{ project.github_stars }}-stars"></span>
+            </span>
+            {% endif %}
+          </a>
+        </div>
+        {% elsif project.github %}
+        <div class="github-icon">
+          <a href="{{ project.github }}" class="github-link" aria-label="View on GitHub" data-toggle="tooltip" title="Code Repository">
+            <i class="fa-brands fa-github gh-icon"></i>
+            {% if project.github_stars %}
+            <span class="stars" data-toggle="tooltip" title="GitHub Stars">
+              <i class="fa-solid fa-star"></i>
+              <span id="{{ project.github_stars }}-stars"></span>
+            </span>
+            {% endif %}
+          </a>
+        </div>
+        {% endif %}
+        
+        {% assign proj_tags = project.tags | default: project.technologies %}
+        {% if proj_tags and proj_tags.size > 0 %}
+        <div class="tags">
+          {% for tag in proj_tags %}
+            <span class="badge">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+      </div>
+    </div>
+  </a>
+</div>

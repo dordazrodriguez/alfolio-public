@@ -1,0 +1,438 @@
+<!doctype html>
+<html lang="{{ site.lang }}" style="display: flex; justify-content: center; align-items: center;">
+  <!-- Head -->
+  <head>
+    {% if page.redirect %}
+      {% if page.redirect == true %}
+        {% assign redirect = site.baseurl | append: '/' %}
+      {% elsif page.redirect contains '://' %}
+        {% assign redirect = page.redirect %}
+      {% else %}
+        {% assign redirect = page.redirect | relative_url %}
+      {% endif %}
+      <meta http-equiv="refresh" content="3; url={{ redirect }}">
+    {% endif %}
+    {% include head.liquid %}
+  </head>
+
+<style>
+    .post.container {
+        margin-top: 2%;
+        width: 95%;
+        /* height: 100%; */
+        background-color: rgba(255, 255, 255, 0.8); 
+        padding: 20px;
+        border-radius: 10px;
+        background-size: cover;
+    }
+
+    [data-theme="dark"] .post.container {
+        background-color: rgba(0, 0, 0, 0.7); 
+    }
+
+    .video-background {
+        position: fixed;
+        right: 0;
+        bottom: 0;
+        min-width: 100%; 
+        min-height: 100%;
+        z-index: -1;
+        object-fit: fill;
+    }
+
+    .content-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        width: 100%;
+        min-height: 100vh;
+    }
+    
+    .post.container article {
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .post.container article .clearfix > *:first-child {
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    .post.container article .clearfix h2:first-of-type {
+        margin-top: 0;
+        padding-top: 0;
+    }
+    
+    .post.container .post-header {
+        margin-bottom: 0.75rem;
+    }
+    
+    .post.container .post-title {
+        margin-bottom: 0.25rem;
+    }
+    
+    .post.container .desc {
+        margin-bottom: 0.25rem;
+    }
+    
+    /* Mobile layout: stack image below name */
+    @media (max-width: 768px) {
+        .post-header > div {
+            flex-direction: column !important;
+            align-items: flex-start !important;
+        }
+        
+        .post-header .profile {
+            width: 100% !important;
+            max-width: 100% !important;
+            margin-left: 0 !important;
+            margin-top: 1rem;
+            display: flex;
+            justify-content: center;
+        }
+        
+        .post-header .profile-protected {
+            width: 100% !important;
+            max-width: 100% !important;
+            min-width: auto !important;
+        }
+        
+        .post-header .profile img,
+        .post-header .profile picture,
+        .post-header .profile figure {
+            width: 100% !important;
+            max-width: 300px !important;
+        }
+    }
+
+    /* #about-background-container {
+        /* background-image: url(https://www.adva.com/-/media/adva-main-site/innovation/virtualization/transforming-sd-wan/sd-wan-1.png); */
+        background-image: url(https://cdn.pixabay.com/video/2020/07/30/45956-447087585_large.mp4);
+        background-size: cover;
+        background-repeat: no-repeat;
+        padding-top: 50%;  
+        display: flex; 
+        justify-content: center; 
+        align-items: center;
+    } */
+
+</style>
+
+
+  <!-- Body -->
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}" id="about-background-container">
+    
+    <!-- Video Background -->
+    <video autoplay muted loop class="video-background">
+        {% comment %} <source src="https://cdn.pixabay.com/video/2020/07/30/45956-447087585_large.mp4" type="video/mp4"> {% endcomment %}
+        {% comment %} <source src="https://cdn.pixabay.com/video/2023/10/14/184941-874460311_large.mp4" type="video/mp4"> {% endcomment %}
+        <source src="https://cdn.pixabay.com/video/2021/04/12/70796-538877060_large.mp4" type="video/mp4">
+        {% comment %} <source src=" ttps://cdn.pixabay.com/video/2018/03/09/14900-259623335_large.mp4" type="video/mp4"> {% endcomment %}
+        Your browser does not support the video tag.
+    </video>
+    
+    <!-- Header -->
+    {% include header.liquid %}
+
+    <!-- Content -->
+    <div class="post container">
+        <header class="post-header">
+            <div style="display: flex; align-items: center; gap: 0.75rem; flex-wrap: wrap; padding-bottom: 1.5rem; padding-top: 2rem;">
+                <div style="flex: 1;">
+                    <h1 class="post-title" style="padding-bottom: 0;">
+                    {% if site.title == 'blank' %}
+                        <span class="font-weight-bold">{{ site.first_name }}</span> {{ site.middle_name }}
+                        {{ site.last_name }}
+                    {% else %}
+                        {{ site.title }}
+                    {% endif %}
+                    </h1>
+                    <p class="desc">{{ page.subtitle }}</p>
+                </div>
+                {% if page.profile and page.profile.image %}
+                <div class="profile profile-protected" style="flex: 1; min-width: 320px; max-width: 450px; width: 400px; position: relative; margin-left: -1rem;"> 
+                    <div class="image-protection-overlay"></div>
+                    {% assign profile_image_path = page.profile.image | prepend: 'assets/img/' %}
+                    {% if page.profile.image_circular %}
+                        {% assign profile_image_class = 'img-fluid z-depth-1 rounded-circle protected-image' %}
+                    {% else %}
+                        {% assign profile_image_class = 'img-fluid z-depth-1 rounded protected-image' %}
+                    {% endif %}
+                    {% capture sizes %}450px{% endcapture %}
+                    <style>
+                      .profile-protected {
+                        user-select: none;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        min-height: auto;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background-color: transparent;
+                        overflow: hidden;
+                        padding: 0;
+                        margin: 0;
+                      }
+                      
+                      .profile img,
+                      .profile picture,
+                      .profile figure {
+                        width: 400px !important;
+                        max-width: 400px !important;
+                        height: auto !important;
+                        display: block;
+                        opacity: 0;
+                        transition: opacity 0.3s ease-in;
+                        object-fit: cover;
+                        margin: 0;
+                        padding: 0;
+                      }
+                      
+                      .profile img.loaded,
+                      .profile picture.loaded,
+                      .profile figure.loaded {
+                        opacity: 1;
+                      }
+                      
+                      @media (max-width: 768px) {
+                        .profile-protected {
+                          min-height: auto;
+                        }
+                        .profile {
+                          min-width: 200px !important;
+                          max-width: 280px !important;
+                          width: 100% !important;
+                        }
+                        .profile img,
+                        .profile picture,
+                        .profile figure {
+                          width: 100% !important;
+                          max-width: 280px !important;
+                        }
+                      }
+                      
+                      /* Image Protection Styles */
+                      .protected-image {
+                        user-select: none;
+                        -webkit-user-select: none;
+                        -moz-user-select: none;
+                        -ms-user-select: none;
+                        -webkit-user-drag: none;
+                        -khtml-user-drag: none;
+                        -moz-user-drag: none;
+                        -o-user-drag: none;
+                        user-drag: none;
+                        pointer-events: none;
+                        -webkit-touch-callout: none;
+                      }
+                      
+                      .image-protection-overlay {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        width: 100%;
+                        height: 100%;
+                        z-index: 1;
+                        background: transparent;
+                        pointer-events: auto;
+                        cursor: default;
+                      }
+                      
+                      .profile-protected figure {
+                        position: relative;
+                        margin: 0;
+                        padding: 0;
+                      }
+                      
+                      .profile-protected picture {
+                        margin: 0;
+                        padding: 0;
+                      }
+                    </style>
+                    {%
+                        include figure.liquid loading="eager" path=profile_image_path class=profile_image_class sizes=sizes alt=page.profile.image
+                        cache_bust=true
+                    %}
+                    {% if page.profile.more_info %}
+                    <div class="more-info">{{ page.profile.more_info }}</div>
+                    {% endif %}
+                </div>
+                {% endif %}
+            </div>
+        </header>
+
+        <article>
+
+            <div class="clearfix">{{ content }}</div>
+
+        </article>
+        
+    {% comment %}
+            <!-- News -->
+            {% if page.news and site.announcements.enabled %}
+            <h2>
+                <a href="{{ '/news/' | relative_url }}" style="color: inherit">news</a>
+            </h2>
+            {% include news.liquid limit=true %}
+            {% endif %}
+
+            <!-- Latest posts -->
+            {% if site.latest_posts.enabled %}
+            <h2>
+                <a href="{{ '/blog/' | relative_url }}" style="color: inherit">latest posts</a>
+            </h2>
+            {% include latest_posts.liquid %}
+            {% endif %}
+
+            <!-- Selected papers -->
+            {% if page.selected_papers %}
+            <h2>
+                <a href="{{ '/publications/' | relative_url }}" style="color: inherit">selected publications</a>
+            </h2>
+            {% include selected_papers.liquid %}
+            {% endif %}
+
+            <!-- Social -->
+            {% if page.social %}
+            <div class="social">
+                <div class="contact-icons">{% include social.liquid %}</div>
+
+                <div class="contact-note">{{ site.contact_note }}</div>
+            </div>
+            {% endif %}
+    {% endcomment %} 
+
+
+    <!-- Footer -->
+    <!-- {% include footer.liquid %} -->
+    
+
+    <!-- JavaScripts -->
+    {% include scripts/jquery.liquid %}
+    {% include scripts/bootstrap.liquid %}
+    {% include scripts/masonry.liquid %}
+    {% include scripts/mermaid.liquid %}
+    {% include scripts/diff2html.liquid %}
+    {% include scripts/leaflet.liquid %}
+    {% include scripts/chartjs.liquid %}
+    {% include scripts/echarts.liquid %}
+    {% include scripts/vega.liquid %}
+    {% include scripts/tikzjax.liquid %}
+    {% include scripts/typograms.liquid %}
+    {% include scripts/misc.liquid %}
+    {% include scripts/badges.liquid %}
+    {% include scripts/mathjax.liquid %}
+    {% include scripts/pseudocode.liquid %}
+    {% include scripts/analytics.liquid %}
+    {% include scripts/progressBar.liquid %}
+    {% include scripts/wechatModal.liquid %}
+    {% include scripts/imageLayouts.liquid %}
+    {% include scripts/jekyll_tabs.liquid %}
+    {% include scripts/back_to_top.liquid %}
+    {% include scripts/search.liquid %}
+    <script src="{{ '/assets/js/shortcut-key.js' | relative_url }}"></script>
+    
+    <!-- Image Protection Script -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const protectedImage = document.querySelector('.protected-image');
+        const profileContainer = document.querySelector('.profile-protected');
+        const overlay = document.querySelector('.image-protection-overlay');
+        
+        // Handle image loading to prevent glitch
+        if (protectedImage) {
+          const img = protectedImage.tagName === 'IMG' ? protectedImage : protectedImage.querySelector('img');
+          if (img) {
+            // If image is already loaded
+            if (img.complete && img.naturalHeight !== 0) {
+              img.classList.add('loaded');
+              if (img.parentElement) img.parentElement.classList.add('loaded');
+              if (img.parentElement && img.parentElement.parentElement) img.parentElement.parentElement.classList.add('loaded');
+            } else {
+              // Wait for image to load
+              img.addEventListener('load', function() {
+                this.classList.add('loaded');
+                if (this.parentElement) this.parentElement.classList.add('loaded');
+                if (this.parentElement && this.parentElement.parentElement) this.parentElement.parentElement.classList.add('loaded');
+              });
+              // Fallback if load event doesn't fire
+              img.addEventListener('error', function() {
+                this.style.opacity = '1';
+              });
+            }
+          }
+        }
+        
+        if (protectedImage && profileContainer) {
+          // Disable right-click context menu on image area
+          profileContainer.addEventListener('contextmenu', function(e) {
+            e.preventDefault();
+            return false;
+          });
+          
+          // Disable drag and drop
+          profileContainer.addEventListener('dragstart', function(e) {
+            e.preventDefault();
+            return false;
+          });
+          
+          // Prevent image from being opened in new tab via middle click
+          profileContainer.addEventListener('auxclick', function(e) {
+            if (e.button === 1) { // Middle mouse button
+              e.preventDefault();
+              return false;
+            }
+          });
+          
+          // Prevent opening image in new tab via overlay click
+          if (overlay) {
+            overlay.addEventListener('click', function(e) {
+              e.preventDefault();
+              e.stopPropagation();
+              return false;
+            });
+            
+            overlay.addEventListener('contextmenu', function(e) {
+              e.preventDefault();
+              return false;
+            });
+          }
+          
+          // Disable common keyboard shortcuts for saving/viewing source
+          document.addEventListener('keydown', function(e) {
+            // Only prevent on the about page, allow in input fields
+            if (e.target.tagName === 'INPUT' || e.target.tagName === 'TEXTAREA' || e.target.isContentEditable) {
+              return true;
+            }
+            
+            // Disable Ctrl+S (save page)
+            if ((e.ctrlKey || e.metaKey) && e.key === 's') {
+              e.preventDefault();
+              return false;
+            }
+            
+            // Disable Ctrl+Shift+I, Ctrl+Shift+J, Ctrl+U (dev tools, view source)
+            if ((e.ctrlKey || e.metaKey) && e.shiftKey && (e.key === 'I' || e.key === 'J')) {
+              e.preventDefault();
+              return false;
+            }
+            
+            if ((e.ctrlKey || e.metaKey) && e.key === 'u') {
+              e.preventDefault();
+              return false;
+            }
+          });
+          
+          // Prevent image selection
+          protectedImage.style.pointerEvents = 'none';
+          
+          // Add watermark overlay effect (subtle)
+          const watermark = document.createElement('div');
+          watermark.style.cssText = 'position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; background: transparent;';
+          profileContainer.appendChild(watermark);
+        }
+      });
+    </script>
+  </body>
+</html>

@@ -65,6 +65,24 @@ importance: 1
       </div>
       <p class="text-center mt-2" style="font-size: 0.9rem; color: #666;">Account Management</p>
     </div>
+    <div class="col-md-4 mb-3">
+      <div class="screenshot-thumbnail" data-image="{{ '/assets/img/projects/gitaggregate/SearchModalCommandPalette.png' | relative_url }}" data-caption="Search Modal and Command Palette - Advanced search functionality and keyboard shortcuts" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <img src="{{ '/assets/img/projects/gitaggregate/SearchModalCommandPalette.png' | relative_url }}" alt="Search Modal and Command Palette" class="img-fluid" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+        <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+          <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
+        </div>
+      </div>
+      <p class="text-center mt-2" style="font-size: 0.9rem; color: #666;">Search Modal & Command Palette</p>
+    </div>
+    <div class="col-md-4 mb-3">
+      <div class="screenshot-thumbnail" data-image="{{ '/assets/img/projects/gitaggregate/Add_Images_to_Commit.png' | relative_url }}" data-caption="Add Media Attachments to Commits - Enhanced commit functionality with image and media attachments" style="cursor: pointer; position: relative; overflow: hidden; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.1);">
+        <img src="{{ '/assets/img/projects/gitaggregate/Add_Images_to_Commit.png' | relative_url }}" alt="Add Media Attachments to Commits" class="img-fluid" style="width: 100%; height: auto; display: block; transition: transform 0.3s ease;">
+        <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease;">
+          <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
+        </div>
+      </div>
+      <p class="text-center mt-2" style="font-size: 0.9rem; color: #666;">Add Media Attachments to Commits</p>
+    </div>
   </div>
 </div>
 
@@ -221,6 +239,14 @@ importance: 1
     {
       image: "{{ '/assets/img/projects/gitaggregate/screenshot-account-management.png' | relative_url }}",
       caption: "Account Management Interface - Add and manage multiple Git provider accounts"
+    },
+    {
+      image: "{{ '/assets/img/projects/gitaggregate/SearchModalCommandPalette.png' | relative_url }}",
+      caption: "Search Modal and Command Palette - Advanced search functionality and keyboard shortcuts"
+    },
+    {
+      image: "{{ '/assets/img/projects/gitaggregate/Add_Images_to_Commit.png' | relative_url }}",
+      caption: "Add Media Attachments to Commits - Enhanced commit functionality with screenshots & media attachments"
     }
   ];
   
@@ -299,7 +325,7 @@ importance: 1
 
 ## Overview
 
-GitAggregate solves the problem of managing repositories across multiple Git hosting platforms. Whether you have personal GitHub accounts, work GitLab instances, or self-hosted Gitea servers, GitAggregate provides a unified dashboard to manage them all from one place.
+GitAggregate solves the problem of managing repositories across multiple Git hosting platforms. Whether you have personal GitHub accounts, work GitLab instances, or self-hosted Gitea servers, GitAggregate provides a unified dashboard to manage them all from one place. It also builds on top of Git to add additional features like enhanced commit functionality with image attachments and advanced search capabilities.
 
 ## Key Features
 

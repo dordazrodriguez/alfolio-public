@@ -22,3 +22,7 @@ importance: 1
 Imported from external source. See the Colab notebook for full details.
 
 - Notebook: https://colab.research.google.com/drive/1tpmXADD_4HdJf7w9oq9_cX5C19871uLD?usp=sharing
+
+<div class="project-thumbnail" style="text-align: center; margin: 1.5rem 0;">
+  <img src="{{ '/assets/img/projects/flight_prediction_ML.gif' | relative_url }}" alt="Airline Flights Price Prediction - Model Preview" style="max-width: 100%; border-radius: 14px; box-shadow: 0 4px 12px rgba(0,0,0,0.15);">
+</div>

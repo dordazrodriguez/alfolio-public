@@ -134,7 +134,7 @@ horizontal: false
         {% comment %} Projects will be sorted by date in JavaScript (most recent first), then by importance {% endcomment %}
         <div class="row" id="projects-grid">
           {% for project in sorted_projects %}
-            <div class="col-md-6 col-lg-4 mb-4 project-card" 
+            <div class="col-md-6 col-xl-4 mb-4 project-card" 
                  data-category="{% if project.category %}{% if project.category.first %}{{ project.category | join: ',' }}{% else %}{{ project.category }}{% endif %}{% endif %}" 
                  data-title="{{ project.title }}" 
                  data-description="{{ project.description }}"
@@ -1516,6 +1516,195 @@ horizontal: false
   html[data-theme='dark'] #reset-filters:hover {
     background-color: rgba(255, 255, 255, 0.05) !important;
     border-color: rgba(255, 255, 255, 0.15) !important;
+  }
+</style>
+
+<!-- Project card visual polish -->
+<style>
+  /* Equal-height cards: stretch each column so every card in a row matches */
+  .project-card {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .project-card .card {
+    flex: 1 1 auto;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+    border-radius: 14px;
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
+    transform: none !important;
+  }
+
+  html[data-theme='light'] .project-card .card {
+    background-color: #ffffff;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
+  }
+
+  html[data-theme='dark'] .project-card .card {
+    background-color: #1e293b;
+    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
+  }
+
+  .project-card .card:hover {
+    transform: translateY(-6px) !important;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 20px 40px rgba(0, 0, 0, 0.14) !important;
+    border-color: rgba(56, 189, 248, 0.55);
+  }
+
+  html[data-theme='light'] .project-card .card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 20px 40px rgba(0, 0, 0, 0.14) !important;
+  }
+
+  html[data-theme='dark'] .project-card .card:hover {
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.5), 0 20px 40px rgba(0, 0, 0, 0.55) !important;
+  }
+
+  /* Keep the footer pinned to the bottom of every card */
+  .project-card .card-body {
+    flex: 1 1 auto;
+    display: flex !important;
+    flex-direction: column !important;
+    padding: 1.5rem 1.5rem 1.25rem;
+  }
+
+  /* Image: soft fade + zoom on hover (clipped by the card) */
+  .project-card .card > figure {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+  }
+
+  .project-card .card > figure::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    background: linear-gradient(to top, rgba(2, 6, 23, 0.4), transparent 55%);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+
+  .project-card .card:hover > figure::after {
+    opacity: 1;
+  }
+
+  .project-card .card img.card-img-top,
+  .project-card .card video.card-img-top {
+    transition: transform 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+  }
+
+  .project-card .card:hover img.card-img-top,
+  .project-card .card:hover video.card-img-top {
+    transform: scale(1.05);
+  }
+
+  /* Typography: clamp title and description so cards align */
+  .project-card .card-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    line-height: 1.35;
+    margin-bottom: 0.5rem;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .project-card .card-text {
+    font-size: 0.95rem !important;
+    line-height: 1.55 !important;
+    display: -webkit-box !important;
+    -webkit-line-clamp: 4;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    flex: none;
+    margin-bottom: 0.5rem;
+  }
+
+  .project-card .card-body small.text-muted {
+    font-size: 0.8rem;
+    letter-spacing: 0.3px;
+  }
+
+  /* Footer: clean divider instead of a solid grey block */
+  .project-card .card-footer {
+    margin-top: auto;
+    background-color: transparent !important;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+    padding: 1rem 1.5rem;
+    border-radius: 0 !important;
+  }
+
+  html[data-theme='dark'] .project-card .card-footer {
+    background-color: transparent !important;
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  /* Themed pill buttons in the footer */
+  .project-card .card-footer .btn {
+    border-radius: 6px;
+    font-weight: 500;
+    padding: 0.4rem 1.05rem;
+    font-size: 0.85rem;
+    transition: all 0.2s ease;
+  }
+
+  .project-card .card-footer .btn-primary {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    border: 1px solid transparent;
+    color: #ffffff;
+    box-shadow: 0 2px 6px rgba(2, 132, 199, 0.35);
+  }
+
+  .project-card .card-footer .btn-primary:hover {
+    background: linear-gradient(135deg, #0369a1, #0284c7);
+    color: #ffffff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(2, 132, 199, 0.4);
+  }
+
+  html[data-theme='dark'] .project-card .card-footer .btn-primary {
+    background: linear-gradient(135deg, #0ea5e9, #38bdf8);
+    color: #0f172a;
+    box-shadow: 0 2px 6px rgba(56, 189, 248, 0.35);
+  }
+
+  html[data-theme='dark'] .project-card .card-footer .btn-primary:hover {
+    background: linear-gradient(135deg, #0284c7, #0ea5e9);
+    color: #ffffff;
+  }
+
+  .project-card .card-footer .btn-outline-primary {
+    background: transparent;
+    border: 1px solid rgba(2, 132, 199, 0.45);
+    color: #0284c7;
+  }
+
+  .project-card .card-footer .btn-outline-primary:hover {
+    background: rgba(2, 132, 199, 0.08);
+    border-color: #0284c7;
+    color: #0284c7;
+  }
+
+  html[data-theme='dark'] .project-card .card-footer .btn-outline-primary {
+    border-color: rgba(56, 189, 248, 0.45);
+    color: #38bdf8;
+  }
+
+  html[data-theme='dark'] .project-card .card-footer .btn-outline-primary:hover {
+    background: rgba(56, 189, 248, 0.12);
+    border-color: #38bdf8;
+    color: #38bdf8;
   }
 </style>
 

@@ -1,17 +1,5 @@
 // Has to be in the head tag, otherwise a flicker effect will occur.
 
-// Toggle through light, dark, and system theme settings.
-let toggleThemeSetting = () => {
-  let themeSetting = determineThemeSetting();
-  if (themeSetting == "system") {
-    setThemeSetting("light");
-  } else if (themeSetting == "light") {
-    setThemeSetting("dark");
-  } else {
-    setThemeSetting("system");
-  }
-};
-
 // Change the theme setting and apply the theme.
 let setThemeSetting = (themeSetting) => {
   localStorage.setItem("theme", themeSetting);
@@ -299,7 +287,6 @@ let initTheme = () => {
   document.addEventListener("DOMContentLoaded", function () {
     const dropdownToggle = document.getElementById("theme-dropdown-toggle");
     const menuItems = document.querySelectorAll(".theme-dropdown-menu li[data-theme-value]");
-    const legacyToggle = document.getElementById("light-toggle");
 
     if (dropdownToggle) {
       dropdownToggle.addEventListener("click", function (e) {
@@ -332,21 +319,6 @@ let initTheme = () => {
 
     // Close dropdown when clicking outside
     document.addEventListener("click", handleClickOutside);
-
-    // Keep backward compatibility with the old toggle
-    if (legacyToggle) {
-      legacyToggle.addEventListener("click", function () {
-        toggleThemeSetting();
-      });
-    }
-
-    // Add support for mobile theme toggle
-    const mobileToggle = document.getElementById("light-toggle-mobile");
-    if (mobileToggle) {
-      mobileToggle.addEventListener("click", function () {
-        toggleThemeSetting();
-      });
-    }
 
     // Initial update of dropdown
     updateThemeDropdown(themeSetting);

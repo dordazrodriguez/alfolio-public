@@ -10,17 +10,6 @@
         <span style="color: var(--global-text-color); margin-left: -5px">.dev</span>
       </a>
       
-      <!-- Mobile Theme Toggle (visible on mobile, hidden on desktop) -->
-      {% if site.enable_darkmode %}
-        <div class="mobile-theme-toggle d-sm-none">
-          <button id="light-toggle-mobile" title="Change theme" class="mobile-toggle-btn">
-            <i class="ti ti-sun-moon" id="light-toggle-system-mobile"></i>
-            <i class="ti ti-moon-filled" id="light-toggle-dark-mobile"></i>
-            <i class="ti ti-sun-filled" id="light-toggle-light-mobile"></i>
-          </button>
-        </div>
-      {% endif %}
-      
       <!-- Mobile Search Toggle (visible on mobile, hidden on desktop) -->
       {% if site.search_enabled %}
         <div class="mobile-search-toggle d-sm-none">
@@ -121,19 +110,11 @@
             </li>
           {% endif %}
           {% if site.enable_darkmode %}
-            <!-- Toggle theme mode (hidden on mobile, shown on desktop) -->
-            <li class="toggle-container d-none d-sm-flex">
-              <button id="light-toggle" title="Change theme">
-                <i class="ti ti-sun-moon" id="light-toggle-system"></i>
-                <i class="ti ti-moon-filled" id="light-toggle-dark"></i>
-                <i class="ti ti-sun-filled" id="light-toggle-light"></i>
-              </button>
+            <!-- Theme Selector -->
+            <li class="nav-item" id="theme-selector" style="padding: 0 10px; margin: 0;">
+              {% include theme_selector.liquid %}
             </li>
           {% endif %}
-          <!-- Theme Selector -->
-          <li class="nav-item" id="theme-selector" style="padding: 0 10px; margin: 0;">
-            {% include theme_selector.liquid %}
-          </li>
         </ul>
       </div>
     </div>

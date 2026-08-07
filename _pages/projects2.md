@@ -680,7 +680,7 @@ horizontal: false
   }
   
   html[data-theme='light'] .project-card .card-text {
-    color: #ffffff !important;
+    color: #475569 !important;
   }
   
   html[data-theme='dark'] .project-card .card-text {
@@ -1040,7 +1040,7 @@ horizontal: false
   }
   
   html[data-theme='light'] .project-card .card-text {
-    color: #ffffff !important;
+    color: #475569 !important;
   }
   
   html[data-theme='dark'] .project-card .card-text {
@@ -1204,7 +1204,7 @@ horizontal: false
   }
   
   html[data-theme='light'] .project-card .card-text {
-    color: #ffffff !important;
+    color: #475569 !important;
   }
   
   html[data-theme='dark'] .project-card .card-text {

@@ -19,7 +19,7 @@ let setThemeSetting = (themeSetting) => {
   document.documentElement.setAttribute("data-theme-setting", themeSetting);
 
   // Update active button in theme selector
-  updateThemeButtons(themeSetting);
+  updateThemeDropdown(themeSetting);
 
   applyTheme();
 };
@@ -234,52 +234,59 @@ let determineComputedTheme = () => {
   }
 };
 
-// Update the active state of theme buttons
-let updateThemeButtons = (themeSetting) => {
-  const lightBtn = document.getElementById("light-theme-btn");
-  const darkBtn = document.getElementById("dark-theme-btn");
-  const systemBtn = document.getElementById("system-theme-btn");
+// Update the active state and display of the theme dropdown
+let updateThemeDropdown = (themeSetting) => {
+  const menuItems = document.querySelectorAll(".theme-dropdown-menu li[data-theme-value]");
+  const dropdownIcon = document.getElementById("theme-dropdown-icon");
+  const dropdownLabel = document.getElementById("theme-dropdown-label");
 
-  if (!lightBtn || !darkBtn || !systemBtn) return;
+  menuItems.forEach((item) => {
+    item.classList.toggle("active", item.getAttribute("data-theme-value") === themeSetting);
+  });
 
-  // Remove active class from all buttons
-  lightBtn.classList.remove("active");
-  darkBtn.classList.remove("active");
-  systemBtn.classList.remove("active");
+  if (dropdownLabel) {
+    dropdownLabel.textContent = themeSetting.charAt(0).toUpperCase() + themeSetting.slice(1);
+  }
 
-  // Add active class to the selected button
-  if (themeSetting === "light") {
-    lightBtn.classList.add("active");
-  } else if (themeSetting === "dark") {
-    darkBtn.classList.add("active");
-  } else {
-    systemBtn.classList.add("active");
+  if (dropdownIcon) {
+    if (themeSetting === "light") {
+      dropdownIcon.className = "fas fa-sun";
+    } else if (themeSetting === "dark") {
+      dropdownIcon.className = "fas fa-moon";
+    } else {
+      dropdownIcon.className = "ti ti-sun-moon";
+    }
   }
 };
 
-// Toggle the theme popup
-let toggleThemePopup = () => {
-  const popup = document.querySelector('.theme-popup');
-  if (popup) {
-    popup.classList.toggle('show');
+// Toggle the theme dropdown
+let toggleThemeDropdown = () => {
+  const menu = document.querySelector(".theme-dropdown-menu");
+  const container = document.querySelector(".theme-dropdown-container");
+  const toggle = document.getElementById("theme-dropdown-toggle");
+  if (!menu || !container) return;
+  menu.classList.toggle("show");
+  container.classList.toggle("open");
+  if (toggle) {
+    toggle.setAttribute("aria-expanded", menu.classList.contains("show") ? "true" : "false");
   }
 };
 
-// Close the theme popup
-let closeThemePopup = () => {
-  const popup = document.querySelector('.theme-popup');
-  if (popup) {
-    popup.classList.remove('show');
-  }
+// Close the theme dropdown
+let closeThemeDropdown = () => {
+  const menu = document.querySelector(".theme-dropdown-menu");
+  const container = document.querySelector(".theme-dropdown-container");
+  const toggle = document.getElementById("theme-dropdown-toggle");
+  if (menu) menu.classList.remove("show");
+  if (container) container.classList.remove("open");
+  if (toggle) toggle.setAttribute("aria-expanded", "false");
 };
 
-// Close popup when clicking outside
+// Close dropdown when clicking outside
 let handleClickOutside = (event) => {
-  const popup = document.querySelector('.theme-popup');
-  const settingsToggle = document.getElementById('settings-toggle');
-
-  if (popup && settingsToggle && !popup.contains(event.target) && !settingsToggle.contains(event.target)) {
-    closeThemePopup();
+  const container = document.querySelector(".theme-dropdown-container");
+  if (container && !container.contains(event.target)) {
+    closeThemeDropdown();
   }
 };
 
@@ -288,48 +295,42 @@ let initTheme = () => {
 
   setThemeSetting(themeSetting);
 
-  // Add event listeners to the theme selector buttons and popup
+  // Add event listeners to the theme selector dropdown
   document.addEventListener("DOMContentLoaded", function () {
-    const lightBtn = document.getElementById("light-theme-btn");
-    const darkBtn = document.getElementById("dark-theme-btn");
-    const systemBtn = document.getElementById("system-theme-btn");
-    const settingsToggle = document.getElementById("settings-toggle");
-    const closeBtn = document.querySelector(".theme-popup-close");
+    const dropdownToggle = document.getElementById("theme-dropdown-toggle");
+    const menuItems = document.querySelectorAll(".theme-dropdown-menu li[data-theme-value]");
     const legacyToggle = document.getElementById("light-toggle");
 
-    if (lightBtn) {
-      lightBtn.addEventListener("click", function () {
-        setThemeSetting("light");
-        closeThemePopup();
-      });
-    }
-
-    if (darkBtn) {
-      darkBtn.addEventListener("click", function () {
-        setThemeSetting("dark");
-        closeThemePopup();
-      });
-    }
-
-    if (systemBtn) {
-      systemBtn.addEventListener("click", function () {
-        setThemeSetting("system");
-        closeThemePopup();
-      });
-    }
-
-    if (settingsToggle) {
-      settingsToggle.addEventListener("click", function (e) {
+    if (dropdownToggle) {
+      dropdownToggle.addEventListener("click", function (e) {
         e.stopPropagation();
-        toggleThemePopup();
+        toggleThemeDropdown();
       });
     }
 
-    if (closeBtn) {
-      closeBtn.addEventListener("click", closeThemePopup);
-    }
+    menuItems.forEach((item) => {
+      item.addEventListener("click", function () {
+        const value = item.getAttribute("data-theme-value");
+        if (value) {
+          setThemeSetting(value);
+          closeThemeDropdown();
+        }
+      });
+      item.addEventListener("keydown", function (e) {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          item.click();
+        }
+      });
+    });
 
-    // Close popup when clicking outside
+    document.addEventListener("keydown", function (e) {
+      if (e.key === "Escape") {
+        closeThemeDropdown();
+      }
+    });
+
+    // Close dropdown when clicking outside
     document.addEventListener("click", handleClickOutside);
 
     // Keep backward compatibility with the old toggle
@@ -347,8 +348,8 @@ let initTheme = () => {
       });
     }
 
-    // Initial update of buttons
-    updateThemeButtons(themeSetting);
+    // Initial update of dropdown
+    updateThemeDropdown(themeSetting);
   });
 
   // Add event listener to the system theme preference change.

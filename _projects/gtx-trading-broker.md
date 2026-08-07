@@ -150,6 +150,12 @@ gtx-trading-broker/
     position: relative;
   }
   
+  .screenshot-item img {
+    height: 320px !important;
+    object-fit: cover;
+    object-position: top;
+  }
+  
   .screenshot-item:hover {
     transform: translateY(-4px);
     box-shadow: 0 4px 12px rgba(0,0,0,0.15) !important;

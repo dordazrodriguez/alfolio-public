@@ -1385,7 +1385,8 @@ body.toc-panel-open {
     top: 0;
     bottom: 0;
     right: 100%;
-    width: min(230px, calc(14vw - 1rem));
+    width: min(230px, calc(17vw - 1rem));
+    max-width: 230px;
     padding-right: 1rem;
   }
 
@@ -1419,6 +1420,15 @@ body.blog-page .container {
 /* Comfortable reading width for individual blog posts */
 body.post-page .post {
   max-width: 780px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* On post pages, narrow the container so the TOC has more room and content stays centered */
+@media (min-width: 992px) {
+  body.post-page .container {
+    width: 66%;
+  }
 }
 
 .featured-posts {

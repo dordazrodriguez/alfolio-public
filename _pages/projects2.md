@@ -1120,7 +1120,7 @@ horizontal: false
   .project-card .card {
     width: 100%;
     transition: all 0.3s ease;
-    border-radius: 8px;
+    border-radius: 7.5px;
   }
 
   .project-card .card-img-top {
@@ -1530,7 +1530,7 @@ horizontal: false
   .project-card .card {
     flex: 1 1 auto;
     border: 1px solid rgba(0, 0, 0, 0.08);
-    border-radius: 14px;
+    border-radius: 7.5px;
     background-color: #ffffff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
     overflow: hidden;

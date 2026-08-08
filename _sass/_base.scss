@@ -1407,6 +1407,13 @@ body.blog-page .container {
   width: 72%;
 }
 
+/* On small screens, let blog content use nearly the full width */
+@media (max-width: 767px) {
+  body.blog-page .container {
+    width: 100%;
+  }
+}
+
 /* Comfortable reading width for individual blog posts */
 body.post-page .post {
   max-width: 780px;

@@ -1417,11 +1417,9 @@ body.blog-page .container {
   }
 }
 
-/* Comfortable reading width for individual blog posts */
+/* Post content fills the column to the right of the TOC (no width cap) */
 body.post-page .post {
-  max-width: 780px;
-  margin-left: auto;
-  margin-right: auto;
+  width: 100%;
 }
 
 /* On post pages, narrow the container so the TOC has more room and content stays centered */

@@ -1374,8 +1374,8 @@ body.toc-panel-open {
   max-width: 100%;
 }
 
-/* Float the TOC sidebar in the left margin on large screens */
-@media (min-width: 992px) {
+/* Float the TOC sidebar in the left margin on larger screens */
+@media (min-width: 768px) {
   body.blog-page #toc-row {
     position: relative;
   }
@@ -1423,7 +1423,7 @@ body.post-page .post {
 }
 
 /* On post pages, narrow the container so the TOC has more room and content stays centered */
-@media (min-width: 992px) {
+@media (min-width: 768px) {
   body.post-page .container {
     width: 66%;
   }

@@ -641,10 +641,9 @@ footer.sticky-bottom {
 // Blog
 
 .header-bar {
-  border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
   padding-top: 2rem;
-  padding-bottom: 3rem;
+  padding-bottom: 1.5rem;
 
   h1 {
     color: var(--global-theme-color);
@@ -655,7 +654,7 @@ footer.sticky-bottom {
 .tag-category-list {
   border-bottom: 1px solid var(--global-divider-color);
   text-align: center;
-  padding-top: 1rem;
+  padding-top: 0.5rem;
 
   ul {
     justify-content: center;
@@ -665,7 +664,7 @@ footer.sticky-bottom {
     li {
       list-style: none;
       display: inline-block;
-      padding: 1rem 0.5rem;
+      padding: 0.5rem 0.5rem;
       color: var(--global-text-color-light);
     }
   }
@@ -1076,12 +1075,12 @@ html.transition *:after {
   text-decoration: none;
 }
 
-.post-content h2:not(:hover) a,
-.post-content h3:not(:hover) a,
-.post-content h4:not(:hover) a,
-.post h2:not(:hover) a,
-.post h3:not(:hover) a,
-.post h4:not(:hover) a {
+.post-content h2:not(:hover) a[href^="#"],
+.post-content h3:not(:hover) a[href^="#"],
+.post-content h4:not(:hover) a[href^="#"],
+.post h2:not(:hover) a[href^="#"],
+.post h3:not(:hover) a[href^="#"],
+.post h4:not(:hover) a[href^="#"] {
   opacity: 0.35;
   transition: opacity 0.2s ease;
 }
@@ -1375,10 +1374,10 @@ body.toc-panel-open {
   max-width: 100%;
 }
 
-/* Wider container for blog pages (about 5% spacing on each side) */
+/* Wider container for blog pages (about 10% spacing on each side) */
 body.blog-page .container {
   max-width: none;
-  width: 90%;
+  width: 80%;
 }
 
 .featured-posts {

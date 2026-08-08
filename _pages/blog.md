@@ -23,7 +23,9 @@ pagination:
   {% if blog_name_size > 0 or blog_description_size > 0 %}
     <div class="header-bar">
       <h1>{{ site.blog_name }}</h1>
-      <h2>{{ site.blog_description }}</h2>
+      {% if blog_description_size > 0 %}
+        <h2>{{ site.blog_description }}</h2>
+      {% endif %}
     </div>
   {% endif %}
 
@@ -97,7 +99,12 @@ pagination:
   <div class="container-fluid mt-4">
     <!-- Horizontal Filter Section -->
     <div class="mb-4" id="blog-filter-section">
-      <div class="card shadow-sm filter-card-horizontal">
+      <button type="button" class="filter-collapse-toggle filter-section-toggle" id="blog-filter-section-toggle" aria-expanded="true" aria-controls="blog-filter-section-content">
+        <i class="fas fa-sliders-h"></i>
+        <span>Filters</span>
+        <i class="fas fa-chevron-down filter-chevron" style="margin-left: auto; transition: transform 0.3s ease; font-size: 0.75rem; opacity: 0.7;"></i>
+      </button>
+      <div class="card shadow-sm filter-card-horizontal filter-collapse-content" id="blog-filter-section-content">
         <div class="card-body">
           <div class="filter-section-horizontal">
             <!-- Search Input -->
@@ -813,6 +820,27 @@ pagination:
   .filter-collapse-toggle {
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     cursor: pointer;
+  }
+  
+  .filter-section-toggle {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.75rem 0.5rem;
+    margin-bottom: 0.5rem;
+    background: transparent;
+    border: none;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    font-weight: 600;
+    font-size: 0.9rem;
+    letter-spacing: 0.3px;
+    color: #475569;
+  }
+  
+  html[data-theme='dark'] .filter-section-toggle {
+    color: #cbd5e1;
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
   
   .filter-collapse-toggle:hover {
@@ -1596,5 +1624,39 @@ document.addEventListener('DOMContentLoaded', function() {
       saveCollapseState(sectionId, newState);
     });
   });
+
+  // Whole filter section toggle
+  const filterSectionToggle = document.getElementById('blog-filter-section-toggle');
+  const filterSectionContent = document.getElementById('blog-filter-section-content');
+
+  if (filterSectionToggle && filterSectionContent) {
+    let filterExpanded = true;
+    try {
+      const stored = localStorage.getItem('blog-filter-section-main');
+      if (stored === 'collapsed') filterExpanded = false;
+    } catch (e) {}
+
+    if (filterExpanded) {
+      filterSectionToggle.classList.add('active');
+      filterSectionContent.classList.remove('collapsed');
+    } else {
+      filterSectionToggle.classList.remove('active');
+      filterSectionContent.classList.add('collapsed');
+    }
+
+    filterSectionToggle.addEventListener('click', function() {
+      const newState = !this.classList.contains('active');
+      if (newState) {
+        this.classList.add('active');
+        filterSectionContent.classList.remove('collapsed');
+      } else {
+        this.classList.remove('active');
+        filterSectionContent.classList.add('collapsed');
+      }
+      try {
+        localStorage.setItem('blog-filter-section-main', newState ? 'expanded' : 'collapsed');
+      } catch (e) {}
+    });
+  }
 });
 </script>

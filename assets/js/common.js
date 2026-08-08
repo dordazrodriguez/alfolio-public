@@ -35,32 +35,51 @@ $(document).ready(function () {
   if ($("#toc-toggle").length) {
     var $tocRow = $("#toc-row");
     var $tocToggle = $("#toc-toggle");
+    var $tocMobilePanel = $("#toc-mobile-panel");
+    var $tocMobileBackdrop = $("#toc-mobile-backdrop");
+    var $tocMobileBody = $tocMobilePanel.find(".toc-mobile-body");
 
-    function positionTocToggle() {
-      var nav = document.querySelector("#toc-sidebar");
-      if (!$tocRow.hasClass("toc-hidden") && nav && nav.getBoundingClientRect().width > 0) {
-        var r = nav.getBoundingClientRect();
-        var top = Math.min(r.bottom + 12, window.innerHeight - 40);
-        $tocToggle.css({ top: top + "px", bottom: "auto", left: r.left + "px" });
-      } else {
-        $tocToggle.css({ top: "auto", bottom: "30px", left: "30px" });
+    function openMobileToc() {
+      if (!$tocMobileBody.children().length) {
+        var nav = document.querySelector("#toc-sidebar");
+        if (nav) {
+          $tocMobileBody.html(nav.innerHTML);
+        }
       }
+      $tocMobilePanel.addClass("open");
+      $tocMobileBackdrop.addClass("open");
+      $("body").addClass("toc-panel-open");
+      var closeBtn = document.getElementById("toc-mobile-close");
+      if (closeBtn) closeBtn.focus();
+    }
+
+    function closeMobileToc() {
+      $tocMobilePanel.removeClass("open");
+      $tocMobileBackdrop.removeClass("open");
+      $("body").removeClass("toc-panel-open");
     }
 
     if (localStorage.getItem("tocHidden") === "1") {
       $tocRow.addClass("toc-hidden");
       $tocToggle.attr("aria-expanded", "false");
     }
-    positionTocToggle();
 
     $tocToggle.on("click", function () {
-      $tocRow.toggleClass("toc-hidden");
-      $tocToggle.attr("aria-expanded", String(!$tocRow.hasClass("toc-hidden")));
-      localStorage.setItem("tocHidden", $tocRow.hasClass("toc-hidden") ? "1" : "0");
-      positionTocToggle();
+      if (window.innerWidth <= 576) {
+        openMobileToc();
+      } else {
+        $tocRow.toggleClass("toc-hidden");
+        $tocToggle.attr("aria-expanded", String(!$tocRow.hasClass("toc-hidden")));
+        localStorage.setItem("tocHidden", $tocRow.hasClass("toc-hidden") ? "1" : "0");
+      }
     });
 
-    $(window).on("scroll resize", positionTocToggle);
+    $("#toc-mobile-close").on("click", closeMobileToc);
+    $tocMobileBackdrop.on("click", closeMobileToc);
+    $tocMobileBody.on("click", "a", closeMobileToc);
+    $(document).on("keyup", function (e) {
+      if (e.key === "Escape") closeMobileToc();
+    });
   }
 
   // add css to jupyter notebooks

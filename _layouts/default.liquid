@@ -48,6 +48,16 @@
             <i class="fa-solid fa-list" aria-hidden="true"></i>
           </button>
         {% endif %}
+        <div id="toc-mobile-backdrop" class="toc-mobile-backdrop"></div>
+        <div id="toc-mobile-panel" class="toc-mobile-panel" role="dialog" aria-modal="true" aria-label="Table of contents">
+          <div class="toc-mobile-header">
+            <span class="toc-mobile-title"><i class="fa-solid fa-list" aria-hidden="true"></i> Contents</span>
+            <button type="button" id="toc-mobile-close" class="toc-mobile-close" aria-label="Close table of contents">
+              <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+            </button>
+          </div>
+          <div class="toc-mobile-body"></div>
+        </div>
       {% else %}
         {{ content }}
       {% endif %}

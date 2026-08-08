@@ -1245,6 +1245,12 @@ nav[data-toggle="toc"] {
 
 /* small screens */
 @media (max-width: 576px) {
+  /* Hide the desktop TOC on phones; the floating toggle + drawer is used instead.
+     Hide the whole column immediately so it never flashes over the content. */
+  .toc-column {
+    display: none;
+  }
+
   /* override stickyness so that the navigation does not follow scrolling */
   nav[data-toggle="toc"] {
     visibility: hidden;
@@ -1403,14 +1409,14 @@ body.toc-panel-open {
 }
 
 /* Wider container for blog pages (about 14% spacing on each side) */
-body.blog-page .container {
+body.blog-page .container[role="main"] {
   max-width: 1200px;
   width: 72%;
 }
 
 /* On small screens, let blog content use nearly the full width */
 @media (max-width: 767px) {
-  body.blog-page .container {
+  body.blog-page .container[role="main"] {
     width: 100%;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
@@ -1424,7 +1430,7 @@ body.post-page .post {
 
 /* On post pages, narrow the container so the TOC has more room and content stays centered */
 @media (min-width: 768px) {
-  body.post-page .container {
+  body.post-page .container[role="main"] {
     width: 66%;
   }
 }

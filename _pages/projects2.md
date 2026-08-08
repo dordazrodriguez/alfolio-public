@@ -16,7 +16,7 @@ horizontal: false
     max-width: 100%;
     margin: 0 auto;
   }
-  .container {
+  .container[role="main"] {
     width: 100% !important;
     max-width: 100%;
     margin: 0 auto !important;
@@ -1112,8 +1112,14 @@ horizontal: false
   
   @media (max-width: 767.98px) {
     .container-fluid {
-      padding-left: 0.5rem;
-      padding-right: 0.5rem;
+      max-width: 100% !important;
+      padding-left: 0.75rem;
+      padding-right: 0.75rem;
+    }
+
+    .container[role="main"] {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
     }
 
     #projects-grid {
@@ -1228,7 +1234,7 @@ horizontal: false
     margin: 0 auto;
   }
 
-  .container {
+  .container[role="main"] {
     width: 100% !important;
     max-width: 100%;
     margin: 0 auto !important;

@@ -28,7 +28,7 @@ importance: 1
 featured: true
 ---
 
-<img src="{{ 'assets/img/projects/macrosnap/macrosnap_dashboard.png' | relative_url }}" alt="MacroSnap Dashboard" style="max-width: 80%;">
+<img src="{{ 'assets/img/projects/macrosnap/macrosnap_dashboard.png' | relative_url }}" alt="MacroSnap Dashboard" style="max-width: 80%;" data-zoomable>
 
 ## Key Features
 

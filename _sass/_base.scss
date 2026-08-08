@@ -1385,7 +1385,7 @@ body.toc-panel-open {
     top: 0;
     bottom: 0;
     right: 100%;
-    width: min(230px, calc(10vw - 1rem));
+    width: min(230px, calc(14vw - 1rem));
     padding-right: 1rem;
   }
 
@@ -1401,10 +1401,15 @@ body.toc-panel-open {
   }
 }
 
-/* Wider container for blog pages (about 10% spacing on each side) */
+/* Wider container for blog pages (about 14% spacing on each side) */
 body.blog-page .container {
-  max-width: none;
-  width: 80%;
+  max-width: 1200px;
+  width: 72%;
+}
+
+/* Comfortable reading width for individual blog posts */
+body.post-page .post {
+  max-width: 780px;
 }
 
 .featured-posts {

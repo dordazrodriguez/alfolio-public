@@ -27,6 +27,7 @@ tags:
 date: 2026-08-04
 show_date: true
 importance: 1
+featured: true
 ---
 
 A combined crypto exchange + brokerage-style trading platform that pairs an FTX-like order-book exchange experience with IBKR-style multi-asset access, built on the **Alpaca Broker API**. It is designed for traders who want institutional-grade tools - advanced order types, automation, and portfolio workflows - without leaving a single, familiar interface.

@@ -5,11 +5,16 @@ date: 2018-08-15 10:00:00
 description: Selected as one of 32 students worldwide to compete in TD Securities' prestigious trading competition in New York.
 tags: finance trading competition wall-street td-securities high-frequency
 categories: experience
+toc:
+  sidebar: left
 ---
 
 ## Introduction
 
 In August 2018, I had the extraordinary opportunity to participate in TD Securities' Trading Competition in New York—one of the most prestigious student trading competitions in the financial industry. Being selected as one of only 32 students worldwide to compete was an honor in itself, but the experience of competing in a high-pressure trading environment at TD Securities' New York headquarters was truly transformative.
+
+> **Tip:** TD Securities selects participants through a rigorous global application process—only 32 students made the cut worldwide, so simply being invited was considered a strong credential in itself.
+{: .block-tip }
 
 <div class="row mt-3">
     <div class="col-sm mt-3 mt-md-0" style="text-align: center;">
@@ -60,6 +65,9 @@ With 32 highly qualified participants, the competition was intense. Each partici
 ## Achieving 7th Place: Performance Under Pressure
 
 Finishing in **7th place out of 32 participants** required a combination of technical skill, strategic thinking, and emotional discipline. This achievement demonstrated:
+
+> **Tip:** Finishing 7th of 32 (top quartile) is worth more than a ranking—it demonstrates you can hold your analytical process together when live markets move against you.
+{: .block-tip }
 
 ### Technical Competence
 

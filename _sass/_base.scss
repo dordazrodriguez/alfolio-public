@@ -1016,6 +1016,66 @@ html.transition *:after {
   }
 }
 
+/* Section dividers: subtle rule above long-form sections */
+.post-content h2,
+.post h2 {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--global-divider-color);
+}
+
+.post-content h3,
+.post h3 {
+  margin-top: 2rem;
+}
+
+.post-content h2:first-child,
+.post h2:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: none;
+}
+
+/* Heading hover states */
+.post-content h2,
+.post-content h3,
+.post-content h4,
+.post h2,
+.post h3,
+.post h4 {
+  transition: color 0.2s ease;
+}
+
+.post-content h2:hover,
+.post-content h3:hover,
+.post-content h4:hover,
+.post h2:hover,
+.post h3:hover,
+.post h4:hover {
+  color: var(--global-theme-color);
+}
+
+/* Anchor link reveal on heading hover */
+.post-content h2 a,
+.post-content h3 a,
+.post-content h4 a,
+.post h2 a,
+.post h3 a,
+.post h4 a {
+  color: var(--global-theme-color);
+  text-decoration: none;
+}
+
+.post-content h2:not(:hover) a,
+.post-content h3:not(:hover) a,
+.post-content h4:not(:hover) a,
+.post h2:not(:hover) a,
+.post h3:not(:hover) a,
+.post h4:not(:hover) a {
+  opacity: 0.35;
+  transition: opacity 0.2s ease;
+}
+
 progress {
   /* Positioning */
   position: fixed;

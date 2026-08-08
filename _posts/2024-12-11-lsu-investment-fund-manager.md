@@ -5,15 +5,23 @@ date: 2020-12-11 18:00:00
 description: A deep dive into my role as Investment Fund Manager at LSU Investment Fund, where I contributed to 16.7% AUM growth and learned to leverage Bloomberg Terminal for equity research
 tags: finance investment bloomberg equity-research portfolio-management trading
 categories: experience
+toc:
+  sidebar: left
 ---
 
 ## Introduction
 
 During my time at Louisiana State University, I had the incredible opportunity to serve as an Investment Fund Manager for the LSU Investment Fund—a student-managed investment fund that provides hands-on experience managing real capital. This role wasn't just academic; we were responsible for real money, real decisions, and real outcomes. The experience taught me invaluable lessons about equity research, portfolio management, and the importance of data-driven decision-making in finance.
 
+> **Tip:** The LSU Investment Fund is a 100% student-run fund, meaning every research note, valuation model, and trade recommendation was built and defended by students—no professional safety net.
+{: .block-tip }
+
 ## The Challenge: Growing Assets Under Management
 
 When I joined the fund, we were managing approximately $3.6 million in assets. Our goal was clear: outperform the market while growing our assets under management (AUM). This required a combination of rigorous research, strategic thinking, and the ability to identify undervalued opportunities in the market.
+
+> **Warning:** Managing real capital means real downside risk. A single bad call isn't just a grade—it's a real loss for the fund and the students counting on its performance.
+{: .block-warning }
 
 ## The Bloomberg Terminal: A Game-Changer
 
@@ -46,6 +54,9 @@ Using EDGAR, I could access the raw, unfiltered information directly from compan
 - **Track changes over time** by comparing filings across multiple periods
 - **Uncover hidden risks** buried in footnotes, risk factors, and MD&A sections
 - **Verify data accuracy** by cross-referencing Bloomberg data with official SEC filings
+
+> **Tip:** EDGAR is free and public. If you're learning equity research, start with a company's 10-K MD&A section—it's where management is legally required to tell you what's actually happening.
+{: .block-tip }
 
 The combination of Bloomberg Terminal's real-time analytics and EDGAR's comprehensive historical filings created a powerful research framework. While Bloomberg provided speed and integration, EDGAR provided depth and transparency—ensuring that every investment decision was grounded in thorough analysis of primary source documents.
 

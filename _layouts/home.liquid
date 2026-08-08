@@ -22,6 +22,35 @@ layout: default
     </p>
     <div class="home-cta">
       <a href="{{ '/projects/' | relative_url }}" class="btn btn-primary">View My Work</a>
+      <a href="{{ '/blog/' | relative_url }}" class="btn btn-outline-primary">Read My Blog</a>
+    </div>
+    <div class="home-badges">
+      <span class="badge-item">AWS Certified</span>
+      <span class="badge-item">Bloomberg BMC</span>
+      <span class="badge-item">Security+</span>
+      <span class="badge-item">Data Science</span>
+      <span class="badge-item">Machine Learning</span>
+      <span class="badge-item">Quantitative Finance</span>
+    </div>
+  </div>
+
+  <div class="home-featured">
+    <h3 class="featured-heading">Featured Projects</h3>
+    <div class="featured-grid">
+      {% assign featured = site.projects | where: "featured", true | sort: "importance" %}
+      {% for project in featured %}
+        <a href="{{ project.url | relative_url }}" class="featured-card">
+          <div class="featured-img">
+            {% if project.img %}
+              <img src="{{ project.img | relative_url }}" alt="{{ project.title }}" loading="lazy">
+            {% endif %}
+          </div>
+          <div class="featured-body">
+            <h5>{{ project.title }}</h5>
+            <p>{{ project.description | truncate: 110 }}</p>
+          </div>
+        </a>
+      {% endfor %}
     </div>
   </div>
 </div>

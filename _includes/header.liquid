@@ -12,7 +12,7 @@
       
       <!-- Mobile Search Toggle (visible on mobile, hidden on desktop) -->
       {% if site.search_enabled %}
-        <div class="mobile-search-toggle d-sm-none">
+        <div class="mobile-search-toggle d-sm-none ml-auto">
           <button id="search-toggle-mobile" title="Search" class="mobile-toggle-btn" onclick="openSearchModal()">
             <i class="ti ti-search"></i>
           </button>
@@ -21,7 +21,7 @@
       
       <!-- Navbar Toggle -->
       <button
-        class="navbar-toggler collapsed ml-auto"
+        class="navbar-toggler collapsed {% unless site.search_enabled %}ml-auto{% endunless %}"
         type="button"
         id="navbar-toggler-btn"
         aria-controls="navbarNav"

@@ -450,7 +450,6 @@ ul.task-list input[type="checkbox"] {
   display: flex;
   align-items: center;
   margin-right: 0.5rem;
-  
   .mobile-toggle-btn {
     padding: 0.75rem;
     border: 0;
@@ -490,6 +489,11 @@ ul.task-list input[type="checkbox"] {
       padding-top: 0;
     }
   }
+}
+
+// Flush the mobile search icon against the hamburger
+.mobile-search-toggle {
+  margin-right: 0;
 }
 
 [data-theme="dark"] .mobile-theme-toggle .mobile-toggle-btn,
@@ -1371,9 +1375,10 @@ body.toc-panel-open {
   max-width: 100%;
 }
 
-/* Wider container for blog posts */
-body.post-page .container {
-  max-width: 1400px;
+/* Wider container for blog pages (about 5% spacing on each side) */
+body.blog-page .container {
+  max-width: none;
+  width: 90%;
 }
 
 .featured-posts {

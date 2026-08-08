@@ -1374,6 +1374,33 @@ body.toc-panel-open {
   max-width: 100%;
 }
 
+/* Float the TOC sidebar in the left margin on large screens */
+@media (min-width: 992px) {
+  body.blog-page #toc-row {
+    position: relative;
+  }
+
+  body.blog-page #toc-row > .toc-column {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 100%;
+    width: min(230px, calc(10vw - 1rem));
+    padding-right: 1rem;
+  }
+
+  body.blog-page #toc-row > .toc-column #toc-sidebar {
+    position: sticky;
+    top: 5rem;
+  }
+
+  body.blog-page #toc-row > .col-sm-9 {
+    flex: 0 0 100%;
+    max-width: 100%;
+    width: 100%;
+  }
+}
+
 /* Wider container for blog pages (about 10% spacing on each side) */
 body.blog-page .container {
   max-width: none;

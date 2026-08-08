@@ -26,6 +26,7 @@ link: "https://github.com/dordazrodriguez/CryptoTradingSystem"
 date: 2025-01-15
 show_date: true
 importance: 1
+featured: true
 ---
 
 Project Repo: <a href="https://github.com/dordazrodriguez/CryptoTradingSystem" targer="_blank"> https://github.com/dordazrodriguez/CryptoTradingSystem </a>

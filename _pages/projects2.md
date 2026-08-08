@@ -1112,8 +1112,18 @@ horizontal: false
   
   @media (max-width: 767.98px) {
     .container-fluid {
-      padding-left: 1.5rem;
-      padding-right: 1.5rem;
+      padding-left: 0.5rem;
+      padding-right: 0.5rem;
+    }
+
+    #projects-grid {
+      margin-left: 0;
+      margin-right: 0;
+    }
+
+    #projects-grid > .project-card {
+      padding-left: 0;
+      padding-right: 0;
     }
   }
 

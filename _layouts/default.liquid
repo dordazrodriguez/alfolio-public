@@ -29,14 +29,26 @@
             <div class="col-sm-9">{{ content }}</div>
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
+              <div class="toc-wrapper" id="toc-wrapper">
+                <button type="button" class="toc-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-sidebar">
+                  <span class="toc-toggle-label"><i class="fa-solid fa-list fa-sm" aria-hidden="true"></i> Contents</span>
+                  <i class="fa-solid fa-chevron-up toc-chevron" aria-hidden="true"></i>
+                </button>
+                <nav id="toc-sidebar" class="sticky-top"></nav>
+              </div>
             </div>
           </div>
         {% else %}
           <div class="row">
             <!-- sidebar, which will move to the top on a small screen -->
             <div class="col-sm-3">
-              <nav id="toc-sidebar" class="sticky-top"></nav>
+              <div class="toc-wrapper" id="toc-wrapper">
+                <button type="button" class="toc-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-sidebar">
+                  <span class="toc-toggle-label"><i class="fa-solid fa-list fa-sm" aria-hidden="true"></i> Contents</span>
+                  <i class="fa-solid fa-chevron-up toc-chevron" aria-hidden="true"></i>
+                </button>
+                <nav id="toc-sidebar" class="sticky-top"></nav>
+              </div>
             </div>
             <!-- main content area -->
             <div class="col-sm-9">{{ content }}</div>

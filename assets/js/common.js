@@ -31,6 +31,23 @@ $(document).ready(function () {
     });
   }
 
+  // toc sidebar toggle
+  if ($("#toc-toggle").length) {
+    var $tocWrapper = $("#toc-wrapper");
+    var $tocToggle = $("#toc-toggle");
+    var tocCollapsed = localStorage.getItem("tocCollapsed") === "1";
+    if (tocCollapsed) {
+      $tocWrapper.addClass("collapsed");
+      $tocToggle.attr("aria-expanded", "false");
+    }
+    $tocToggle.on("click", function () {
+      var collapsed = $tocWrapper.hasClass("collapsed");
+      $tocWrapper.toggleClass("collapsed");
+      $tocToggle.attr("aria-expanded", String(collapsed));
+      localStorage.setItem("tocCollapsed", collapsed ? "0" : "1");
+    });
+  }
+
   // add css to jupyter notebooks
   const cssLink = document.createElement("link");
   cssLink.href = "../css/jupyter.css";

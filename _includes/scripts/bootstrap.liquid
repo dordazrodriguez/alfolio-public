@@ -49,6 +49,11 @@
           if (link.classList.contains('dropdown-toggle') || link.closest('.dropdown-toggle')) {
             return;
           }
+
+          // Don't close when interacting with the theme selector
+          if (link.closest('.theme-dropdown-container')) {
+            return;
+          }
           
           // Check if we're on mobile (menu is expanded)
           if (navbarNav.classList.contains('show')) {

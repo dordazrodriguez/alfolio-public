@@ -33,19 +33,34 @@ $(document).ready(function () {
 
   // toc sidebar toggle
   if ($("#toc-toggle").length) {
-    var $tocWrapper = $("#toc-wrapper");
+    var $tocRow = $("#toc-row");
     var $tocToggle = $("#toc-toggle");
-    var tocCollapsed = localStorage.getItem("tocCollapsed") === "1";
-    if (tocCollapsed) {
-      $tocWrapper.addClass("collapsed");
+
+    function positionTocToggle() {
+      var nav = document.querySelector("#toc-sidebar");
+      if (!$tocRow.hasClass("toc-hidden") && nav && nav.getBoundingClientRect().width > 0) {
+        var r = nav.getBoundingClientRect();
+        var top = Math.min(r.bottom + 12, window.innerHeight - 40);
+        $tocToggle.css({ top: top + "px", bottom: "auto", left: r.left + "px" });
+      } else {
+        $tocToggle.css({ top: "auto", bottom: "30px", left: "30px" });
+      }
+    }
+
+    if (localStorage.getItem("tocHidden") === "1") {
+      $tocRow.addClass("toc-hidden");
       $tocToggle.attr("aria-expanded", "false");
     }
+    positionTocToggle();
+
     $tocToggle.on("click", function () {
-      var collapsed = $tocWrapper.hasClass("collapsed");
-      $tocWrapper.toggleClass("collapsed");
-      $tocToggle.attr("aria-expanded", String(collapsed));
-      localStorage.setItem("tocCollapsed", collapsed ? "0" : "1");
+      $tocRow.toggleClass("toc-hidden");
+      $tocToggle.attr("aria-expanded", String(!$tocRow.hasClass("toc-hidden")));
+      localStorage.setItem("tocHidden", $tocRow.hasClass("toc-hidden") ? "1" : "0");
+      positionTocToggle();
     });
+
+    $(window).on("scroll resize", positionTocToggle);
   }
 
   // add css to jupyter notebooks

@@ -16,7 +16,7 @@
   </head>
 
   <!-- Body -->
-  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}">
+  <body class="{% if site.navbar_fixed %}fixed-top-nav{% endif %} {% unless site.footer_fixed %}sticky-bottom-footer{% endunless %}{% if page.layout == 'post' %} post-page{% endif %}">
     <!-- Header -->
     {% include header.liquid %}
 
@@ -24,35 +24,29 @@
     <div class="container mt-5" role="main">
       {% if page.toc and page.toc.sidebar %}
         {% if page.toc.sidebar == 'right' %}
-          <div class="row">
+          <div class="row toc-row" id="toc-row">
             <!-- main content area -->
             <div class="col-sm-9">{{ content }}</div>
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <div class="toc-wrapper" id="toc-wrapper">
-                <button type="button" class="toc-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-sidebar">
-                  <span class="toc-toggle-label"><i class="fa-solid fa-list fa-sm" aria-hidden="true"></i> Contents</span>
-                  <i class="fa-solid fa-chevron-up toc-chevron" aria-hidden="true"></i>
-                </button>
-                <nav id="toc-sidebar" class="sticky-top"></nav>
-              </div>
+            <div class="col-sm-3 toc-column" id="toc-column">
+              <nav id="toc-sidebar" class="sticky-top"></nav>
             </div>
           </div>
+          <button type="button" class="toc-float-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-column" aria-label="Toggle table of contents">
+            <i class="fa-solid fa-list" aria-hidden="true"></i>
+          </button>
         {% else %}
-          <div class="row">
+          <div class="row toc-row" id="toc-row">
             <!-- sidebar, which will move to the top on a small screen -->
-            <div class="col-sm-3">
-              <div class="toc-wrapper" id="toc-wrapper">
-                <button type="button" class="toc-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-sidebar">
-                  <span class="toc-toggle-label"><i class="fa-solid fa-list fa-sm" aria-hidden="true"></i> Contents</span>
-                  <i class="fa-solid fa-chevron-up toc-chevron" aria-hidden="true"></i>
-                </button>
-                <nav id="toc-sidebar" class="sticky-top"></nav>
-              </div>
+            <div class="col-sm-3 toc-column" id="toc-column">
+              <nav id="toc-sidebar" class="sticky-top"></nav>
             </div>
             <!-- main content area -->
             <div class="col-sm-9">{{ content }}</div>
           </div>
+          <button type="button" class="toc-float-toggle" id="toc-toggle" aria-expanded="true" aria-controls="toc-column" aria-label="Toggle table of contents">
+            <i class="fa-solid fa-list" aria-hidden="true"></i>
+          </button>
         {% endif %}
       {% else %}
         {{ content }}

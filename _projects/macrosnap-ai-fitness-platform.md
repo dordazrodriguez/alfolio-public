@@ -28,10 +28,6 @@ importance: 1
 featured: true
 ---
 
-## Links
-
-- Live App: <a href="https://macrosnap.tectgc.com">https://macrosnap.tectgc.com</a>
-
 <div class="text-center">
   <div
     class="screenshot-item"
@@ -236,3 +232,7 @@ featured: true
 - Large Language Models (LLMs)
 - AI/ML
 - Full Stack Development
+
+## Links
+
+- Live App: <a href="https://macrosnap.tectgc.com">https://macrosnap.tectgc.com</a>

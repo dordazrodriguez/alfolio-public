@@ -1545,7 +1545,7 @@ horizontal: false
 
   .project-card .card {
     flex: 1 1 auto;
-    border: 1px solid rgba(0, 0, 0, 0.08);
+    border: 1px solid rgba(0, 0, 0, 0.14);
     border-radius: 7.5px;
     background-color: #ffffff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
@@ -1556,19 +1556,20 @@ horizontal: false
 
   html[data-theme='light'] .project-card .card {
     background-color: #ffffff;
+    border: 1px solid rgba(0, 0, 0, 0.14);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
   }
 
   html[data-theme='dark'] .project-card .card {
     background-color: #1e293b;
-    border: 1px solid rgba(255, 255, 255, 0.1) !important;
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
   }
 
   .project-card .card:hover {
     transform: translateY(-6px) !important;
     box-shadow: 0 6px 16px rgba(0, 0, 0, 0.08), 0 20px 40px rgba(0, 0, 0, 0.14) !important;
-    border-color: rgba(56, 189, 248, 0.55);
+    border-color: rgba(56, 189, 248, 0.65);
   }
 
   html[data-theme='light'] .project-card .card:hover {

@@ -64,6 +64,38 @@ horizontal: false
   .project-card.primary-cat-ai > .card::before { background: #d946ef; }
   .project-card.primary-cat-production > .card::before { background: #14b8a6; }
 
+  /* Category badge pills on project cards */
+  .project-category-badges {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+  }
+
+  .project-category-badge {
+    display: inline-block;
+    font-size: 0.65rem;
+    font-weight: 700;
+    line-height: 1;
+    padding: 0.3rem 0.55rem;
+    border-radius: 999px;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+    color: #fff;
+    background: #94a3b8;
+  }
+
+  .project-category-badge.cat-financial { background: #10b981; }
+  .project-category-badge.cat-quant { background: #3b82f6; }
+  .project-category-badge.cat-dev { background: #f59e0b; color: #1f2937; }
+  .project-category-badge.cat-devops { background: #6366f1; }
+  .project-category-badge.cat-cybersecurity { background: #ef4444; }
+  .project-category-badge.cat-web { background: #06b6d4; color: #1f2937; }
+  .project-category-badge.cat-full-stack { background: #8b5cf6; }
+  .project-category-badge.cat-data-science { background: #ec4899; }
+  .project-category-badge.cat-ml { background: #a855f7; }
+  .project-category-badge.cat-ai { background: #d946ef; }
+  .project-category-badge.cat-production { background: #14b8a6; }
+
 </style>
 
 <div class="container-fluid mt-4" style="max-width: 90%; margin-left: auto; margin-right: auto;">
@@ -200,6 +232,17 @@ horizontal: false
                   </video>
                 {% endif %}
                 <div class="card-body">
+                  {% if project.category %}
+                    <div class="project-category-badges mb-2">
+                      {% if project.category.first %}
+                        {% for cat in project.category %}
+                          <span class="project-category-badge cat-{{ cat | slugify }}">{{ cat }}</span>
+                        {% endfor %}
+                      {% else %}
+                        <span class="project-category-badge cat-{{ project.category | slugify }}">{{ project.category }}</span>
+                      {% endif %}
+                    </div>
+                  {% endif %}
                   <h5 class="card-title">{{ project.title }}</h5>
                   {% if project.show_date and project.date and project.date != '1900-01-01' %}
                     <small class="text-muted d-block mb-2">

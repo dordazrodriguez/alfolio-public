@@ -2,11 +2,12 @@
 layout: page
 title: "MacroSnap AI: Macros Fitness and Nutrition Platform"
 description: "Launched MacroSnap AI for web and iOS/Android. Engineered core feature for instant food logging via photo using CV and LLMs. Includes AI-powered coach, goal tracking, food journal, workout tracking, and meal preps."
-category: 
+category:
   - 'Web'
   - 'AI'
   - 'DevOps'
-  - 'Cloud'
+  - 'Dev'
+  - 'ML'
 img: assets/img/projects/macrosnap/macrosnap_dashboard.png
 tags:
   - Mobile Development
@@ -20,6 +21,11 @@ tags:
   - GCP
   - AWS
   - Data
+  - Fitness
+  - Nutrition
+  - Mobile App
+  - Web
+  - Cloud
 live: "https://macrosnap.tectgc.com"
 link: "https://macrosnap.tectgc.com"
 date: 2025-01-10

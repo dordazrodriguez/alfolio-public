@@ -3,13 +3,18 @@ layout: page
 title: "React/Tailwind Dev Portfolio Site"
 description: "A modern portfolio website built with React, TypeScript, and Tailwind CSS featuring dark/light mode, responsive design, and interactive project filtering."
 img: assets/img/proj9image.png
-category: web
+category: 'Web'
 importance: 3
 tags:
   - React
   - TypeScript
   - Tailwind CSS
   - Framer Motion
+  - Portfolio
+  - Frontend
+  - Responsive Design
+  - Dark Mode
+  - UI/UX
 link: "https://github.com/yourusername/portfolio-site"
 ---
 

@@ -2,11 +2,11 @@
 layout: page
 title: "Live TV and Movie Streaming Application"
 description: "Cross-platform application built with Flutter for streaming on-demand movies and live TV channels through HLS/HTTP links loaded from M3U8 files."
-category: 
+category:
+  - 'Full Stack'
   - 'Dev'
   - 'Web'
   - 'DevOps'
-  - 'Cybersecurity'
 img: assets/img/projects/iptv/mobile.png
 tags:
   - Flutter
@@ -16,6 +16,16 @@ tags:
   - Mobile Development
   - Desktop
   - Full Stack
+  - AWS
+  - Firebase
+  - TMDB API
+  - HLS
+  - Video Streaming
+  - Android TV
+  - Provider
+  - API Integration
+  - Cross-Platform
+  - Mobile App
 link: "https://github.com/dordazrodriguez/IPTV-and-Movie-App"
 importance: 1
 ---

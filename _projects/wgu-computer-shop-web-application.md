@@ -2,7 +2,10 @@
 layout: page
 title: "WGU Computer Shop Web Application"
 description: "Full-featured web application for WGU Computer Shop built with Java and Spring Boot, featuring inventory management, customer service, and order processing capabilities."
-category: 'Dev'
+category:
+  - 'Full Stack'
+  - 'Web'
+  - 'Dev'
 img: assets/img/projects/WGU-JavaFoundations.gif
 tags:
   - Java
@@ -10,6 +13,14 @@ tags:
   - Web Development
   - Full Stack
   - Frontend
+  - Thymeleaf
+  - HTML
+  - CSS
+  - JavaScript
+  - Inventory Management
+  - E-Commerce
+  - Web Application
+  - Backend
 link: "https://gitlab.com/wgu-gitlab-environment/student-repos/dordazr1/d287-java-frameworks/-/tree/main1?ref_type=heads"
 importance: 2
 ---

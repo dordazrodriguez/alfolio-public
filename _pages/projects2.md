@@ -5,7 +5,7 @@ permalink: /projects/
 description:
 nav: true
 nav_order: 3
-display_categories: ['Financial', 'Quant', 'Dev', 'DevOps', 'Cybersecurity', 'Web', 'Data Science', 'ML', 'AI']
+display_categories: ['Financial', 'Quant', 'Dev', 'DevOps', 'Cybersecurity', 'Web', 'Full Stack', 'Data Science', 'ML', 'AI']
 horizontal: false
 ---
 

@@ -10,9 +10,14 @@ img: assets/img/projects/flight_prediction_ML.gif
 tags:
   - Python
   - Data Science
+  - Machine Learning
   - Analytics
   - Seaborn
-  - Machine Learning
+  - scikit-learn
+  - Pandas
+  - NumPy
+  - Regression
+  - Data Visualization
   - Data
 link: "https://colab.research.google.com/drive/1tpmXADD_4HdJf7w9oq9_cX5C19871uLD?usp=sharing"
 # redirect: "https://colab.research.google.com/drive/1tpmXADD_4HdJf7w9oq9_cX5C19871uLD?usp=sharing"

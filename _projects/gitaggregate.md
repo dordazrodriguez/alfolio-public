@@ -26,6 +26,8 @@ tags:
   - Repository Management
   - OAuth
   - State Management
+  - Full Stack
+  - DevOps
 link: "https://github.com/dordazrodriguez/GitAggregate"
 date: 2024-11-01
 show_date: true

@@ -1,150 +1,149 @@
 ---
 layout: page
-title: "GTX - Combined Crypto Exchange & Multi-Asset Brokerage Platform"
-description: "A combined crypto exchange + brokerage-style trading platform (FTX-like exchange plus IBKR-style multi-asset access), with added features for advanced trading, automation, and portfolio workflows."
-category: 
-  - 'Financial'
-  - 'Quant'
+title: "InsuranceHUB"
+description: "A modern full-stack insurance marketplace hub that lets consumers compare quotes across 50+ insurance products, manage policies in a unified digital wallet, and get AI-powered coverage recommendations."
+category:
+  - 'Full Stack'
+  - 'Web'
   - 'Dev'
-img: assets/img/projects/gtx-trading-broker/gtx-dashboard.png
+  - 'AI'
+img: assets/img/projects/insurancehub/hero-homepage.png
+additional_images:
+  - assets/img/projects/insurancehub/all-products.png
+  - assets/img/projects/insurancehub/quote-product-selection.png
+  - assets/img/projects/insurancehub/quote-vehicle-form.png
+  - assets/img/projects/insurancehub/quote-loading.png
+  - assets/img/projects/insurancehub/quote-results.png
+  - assets/img/projects/insurancehub/dashboard-overview.png
+  - assets/img/projects/insurancehub/wallet-overview.png
+  - assets/img/projects/insurancehub/wallet-search-modal.png
 tags:
-  - Alpaca
-  - Broker API
-  - Python
-  - Crypto Exchange
-  - Multi-Asset
-  - Trading
-  - Automation
-  - Portfolio Management
-  - FastAPI
-  - WebSocket
-  - REST API
-  - OAuth
-  - Trading Bot
-  - IBKR
-  - FTX
   - Full Stack
-  - PostgreSQL
+  - React
+  - TypeScript
+  - Node.js
+  - FastAPI
+  - Google Cloud
+  - Cloud Run
+  - Gemini AI
+  - Insurance
+  - Web Application
+  - Responsive
+  - AI
+  - Fintech
+  - Dashboard
+  - Marketplace
+  - DevOps
   - Docker
-  - Financial
-  - Risk Management
-date: 2026-08-04
+link: "https://insurancehub-copy-819556054794.us-west1.run.app"
+importance: 2
+date: 2026-08-09
 show_date: true
-importance: 1
-featured: true
 ---
 
-A combined crypto exchange + brokerage-style trading platform that pairs an FTX-like order-book exchange experience with IBKR-style multi-asset access, built on the **Alpaca Broker API**. It is designed for traders who want institutional-grade tools - advanced order types, automation, and portfolio workflows - without leaving a single, familiar interface.
+InsuranceHUB is an **AI-powered insurance marketplace hub** designed to make insurance shopping simple, transparent, and affordable. It lets users compare quotes from 100+ top carriers across dozens of insurance products, manage all their policies in one digital wallet, and get personalized coverage recommendations powered by a proprietary AI engine.
 
 ## Key Features
 
-- **FTX-like Exchange Experience**: Perpetual-style trading terminals, mark price / funding rate panels, leverage controls, and depth/order-book visualization
-- **IBKR-style Multi-Asset Access**: Equities, options, and crypto from one account via the Alpaca Broker API, mirroring Interactive Brokers' professional workstation workflows
-- **Advanced Order Management**: Stop-loss, take-profit, trailing stops, bracket orders, and conditional orders with real-time status streaming
-- **Trading Automation**: Scriptable strategies, scheduled rebalancing, algorithmic order placement, and paper-to-live promotion
-- **Portfolio Workflows**: Consolidated P&L, margin and buying-power tracking, position blotters, and performance analytics
-- **Real-time Market Data**: WebSocket streaming for quotes, trades, and account updates
-- **Secure Account Onboarding**: OAuth-based brokerage account creation and KYC flow through Alpaca Broker API
+- **50+ Insurance Product Categories**: Browse and quote auto, home, life, health, dental, vision, renters, flood, pet, travel, business, cyber liability, and many more specialty lines.
+- **Live Quote Comparison Engine**: Side-by-side comparison of carrier quotes with monthly/annual premiums, coverage scores, ratings, and feature highlights.
+- **AI-Powered Risk Analysis**: Natural-language assistant analyzes the user's profile and recommends the best-matching policies.
+- **Smart Digital Wallet**: Centralized dashboard to view active policies, download ID cards, file claims, manage payments, and track renewal dates.
+- **Bundle Optimization**: Intelligent suggestions that show potential savings by bundling multiple policies (e.g., auto + renters + life).
+- **Market & Coverage Analytics**: Visual market analysis comparing quoted rates to market averages and a coverage-level score.
+- **Command Palette / Global Search**: Keyboard-driven search for policies, claims, and actions across the app.
+- **Responsive Modern UI**: Clean, mobile-friendly interface built with React and TypeScript.
+- **Fast, Scalable Backend**: Containerized microservices deployed on Google Cloud Run.
 
 ## Technology Stack
 
-- **Backend**: Python (FastAPI) with WebSocket support
-- **Brokerage**: Alpaca Broker API (trading, market data, and account management)
-- **Frontend**: Web-based trading terminal with dark-mode pro dashboard
-- **Database**: PostgreSQL for orders, positions, and account state
-- **Automation**: Task scheduling and strategy runner services
-- **Deployment**: Docker Compose, CI/CD, VPS-ready
+- **Frontend**: React, TypeScript, Tailwind CSS
+- **Backend**: Python (FastAPI) + Node.js services
+- **AI / LLM**: Google Gemini API for recommendations, risk analysis, and conversational assistance
+- **Charts & Visualization**: Recharts for market-analysis charts and coverage dashboards
+- **Cloud**: Google Cloud Run, Google Cloud Platform (GCP)
+- **Architecture**: Serverless, containerized microservices
 
-## Architecture
+## Live Demo
 
-```
-gtx-trading-broker/
-├── api/                 # FastAPI REST + WebSocket endpoints
-├── broker/              # Alpaca Broker API integration layer
-├── trading/             # Order manager, position manager, strategy engine
-├── marketdata/          # Real-time quotes, trades, and account streams
-├── portfolio/           # P&L, performance, and portfolio analytics
-├── frontend/            # Trading terminal UI
-├── scheduler/           # Automation and scheduled workflows
-└── tests/               # Unit and integration tests
-```
+Visit the live application: **[https://insurancehub-copy-819556054794.us-west1.run.app](https://insurancehub-copy-819556054794.us-west1.run.app)**
 
 ## Screenshots
 
 <div class="project-screenshots-grid" style="margin: 2rem 0;">
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/gtx-dashboard.png' | relative_url }}" data-caption="GTX Trading Terminal - Combined exchange & brokerage dashboard" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/hero-homepage.png' | relative_url }}" data-caption="InsuranceHUB homepage — AI-powered insurance marketplace hub" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/gtx-dashboard.png' | relative_url }}" alt="GTX Trading Terminal" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/hero-homepage.png' | relative_url }}" alt="InsuranceHUB Homepage" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
             <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
           </div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">GTX Trading Terminal</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Homepage — Marketplace Hub</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-01.png' | relative_url }}" data-caption="IBKR-style Multi-Asset Workstation - Equities, options & crypto" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/all-products.png' | relative_url }}" data-caption="Browse 50+ insurance product categories" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-01.png' | relative_url }}" alt="Multi-Asset Workstation" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/all-products.png' | relative_url }}" alt="All Insurance Products" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">IBKR-style Multi-Asset Workstation</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">All Insurance Products</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-02.png' | relative_url }}" data-caption="Order Entry & Advanced Order Types" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/quote-product-selection.png' | relative_url }}" data-caption="Product selection — Auto, Home, Life, Health" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-02.png' | relative_url }}" alt="Order Entry" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/quote-product-selection.png' | relative_url }}" alt="Quote Product Selection" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Order Entry & Advanced Order Types</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Quote — Product Selection</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-03.png' | relative_url }}" data-caption="Charting & Market Data" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/quote-vehicle-form.png' | relative_url }}" data-caption="Quote wizard — vehicle details" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-03.png' | relative_url }}" alt="Charting & Market Data" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/quote-vehicle-form.png' | relative_url }}" alt="Quote Vehicle Form" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Charting & Market Data</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Quote Wizard — Vehicle Details</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-04.png' | relative_url }}" data-caption="Portfolio Overview & Performance" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/quote-results.png' | relative_url }}" data-caption="Live quote comparison results with market analysis and bundle optimization" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-04.png' | relative_url }}" alt="Portfolio Overview" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/quote-results.png' | relative_url }}" alt="Quote Results" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Portfolio Overview & Performance</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Live Quote Comparison Results</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-05.png' | relative_url }}" data-caption="Positions Blotter & P&L" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/dashboard-overview.png' | relative_url }}" data-caption="User dashboard — premiums, renewals, and activity feed" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-05.png' | relative_url }}" alt="Positions Blotter" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/dashboard-overview.png' | relative_url }}" alt="Dashboard Overview" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Positions Blotter & P&L</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">User Dashboard Overview</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-06.png' | relative_url }}" data-caption="Order History & Trades" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/wallet-overview.png' | relative_url }}" data-caption="Digital wallet — active policies and ID cards" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-06.png' | relative_url }}" alt="Order History" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/wallet-overview.png' | relative_url }}" alt="Wallet Overview" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Order History & Trades</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Digital Wallet — Active Policies</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/gtx-trading-broker/ibkr-07.png' | relative_url }}" data-caption="Account Management & Settings" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/insurancehub/wallet-search-modal.png' | relative_url }}" data-caption="AI-powered command palette search" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/gtx-trading-broker/ibkr-07.png' | relative_url }}" alt="Account Management" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/insurancehub/wallet-search-modal.png' | relative_url }}" alt="Wallet Search Modal" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Account Management & Settings</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">AI-Powered Command Palette</p>
       </div>
     </div>
   </div>
@@ -505,11 +504,6 @@ gtx-trading-broker/
 })();
 </script>
 
-## Roadmap
+## Project Overview
 
-- [ ] Alpaca Broker API integration for account onboarding, trading, and market data
-- [ ] Exchange-style trading terminal with order book and advanced order types
-- [ ] Multi-asset support: equities, options, and crypto in a unified workspace
-- [ ] Automation engine: strategy runners, scheduled rebalancing, and paper-to-live promotion
-- [ ] Portfolio analytics: P&L, risk metrics, and performance reporting
-- [ ] WebSocket streaming for real-time quotes, trades, and account updates
+InsuranceHUB demonstrates end-to-end full-stack development: a polished React + TypeScript frontend, FastAPI/Node.js backend services, Google Gemini AI integration for risk analysis and recommendations, and cloud deployment on Google Cloud Run. It is built to be extensible, allowing new insurance products, carriers, and recommendation engines to be added over time.

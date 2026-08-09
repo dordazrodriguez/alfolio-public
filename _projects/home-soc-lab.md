@@ -25,6 +25,8 @@ tags:
   - Cybersecurity
   - Infrastructure
   - Containerization
+  - DevOps
+  - IDS/IPS
 link: "https://github.com/dordazrodriguez/HomeSOCLab"
 date: 2024-12-01
 show_date: true

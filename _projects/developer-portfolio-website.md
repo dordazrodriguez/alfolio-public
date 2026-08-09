@@ -2,7 +2,7 @@
 layout: page
 title: "Developer Portfolio Website"
 description: "Personal developer portfolio website built with React, showcasing projects, skills, and professional experience with modern web technologies."
-category: web
+category: 'Web'
 img: assets/img/projects/portfolio_project.gif
 tags:
   - React
@@ -13,6 +13,8 @@ tags:
   - Portfolio
   - Full Stack
   - Frontend
+  - GitHub Pages
+  - Responsive
 link: "https://dordazrodriguez.github.io/portfolio"
 github: "https://github.com/dordazrodriguez/portfolio"
 # redirect: "https://dordazrodriguez.github.io/portfolio"

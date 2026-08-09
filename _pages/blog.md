@@ -96,7 +96,7 @@ pagination:
     <hr>
   {% endif %}
 
-  <div class="container-fluid mt-4">
+  <div class="container-fluid mt-4" style="max-width: 100%;">
     <!-- Horizontal Filter Section -->
     <div class="mb-4" id="blog-filter-section">
       <button type="button" class="filter-collapse-toggle filter-section-toggle" id="blog-filter-section-toggle" aria-expanded="true" aria-controls="blog-filter-section-content">
@@ -302,12 +302,33 @@ pagination:
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.0/dist/js/bootstrap.bundle.min.js"></script>
 
 <style>
+  /* Keep blog page wide with comfortable side padding */
+  .container[role="main"],
+  .post {
+    width: 100% !important;
+    max-width: 1300px !important;
+    margin-left: auto !important;
+    margin-right: auto !important;
+  }
+
+  .post {
+    padding-left: 2rem;
+    padding-right: 2rem;
+  }
+
+  @media (max-width: 767.98px) {
+    .post {
+      padding-left: 1rem;
+      padding-right: 1rem;
+    }
+  }
+
   /* Force hide pagination when it has d-none class */
   #blog-pagination.d-none {
     display: none !important;
     visibility: hidden !important;
   }
-  
+
   #blog-client-pagination.d-none {
     display: none !important;
     visibility: hidden !important;

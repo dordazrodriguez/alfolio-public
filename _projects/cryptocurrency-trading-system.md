@@ -15,13 +15,18 @@ tags:
   - React
   - Machine Learning
   - Reinforcement Learning
+  - PPO
+  - LightGBM
+  - Random Forest
   - Docker
   - Full Stack
   - Data Science
   - VPS
-  - ML
-  - AI
-  - Data
+  - Trading
+  - Risk Management
+  - REST API
+  - ATR
+  - DevOps
 link: "https://github.com/dordazrodriguez/CryptoTradingSystem"
 date: 2025-01-15
 show_date: true

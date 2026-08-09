@@ -33,27 +33,37 @@ horizontal: false
     display: none;
   }
 
-  /* Category-colored left accents on project cards */
-  .project-card .card {
-    border-left: 4px solid #94a3b8;
+  /* Category-colored top accent bar on project cards */
+  .project-card > .card {
+    position: relative;
     transition: box-shadow 0.2s ease, transform 0.2s ease;
   }
 
-  .project-card.cat-financial .card { border-left-color: #10b981; }
-  .project-card.cat-quant .card { border-left-color: #3b82f6; }
-  .project-card.cat-dev .card { border-left-color: #f59e0b; }
-  .project-card.cat-devops .card { border-left-color: #6366f1; }
-  .project-card.cat-cybersecurity .card { border-left-color: #ef4444; }
-  .project-card.cat-web .card { border-left-color: #06b6d4; }
-  .project-card.cat-full-stack .card { border-left-color: #8b5cf6; }
-  .project-card.cat-data-science .card { border-left-color: #ec4899; }
-  .project-card.cat-ml .card { border-left-color: #a855f7; }
-  .project-card.cat-ai .card { border-left-color: #d946ef; }
-  .project-card.cat-production .card { border-left-color: #14b8a6; }
-
-  html[data-theme='dark'] .project-card .card {
-    border-left-color: #64748b;
+  .project-card > .card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 5px;
+    background: #94a3b8;
+    z-index: 2;
+    border-top-left-radius: inherit;
+    border-top-right-radius: inherit;
   }
+
+  .project-card.primary-cat-financial > .card::before { background: #10b981; }
+  .project-card.primary-cat-quant > .card::before { background: #3b82f6; }
+  .project-card.primary-cat-dev > .card::before { background: #f59e0b; }
+  .project-card.primary-cat-devops > .card::before { background: #6366f1; }
+  .project-card.primary-cat-cybersecurity > .card::before { background: #ef4444; }
+  .project-card.primary-cat-web > .card::before { background: #06b6d4; }
+  .project-card.primary-cat-full-stack > .card::before { background: #8b5cf6; }
+  .project-card.primary-cat-data-science > .card::before { background: #ec4899; }
+  .project-card.primary-cat-ml > .card::before { background: #a855f7; }
+  .project-card.primary-cat-ai > .card::before { background: #d946ef; }
+  .project-card.primary-cat-production > .card::before { background: #14b8a6; }
+
 </style>
 
 <div class="container-fluid mt-4" style="max-width: 90%; margin-left: auto; margin-right: auto;">
@@ -156,7 +166,8 @@ horizontal: false
         {% comment %} Projects will be sorted by date in JavaScript (most recent first), then by importance {% endcomment %}
         <div class="row" id="projects-grid">
           {% for project in sorted_projects %}
-            <div class="col-md-6 col-xl-4 mb-4 project-card{% if project.category %}{% for cat in project.category %} cat-{{ cat | slugify }}{% endfor %}{% endif %}" 
+            {% if project.category %}{% if project.category.first %}{% assign primary_cat = project.category.first %}{% else %}{% assign primary_cat = project.category %}{% endif %}{% else %}{% assign primary_cat = '' %}{% endif %}
+            <div class="col-md-6 col-xl-4 mb-4 project-card{% if project.category %}{% for cat in project.category %} cat-{{ cat | slugify }}{% endfor %}{% endif %}{% if primary_cat != '' %} primary-cat-{{ primary_cat | slugify }}{% endif %}" 
                  data-category="{% if project.category %}{% if project.category.first %}{{ project.category | join: ',' }}{% else %}{{ project.category }}{% endif %}{% endif %}" 
                  data-title="{{ project.title }}" 
                  data-description="{{ project.description }}"

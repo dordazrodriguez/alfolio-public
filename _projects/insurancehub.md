@@ -7,6 +7,7 @@ category:
   - 'Web'
   - 'Dev'
   - 'AI'
+  - 'Production'
 img: assets/img/projects/insurancehub/hero-homepage.png
 additional_images:
   - assets/img/projects/insurancehub/all-products.png
@@ -35,11 +36,14 @@ tags:
   - Marketplace
   - DevOps
   - Docker
+  - Production
 link: "https://insurancehub-copy-819556054794.us-west1.run.app"
 importance: 2
 date: 2026-08-09
 show_date: true
 ---
+
+**Live Demo:** <a href="https://insurancehub-copy-819556054794.us-west1.run.app" target="_blank"><i class="fas fa-globe"></i> https://insurancehub-copy-819556054794.us-west1.run.app</a>
 
 InsuranceHUB is an **AI-powered insurance marketplace hub** designed to make insurance shopping simple, transparent, and affordable. It lets users compare quotes from 100+ top carriers across dozens of insurance products, manage all their policies in one digital wallet, and get personalized coverage recommendations powered by a proprietary AI engine.
 

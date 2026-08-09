@@ -2,10 +2,11 @@
 layout: page
 title: "GTX - Combined Crypto Exchange & Multi-Asset Brokerage Platform"
 description: "A combined crypto exchange + brokerage-style trading platform (FTX-like exchange plus IBKR-style multi-asset access), with added features for advanced trading, automation, and portfolio workflows."
-category: 
+category:
   - 'Financial'
   - 'Quant'
   - 'Dev'
+  - 'Production'
 img: assets/img/projects/gtx-trading-broker/gtx-dashboard.png
 tags:
   - Alpaca
@@ -28,6 +29,7 @@ tags:
   - Docker
   - Financial
   - Risk Management
+  - Production
 date: 2026-08-04
 show_date: true
 importance: 1

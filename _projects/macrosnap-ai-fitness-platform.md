@@ -8,6 +8,7 @@ category:
   - 'DevOps'
   - 'Dev'
   - 'ML'
+  - 'Production'
 img: assets/img/projects/macrosnap/macrosnap_dashboard.png
 tags:
   - Mobile Development
@@ -26,6 +27,7 @@ tags:
   - Mobile App
   - Web
   - Cloud
+  - Production
 live: "https://macrosnap.tectgc.com"
 link: "https://macrosnap.tectgc.com"
 date: 2025-01-10

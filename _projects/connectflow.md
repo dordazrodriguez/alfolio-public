@@ -8,9 +8,16 @@ category:
   - 'Production'
 img: assets/img/projects/connectflow/thumbnail.png
 additional_images:
-  - assets/img/projects/connectflow/hero-dashboard.png
-  - assets/img/projects/connectflow/homepage.png
-  - assets/img/projects/connectflow/blog.png
+  - assets/img/projects/connectflow/homepage-full-light.png
+  - assets/img/projects/connectflow/homepage-full-dark.png
+  - assets/img/projects/connectflow/blog-light.png
+  - assets/img/projects/connectflow/blog-dark.png
+  - assets/img/projects/connectflow/dashboard-live-wallboard.png
+  - assets/img/projects/connectflow/feature-management.png
+  - assets/img/projects/connectflow/signin-page-v2.png
+  - assets/img/projects/connectflow/signup-page-v2.png
+  - assets/img/projects/connectflow/signup-chat-open-v2.png
+  - assets/img/projects/connectflow/signup-assistant-v2.png
 tags:
   - Full Stack
   - UCaaS
@@ -34,6 +41,8 @@ show_date: true
 
 ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform that brings voice, SMS, video, and AI-powered intelligence into one secure, cloud-native workspace. It is designed to replace legacy PBX systems with a scalable, software-first communication stack for distributed teams.
 
+**Live Demo:** Visit [https://connectflow.gen-cloud.org](https://connectflow.gen-cloud.org)
+
 ## Key Features
 
 - **Voice & Calling**: Crystal-clear VoIP calling with WebRTC, call routing, IVR menus, and ring groups
@@ -53,32 +62,102 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
 - **Cloud**: Cloud-hosted, containerized microservices
 - **Integrations**: Salesforce, HubSpot, Clio, Athenahealth
 
-## Live Demo
-
-Visit the live application: **[https://connectflow.gen-cloud.org](https://connectflow.gen-cloud.org)**
-
 ## Screenshots
 
 <div class="project-screenshots-grid" style="margin: 2rem 0;">
   <div class="row">
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/homepage.png' | relative_url }}" data-caption="ConnectFlow homepage — modern UCaaS platform" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/homepage-full-light.png' | relative_url }}" data-caption="ConnectFlow homepage — light theme" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/connectflow/homepage.png' | relative_url }}" alt="ConnectFlow Homepage" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/connectflow/homepage-full-light.png' | relative_url }}" alt="ConnectFlow Homepage Light" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
             <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
           </div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Homepage — UCaaS Platform</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Homepage — Light</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/blog.png' | relative_url }}" data-caption="ConnectFlow blog — resources and insights" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/homepage-full-dark.png' | relative_url }}" data-caption="ConnectFlow homepage — dark theme" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/connectflow/blog.png' | relative_url }}" alt="ConnectFlow Blog" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="{{ '/assets/img/projects/connectflow/homepage-full-dark.png' | relative_url }}" alt="ConnectFlow Homepage Dark" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Resources & Insights Blog</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Homepage — Dark</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/blog-light.png' | relative_url }}" data-caption="ConnectFlow Resources &amp; Insights — light theme" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/blog-light.png' | relative_url }}" alt="ConnectFlow Blog Light" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Resources &amp; Insights — Light</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/blog-dark.png' | relative_url }}" data-caption="ConnectFlow Resources &amp; Insights — dark theme" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/blog-dark.png' | relative_url }}" alt="ConnectFlow Blog Dark" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Resources &amp; Insights — Dark</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/signin-page-v2.png' | relative_url }}" data-caption="ConnectFlow sign-in page" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/signin-page-v2.png' | relative_url }}" alt="ConnectFlow Sign In" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Sign In</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/signup-page-v2.png' | relative_url }}" data-caption="ConnectFlow sign-up page" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/signup-page-v2.png' | relative_url }}" alt="ConnectFlow Sign Up" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Sign Up</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/signup-chat-open-v2.png' | relative_url }}" data-caption="ConnectFlow sign-up page with assistant chat open" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/signup-chat-open-v2.png' | relative_url }}" alt="ConnectFlow Sign Up with Chat" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Sign Up — Assistant Chat Open</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/signup-assistant-v2.png' | relative_url }}" data-caption="ConnectFlow sign-up page with assistant widget" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/signup-assistant-v2.png' | relative_url }}" alt="ConnectFlow Sign Up with Assistant" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Sign Up — Assistant Widget</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/dashboard-live-wallboard.png' | relative_url }}" data-caption="ConnectFlow Live Wallboard — real-time team and queue status" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/dashboard-live-wallboard.png' | relative_url }}" alt="ConnectFlow Live Wallboard" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
+            <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
+          </div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Live Wallboard</p>
+      </div>
+    </div>
+    <div class="col-md-6 mb-4">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/connectflow/feature-management.png' | relative_url }}" data-caption="ConnectFlow Feature Management — add-on overview and pricing" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+        <div style="position: relative;">
+          <img src="{{ '/assets/img/projects/connectflow/feature-management.png' | relative_url }}" alt="ConnectFlow Feature Management" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
+        </div>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Feature Management</p>
       </div>
     </div>
   </div>

@@ -11,6 +11,21 @@ horizontal: false
 
 <!-- Hide the default page title -->
 <style>
+  :root {
+    --cat-financial: #10b981;
+    --cat-quant: #3b82f6;
+    --cat-dev: #f59e0b;
+    --cat-devops: #6366f1;
+    --cat-cybersecurity: #ef4444;
+    --cat-web: #06b6d4;
+    --cat-full-stack: #8b5cf6;
+    --cat-data-science: #ec4899;
+    --cat-ml: #a855f7;
+    --cat-ai: #d946ef;
+    --cat-production: #14b8a6;
+    --cat-default: #94a3b8;
+  }
+
   .body {
     width: 100% !important;
     max-width: 100%;
@@ -46,23 +61,23 @@ horizontal: false
     left: 0;
     right: 0;
     height: 5px;
-    background: #94a3b8;
+    background: var(--cat-default);
     z-index: 2;
     border-top-left-radius: inherit;
     border-top-right-radius: inherit;
   }
 
-  .project-card.primary-cat-financial > .card::before { background: #10b981; }
-  .project-card.primary-cat-quant > .card::before { background: #3b82f6; }
-  .project-card.primary-cat-dev > .card::before { background: #f59e0b; }
-  .project-card.primary-cat-devops > .card::before { background: #6366f1; }
-  .project-card.primary-cat-cybersecurity > .card::before { background: #ef4444; }
-  .project-card.primary-cat-web > .card::before { background: #06b6d4; }
-  .project-card.primary-cat-full-stack > .card::before { background: #8b5cf6; }
-  .project-card.primary-cat-data-science > .card::before { background: #ec4899; }
-  .project-card.primary-cat-ml > .card::before { background: #a855f7; }
-  .project-card.primary-cat-ai > .card::before { background: #d946ef; }
-  .project-card.primary-cat-production > .card::before { background: #14b8a6; }
+  .project-card.primary-cat-financial > .card::before { background: var(--cat-financial); }
+  .project-card.primary-cat-quant > .card::before { background: var(--cat-quant); }
+  .project-card.primary-cat-dev > .card::before { background: var(--cat-dev); }
+  .project-card.primary-cat-devops > .card::before { background: var(--cat-devops); }
+  .project-card.primary-cat-cybersecurity > .card::before { background: var(--cat-cybersecurity); }
+  .project-card.primary-cat-web > .card::before { background: var(--cat-web); }
+  .project-card.primary-cat-full-stack > .card::before { background: var(--cat-full-stack); }
+  .project-card.primary-cat-data-science > .card::before { background: var(--cat-data-science); }
+  .project-card.primary-cat-ml > .card::before { background: var(--cat-ml); }
+  .project-card.primary-cat-ai > .card::before { background: var(--cat-ai); }
+  .project-card.primary-cat-production > .card::before { background: var(--cat-production); }
 
   /* Category badge pills on project cards */
   .project-category-badges {
@@ -81,20 +96,25 @@ horizontal: false
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: #fff;
-    background: #94a3b8;
+    background: var(--cat-default);
   }
 
-  .project-category-badge.cat-financial { background: #10b981; }
-  .project-category-badge.cat-quant { background: #3b82f6; }
-  .project-category-badge.cat-dev { background: #f59e0b; color: #1f2937; }
-  .project-category-badge.cat-devops { background: #6366f1; }
-  .project-category-badge.cat-cybersecurity { background: #ef4444; }
-  .project-category-badge.cat-web { background: #06b6d4; color: #1f2937; }
-  .project-category-badge.cat-full-stack { background: #8b5cf6; }
-  .project-category-badge.cat-data-science { background: #ec4899; }
-  .project-category-badge.cat-ml { background: #a855f7; }
-  .project-category-badge.cat-ai { background: #d946ef; }
-  .project-category-badge.cat-production { background: #14b8a6; }
+  .project-category-badge.cat-financial { background: var(--cat-financial); }
+  .project-category-badge.cat-quant { background: var(--cat-quant); }
+  .project-category-badge.cat-dev { background: var(--cat-dev); color: #1f2937; }
+  .project-category-badge.cat-devops { background: var(--cat-devops); }
+  .project-category-badge.cat-cybersecurity { background: var(--cat-cybersecurity); }
+  .project-category-badge.cat-web { background: var(--cat-web); color: #1f2937; }
+  .project-category-badge.cat-full-stack { background: var(--cat-full-stack); }
+  .project-category-badge.cat-data-science { background: var(--cat-data-science); }
+  .project-category-badge.cat-ml { background: var(--cat-ml); }
+  .project-category-badge.cat-ai { background: var(--cat-ai); }
+  .project-category-badge.cat-production { background: var(--cat-production); }
+
+  /* Tone down bright category badges in dark mode */
+  html[data-theme="dark"] .project-category-badge {
+    filter: brightness(0.88) saturate(0.9);
+  }
 
 </style>
 
@@ -1020,12 +1040,12 @@ horizontal: false
   }
   
   html[data-theme='light'] .project-card .card {
-    background-color: #ffffff;
+    background-color: var(--global-bg-color);
     color: #1e293b;
   }
   
   html[data-theme='dark'] .project-card .card {
-    background-color: #1e293b;
+    background-color: var(--global-bg-color);
     color: #f8fafc;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }

@@ -35,10 +35,6 @@ tags:
   - NumPy
   - pandas
 img: assets/img/projects/quant-trading-system-suite/dashboard-overview.png
-additional_images:
-  - assets/img/projects/quant-trading-system-suite/dashboard-performance.png
-  - assets/img/projects/quant-trading-system-suite/dashboard-trades.png
-  - assets/img/projects/quant-trading-system-suite/dashboard-model.png
 link: "https://github.com/dordazrodriguez/quant-trading-system-suite"
 date: 2026-08-09
 show_date: true
@@ -352,47 +348,3 @@ MIT License — See [LICENSE](https://github.com/dordazrodriguez/quant-trading-s
 
 ---
 
-## Dashboard Screenshots
-
-<div class="project-screenshots-grid" style="margin: 2rem 0;">
-  <div class="row">
-    <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-overview.png' | relative_url }}" data-caption="Analytics Dashboard — Overview" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
-        <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-overview.png' | relative_url }}" alt="Analytics Dashboard — Overview" class="img-fluid" style="width: 100%; height: auto; display: block;">
-          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;">
-            <i class="fas fa-expand" style="color: white; font-size: 2rem;"></i>
-          </div>
-        </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Analytics Dashboard — Overview</p>
-      </div>
-    </div>
-    <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-performance.png' | relative_url }}" data-caption="Analytics Dashboard — Performance Metrics" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
-        <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-performance.png' | relative_url }}" alt="Analytics Dashboard — Performance Metrics" class="img-fluid" style="width: 100%; height: auto; display: block;">
-          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
-        </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Analytics Dashboard — Performance Metrics</p>
-      </div>
-    </div>
-    <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-trades.png' | relative_url }}" data-caption="Analytics Dashboard — Trade Log" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
-        <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-trades.png' | relative_url }}" alt="Analytics Dashboard — Trade Log" class="img-fluid" style="width: 100%; height: auto; display: block;">
-          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
-        </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Analytics Dashboard — Trade Log</p>
-      </div>
-    </div>
-    <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-model.png' | relative_url }}" data-caption="Analytics Dashboard — ML Model Performance" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
-        <div style="position: relative;">
-          <img src="{{ '/assets/img/projects/quant-trading-system-suite/dashboard-model.png' | relative_url }}" alt="Analytics Dashboard — ML Model Performance" class="img-fluid" style="width: 100%; height: auto; display: block;">
-          <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
-        </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Analytics Dashboard — ML Model Performance</p>
-      </div>
-    </div>
-  </div>
-</div>

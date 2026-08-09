@@ -41,7 +41,7 @@ show_date: true
 
 ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform that brings voice, SMS, video, and AI-powered intelligence into one secure, cloud-native workspace. It is designed to replace legacy PBX systems with a scalable, software-first communication stack for distributed teams.
 
-**Live Demo:** Visit [https://connectflow.gen-cloud.org](https://connectflow.gen-cloud.org)
+**Link:** [https://connectflow.gen-cloud.org](https://connectflow.gen-cloud.org)
 
 ## Key Features
 
@@ -213,19 +213,48 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
     position: relative;
     max-width: 100%;
     width: 100%;
+    max-height: 80vh;
     margin: auto;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
-    padding: 1rem 0;
+    overflow: auto;
+    padding: 80px 0;
+    box-sizing: border-box;
   }
   
   .modal-image-container img {
     max-width: 100%;
+    max-height: calc(80vh - 160px);
     height: auto;
+    width: auto;
     object-fit: contain;
     border-radius: 8px;
     box-shadow: 0 8px 24px rgba(0,0,0,0.3);
+    transition: all 0.2s ease;
+    cursor: zoom-in;
+    margin: auto 0;
+  }
+  
+  .modal-image-container img.zoom-100 {
+    max-width: none;
+    max-height: none;
+    width: 100%;
+    cursor: zoom-in;
+  }
+  
+  .modal-image-container img.zoom-150 {
+    max-width: none;
+    max-height: none;
+    width: 150%;
+    cursor: zoom-in;
+  }
+  
+  .modal-image-container img.zoom-200 {
+    max-width: none;
+    max-height: none;
+    width: 200%;
+    cursor: zoom-out;
   }
   
   .modal-close {
@@ -318,6 +347,50 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
     z-index: 10000;
   }
   
+  .modal-zoom-controls {
+    position: fixed;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    color: white;
+    background: rgba(0,0,0,0.5);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 10000;
+  }
+  
+  .modal-zoom-controls button {
+    background: rgba(255,255,255,0.2);
+    border: none;
+    color: white;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: background 0.2s;
+  }
+  
+  .modal-zoom-controls button:hover {
+    background: rgba(255,255,255,0.4);
+  }
+  
+  .modal-zoom-controls button:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+  
+  .modal-zoom-controls span {
+    min-width: 48px;
+    text-align: center;
+  }
+  
   @media (max-width: 768px) {
     .modal-image-container {
       padding: 0.5rem;
@@ -352,6 +425,15 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
       padding: 0.4rem 0.8rem;
     }
     
+    .modal-zoom-controls {
+      top: auto;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      padding: 0.4rem 0.8rem;
+      font-size: 0.8rem;
+    }
+    
     .modal-caption {
       font-size: 0.9rem;
       padding: 0.75rem 1rem;
@@ -364,6 +446,11 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
   <span class="modal-close">&times;</span>
   <div class="modal-counter">
     <span id="current-image-index">1</span> / <span id="total-images-count">2</span>
+  </div>
+  <div class="modal-zoom-controls">
+    <button type="button" id="modal-zoom-out" aria-label="Zoom out"><i class="fas fa-minus"></i></button>
+    <span id="modal-zoom-level">Fit</span>
+    <button type="button" id="modal-zoom-in" aria-label="Zoom in"><i class="fas fa-plus"></i></button>
   </div>
   <div class="modal-nav-arrow prev" id="modal-prev">
     <i class="fas fa-chevron-left"></i>
@@ -416,13 +503,8 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
     if (nextBtn) {
       nextBtn.classList.toggle('disabled', index === screenshots.length - 1);
     }
-  }
-  
-  function openModal(index) {
-    currentIndex = index;
-    updateModal(currentIndex);
-    modal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    
+    resetZoom();
   }
   
   function closeModal() {
@@ -489,6 +571,75 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
   });
   
   const modalImageContainer = document.querySelector('.modal-image-container');
+  const zoomInBtn = document.getElementById('modal-zoom-in');
+  const zoomOutBtn = document.getElementById('modal-zoom-out');
+  const zoomLevelSpan = document.getElementById('modal-zoom-level');
+  
+  const zoomLevels = [
+    { class: '', label: 'Fit' },
+    { class: 'zoom-100', label: '100%' },
+    { class: 'zoom-150', label: '150%' },
+    { class: 'zoom-200', label: '200%' }
+  ];
+  let currentZoom = 0;
+  
+  function applyZoom() {
+    modalImage.classList.remove('zoom-100', 'zoom-150', 'zoom-200');
+    const zoomClass = zoomLevels[currentZoom].class;
+    if (zoomClass) {
+      modalImage.classList.add(zoomClass);
+    }
+    zoomLevelSpan.textContent = zoomLevels[currentZoom].label;
+    if (zoomOutBtn) zoomOutBtn.disabled = currentZoom === 0;
+    if (zoomInBtn) zoomInBtn.disabled = currentZoom === zoomLevels.length - 1;
+  }
+  
+  function resetZoom() {
+    currentZoom = 0;
+    applyZoom();
+  }
+  
+  function zoomIn() {
+    if (currentZoom < zoomLevels.length - 1) {
+      currentZoom++;
+      applyZoom();
+    }
+  }
+  
+  function zoomOut() {
+    if (currentZoom > 0) {
+      currentZoom--;
+      applyZoom();
+    }
+  }
+  
+  if (zoomInBtn) {
+    zoomInBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      zoomIn();
+    });
+  }
+  
+  if (zoomOutBtn) {
+    zoomOutBtn.addEventListener('click', function(e) {
+      e.stopPropagation();
+      zoomOut();
+    });
+  }
+  
+  if (modalImage) {
+    modalImage.addEventListener('click', function(e) {
+      e.stopPropagation();
+      zoomIn();
+    });
+  }
+  
+  function openModal(index) {
+    currentIndex = index;
+    updateModal(currentIndex);
+    modal.classList.add('active');
+    document.body.style.overflow = 'hidden';
+  }
   
   if (modalImageContainer) {
     modalImageContainer.addEventListener('touchstart', function(e) {

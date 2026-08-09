@@ -1020,12 +1020,12 @@ horizontal: false
   }
   
   html[data-theme='light'] .project-card .card {
-    background-color: var(--global-bg-color);
+    background-color: #ffffff;
     color: #1e293b;
   }
-
+  
   html[data-theme='dark'] .project-card .card {
-    background-color: var(--global-bg-color);
+    background-color: #1e293b;
     color: #f8fafc;
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
@@ -1623,7 +1623,7 @@ horizontal: false
     flex: 1 1 auto;
     border: 1px solid rgba(0, 0, 0, 0.14);
     border-radius: 7.5px;
-    background-color: var(--global-bg-color);
+    background-color: #ffffff;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease !important;
@@ -1631,13 +1631,13 @@ horizontal: false
   }
 
   html[data-theme='light'] .project-card .card {
-    background-color: var(--global-bg-color);
+    background-color: #ffffff;
     border: 1px solid rgba(0, 0, 0, 0.14);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
   }
 
   html[data-theme='dark'] .project-card .card {
-    background-color: var(--global-bg-color);
+    background-color: #1e293b;
     border: 1px solid rgba(255, 255, 255, 0.18) !important;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4), 0 8px 24px rgba(0, 0, 0, 0.35) !important;
   }

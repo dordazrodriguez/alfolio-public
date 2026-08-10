@@ -3009,19 +3009,60 @@ horizontal: false
     // Get filter parameters from URL
     const tagParam = getUrlParameter('tag');
     const tagsParam = getUrlParameter('tags'); // Search tags (plural)
-    const categoryParam = getUrlParameter('category');
+    const categoryParam = getUrlParameter('category'); // Backwards-compatible alias
+    const catParam = getUrlParameter('cat');
     const searchParam = getUrlParameter('search');
+    
+    // Normalize a label into a slug for fuzzy matching (e.g. "Data Science" -> "datascience")
+    function slugify(value) {
+      return value.toLowerCase().replace(/[^a-z0-9]+/g, '');
+    }
+    
+    // Apply category filters from URL (cat= or category=, comma-separated slugs)
+    function applyUrlCategories(rawValue) {
+      if (!rawValue) return;
+      const requested = Array.from(new Set(rawValue.split(',').map(slugify).filter(Boolean)));
+      if (requested.length === 0) return;
+      
+      const buttons = Array.from(document.querySelectorAll('.category-btn'));
+      const matchedNames = new Set();
+      
+      // Pass 1: exact slug matches
+      buttons.forEach(btn => {
+        const name = btn.getAttribute('data-category');
+        if (name === 'All') return;
+        if (requested.includes(slugify(name))) matchedNames.add(name);
+      });
+      
+      // Pass 2: prefix matches for tokens without an exact hit (so "data" finds "Data Science")
+      requested.forEach(r => {
+        if (Array.from(matchedNames).some(n => slugify(n) === r)) return;
+        if (r.length < 2) return;
+        buttons.forEach(btn => {
+          const name = btn.getAttribute('data-category');
+          if (name === 'All') return;
+          if (slugify(name).startsWith(r)) matchedNames.add(name);
+        });
+      });
+      
+      if (matchedNames.size > 0) {
+        selectedCategories = Array.from(matchedNames);
+        updateCategoryButtons();
+        applySearch();
+        updateActiveFilters();
+      }
+    }
     
     // Apply filters from URL parameters if they exist
     if (tagParam) {
       // Support for multiple tags separated by commas
-      const tags = tagParam.split(',').map(tag => tag.trim().toLowerCase());
+      const requested = Array.from(new Set(tagParam.split(',').map(slugify).filter(Boolean)));
       
       // Find and activate the tag filters
       const tagButtons = document.querySelectorAll('.tech-btn');
       tagButtons.forEach(btn => {
-        const btnText = btn.textContent.trim().toLowerCase();
-        if (tags.includes(btnText)) {
+        const tech = btn.getAttribute('data-tech');
+        if (tech && requested.includes(slugify(tech))) {
           btn.click();
         }
       });
@@ -3036,19 +3077,8 @@ horizontal: false
       applySearch(); // Apply the filtering
     }
     
-    if (categoryParam) {
-      // Support for multiple categories separated by commas
-      const categories = categoryParam.split(',').map(cat => cat.trim().toLowerCase());
-      
-      // Find and activate the category filters
-      const categoryButtons = document.querySelectorAll('.category-btn');
-      categoryButtons.forEach(btn => {
-        const btnText = btn.textContent.trim().toLowerCase();
-        if (categories.includes(btnText)) {
-          btn.click();
-        }
-      });
-    }
+    // Apply category filters (cat= takes precedence, category= as fallback)
+    applyUrlCategories(catParam || categoryParam);
     
     if (searchParam) {
       // Set the search input and trigger filtering
@@ -3063,11 +3093,11 @@ horizontal: false
     // Update URL when filters change
     function updateUrlWithFilters() {
       // Get current filters
-      const activeCategories = Array.from(document.querySelectorAll('.category-btn.active'))
+      const activeCategories = Array.from(document.querySelectorAll('.category-btn.selected'))
         .map(btn => btn.textContent.trim())
         .filter(cat => cat !== 'All');
       
-      const activeTags = Array.from(document.querySelectorAll('.tech-btn.active'))
+      const activeTags = Array.from(document.querySelectorAll('.tech-btn.selected'))
         .map(btn => btn.textContent.trim());
       
       const searchInputEl = document.getElementById('search-input') || document.getElementById('search-input-horizontal');
@@ -3077,11 +3107,11 @@ horizontal: false
       let params = new URLSearchParams();
       
       if (activeCategories.length > 0) {
-        params.set('category', activeCategories.map(cat => cat.toLowerCase()).join(','));
+        params.set('cat', activeCategories.map(cat => slugify(cat)).join(','));
       }
       
       if (activeTags.length > 0) {
-        params.set('tag', activeTags.map(tag => tag.toLowerCase()).join(','));
+        params.set('tag', activeTags.map(tag => slugify(tag)).join(','));
       }
       
       // Add search tags (the ones added via Enter/comma)

@@ -175,6 +175,7 @@ quant-trading-system-suite/
 - **SQLite persistence** for backtest results across sessions
 - **React dashboard** with equity curves, drawdown charts, return distributions, trade logs, and ML model performance
 - **Flask REST API** serving JSON metric endpoints
+
 ---
 
 ## Quick Start
@@ -322,6 +323,7 @@ walk_forward:
 | Linting/Types | Ruff, mypy |
 | CI/CD | GitHub Actions |
 | Deployment | Docker |
+
 ---
 
 ## Test Results
@@ -329,10 +331,10 @@ walk_forward:
 - **Python tests**: 53/53 passing (unit + integration + analytics)
 - **Linting**: ruff clean (0 errors)
 - **Type checking**: mypy clean (0 errors in 28 source files)
+
 ---
 
 ## License
 
 MIT License — See [LICENSE](https://github.com/dordazrodriguez/quant-trading-system-suite/blob/main/LICENSE) for details.
----
 

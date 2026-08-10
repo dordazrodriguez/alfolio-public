@@ -106,7 +106,7 @@ horizontal: false
     font-weight: 600;
     line-height: 1;
     padding: 0.3rem 0.55rem;
-    border-radius: 999px;
+    border-radius: 7.5px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
     color: var(--cat-default-text);

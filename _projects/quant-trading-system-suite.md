@@ -34,12 +34,11 @@ tags:
   - C++17
   - NumPy
   - pandas
-img: assets/img/projects/quant-trading-system-suite/dashboard-overview.png
 link: "https://github.com/dordazrodriguez/quant-trading-system-suite"
 date: 2026-08-09
 show_date: true
 importance: 1
-featured: true
+featured: false
 ---
 
 Project Repo: <a href="https://github.com/dordazrodriguez/quant-trading-system-suite" target="_blank"> https://github.com/dordazrodriguez/quant-trading-system-suite </a>
@@ -50,7 +49,6 @@ A production-grade quantitative trading system suite featuring a vectorized Pyth
 
 **Developer:** David J. Ordaz-Rodriguez <br/>
 **Academic Foundation:** B.S. Finance (LSU) & B.S. Computer Science (WGU)
-
 ---
 
 ## Architecture Overview
@@ -78,54 +76,6 @@ WebSocket Tick Feed ──► Vectorized Backtester ──► C++ Limit Order Bo
                         Analytics & Dashboard
                         (React + Flask API + SQLite)
 ```
-
----
-
-## Modules
-
-### Module 1: Vectorized Python Backtesting Harness
-- **Fully vectorized** trade execution using NumPy/pandas — no slow `for` loops
-- **Maker/Taker fee model** with programmatic spread-crossing detection
-- **Stochastic slippage simulator** scaled by ATR and volume-to-depth ratio (seeded for reproducibility)
-- **Network latency queue** simulating N-ms execution delay
-- **Walk-forward OOS engine** with automated time-series partitioning
-- **WalkForwardRunner** with per-fold model retraining (avoids static-strategy bias)
-
-### Module 2: High-Performance C++ Limit Order Book
-- **O(1) order add/cancel** via doubly-linked list + unordered_map hash lookup
-- **O(log P) price level insertion** via self-balancing `std::map`
-- **Price-Time priority** matching engine
-- **L2 Market Data Replay Tool** — JSON ingestion and replay with depth snapshots
-- **pybind11 Python bindings** for seamless integration with Python pipelines
-- **Google Test suite** with comprehensive coverage
-
-### Module 3: ML & Risk Management Layer
-- **170+ feature indicators**: momentum, volatility, volume-weighted, statistical, microstructure
-- **Order Flow Imbalance (OFI)** and microstructure price imbalance
-- **Triple-barrier labeling** (Lopez de Prado) for classification targets
-- **Purged Time-Series Cross-Validation** with embargoing
-- **LightGBM and RandomForest** signal models with OOS prediction alignment
-- **PPO reinforcement learning agent** with custom trading environment
-- **Feature IC analysis**: IC, IC decay across horizons, IC stability (rolling window)
-- **ATR-based dynamic stop-loss** with intrabar high/low detection
-- **Volatility-adjusted position sizing** with strict risk-per-trade cap
-
-### Module 4: Statistical Rigor Analytics
-- **Deflated Sharpe Ratio (DSR)** — adjusts for selection bias from multiple trials (Lopez de Prado)
-- **Probability of Backtest Overfitting (PBO)** — combinatorially symmetric cross-validation
-- **White's Reality Check** — stationary bootstrap for data-snooping detection
-- **Multiple-testing corrections** — Bonferroni and Benjamini-Hochberg FDR
-- **Turnover & capacity analysis** — per-bar turnover, average holding period
-
-### Module 5: Performance Attribution & Dashboard
-- **Sharpe, Sortino, Calmar ratios** with proper CAGR annualization
-- **Max Drawdown & Duration** tracking
-- **Value at Risk (VaR)** — historical and parametric (95% confidence, 1-day horizon)
-- **Linear regression Alpha/Beta decomposition** vs. benchmark
-- **SQLite persistence** for backtest results across sessions
-- **React dashboard** with equity curves, drawdown charts, return distributions, trade logs, and ML model performance
-- **Flask REST API** serving JSON metric endpoints
-
 ---
 
 ## Project Layout
@@ -179,7 +129,52 @@ quant-trading-system-suite/
 ├── AGENTS.md                   # Build & test commands
 └── README.md
 ```
+---
 
+## Modules
+
+### Module 1: Vectorized Python Backtesting Harness
+- **Fully vectorized** trade execution using NumPy/pandas — no slow `for` loops
+- **Maker/Taker fee model** with programmatic spread-crossing detection
+- **Stochastic slippage simulator** scaled by ATR and volume-to-depth ratio (seeded for reproducibility)
+- **Network latency queue** simulating N-ms execution delay
+- **Walk-forward OOS engine** with automated time-series partitioning
+- **WalkForwardRunner** with per-fold model retraining (avoids static-strategy bias)
+
+### Module 2: High-Performance C++ Limit Order Book
+- **O(1) order add/cancel** via doubly-linked list + unordered_map hash lookup
+- **O(log P) price level insertion** via self-balancing `std::map`
+- **Price-Time priority** matching engine
+- **L2 Market Data Replay Tool** — JSON ingestion and replay with depth snapshots
+- **pybind11 Python bindings** for seamless integration with Python pipelines
+- **Google Test suite** with comprehensive coverage
+
+### Module 3: ML & Risk Management Layer
+- **170+ feature indicators**: momentum, volatility, volume-weighted, statistical, microstructure
+- **Order Flow Imbalance (OFI)** and microstructure price imbalance
+- **Triple-barrier labeling** (Lopez de Prado) for classification targets
+- **Purged Time-Series Cross-Validation** with embargoing
+- **LightGBM and RandomForest** signal models with OOS prediction alignment
+- **PPO reinforcement learning agent** with custom trading environment
+- **Feature IC analysis**: IC, IC decay across horizons, IC stability (rolling window)
+- **ATR-based dynamic stop-loss** with intrabar high/low detection
+- **Volatility-adjusted position sizing** with strict risk-per-trade cap
+
+### Module 4: Statistical Rigor Analytics
+- **Deflated Sharpe Ratio (DSR)** — adjusts for selection bias from multiple trials (Lopez de Prado)
+- **Probability of Backtest Overfitting (PBO)** — combinatorially symmetric cross-validation
+- **White's Reality Check** — stationary bootstrap for data-snooping detection
+- **Multiple-testing corrections** — Bonferroni and Benjamini-Hochberg FDR
+- **Turnover & capacity analysis** — per-bar turnover, average holding period
+
+### Module 5: Performance Attribution & Dashboard
+- **Sharpe, Sortino, Calmar ratios** with proper CAGR annualization
+- **Max Drawdown & Duration** tracking
+- **Value at Risk (VaR)** — historical and parametric (95% confidence, 1-day horizon)
+- **Linear regression Alpha/Beta decomposition** vs. benchmark
+- **SQLite persistence** for backtest results across sessions
+- **React dashboard** with equity curves, drawdown charts, return distributions, trade logs, and ML model performance
+- **Flask REST API** serving JSON metric endpoints
 ---
 
 ## Quick Start
@@ -237,7 +232,6 @@ cd dashboard/frontend
 npm install
 npm run dev
 ```
-
 ---
 
 ## Usage Example
@@ -280,7 +274,6 @@ sharpe = np.sqrt(252) * returns.mean() / returns.std()
 dsr = deflated_sharpe_ratio(sharpe, n_trials=10, sample_length=len(returns), returns=returns)
 print(f"Deflated Sharpe: {dsr['deflated_sharpe']:.3f} (p={dsr['dsr_pvalue']:.3f})")
 ```
-
 ---
 
 ## C++ LOB Replay Tool
@@ -289,7 +282,6 @@ print(f"Deflated Sharpe: {dsr['deflated_sharpe']:.3f} (p={dsr['dsr_pvalue']:.3f}
 # Replay L2 market data from JSON
 ./cpp_engine/build/lob_replay tests/sample_replay_data.json --depth 5 --stats --verbose
 ```
-
 ---
 
 ## Configuration
@@ -312,7 +304,6 @@ walk_forward:
   test_window: 63
   step: 63
 ```
-
 ---
 
 ## Technology Stack
@@ -331,7 +322,6 @@ walk_forward:
 | Linting/Types | Ruff, mypy |
 | CI/CD | GitHub Actions |
 | Deployment | Docker |
-
 ---
 
 ## Test Results
@@ -339,12 +329,10 @@ walk_forward:
 - **Python tests**: 53/53 passing (unit + integration + analytics)
 - **Linting**: ruff clean (0 errors)
 - **Type checking**: mypy clean (0 errors in 28 source files)
-
 ---
 
 ## License
 
 MIT License — See [LICENSE](https://github.com/dordazrodriguez/quant-trading-system-suite/blob/main/LICENSE) for details.
-
 ---
 

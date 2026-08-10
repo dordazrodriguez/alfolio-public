@@ -251,6 +251,12 @@ horizontal: false
                     Your browser does not support the video tag.
                   </video>
                 {% endif %}
+                {% unless project.img or project.video %}
+                  <div class="card-img-top card-img-placeholder">
+                    <i class="fas fa-cube"></i>
+                    <span class="placeholder-initials">{{ project.title | slice: 0, 2 | upcase }}</span>
+                  </div>
+                {% endunless %}
                 <div class="card-body">
                   {% if project.category %}
                     <div class="project-category-badges mb-2">
@@ -1099,6 +1105,38 @@ horizontal: false
   
   html[data-theme='dark'] .project-card .card-img-top {
     background-color: #0f172a;
+  }
+
+  .project-card .card-img-placeholder {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-height: 220px;
+    padding: 1.5rem;
+    gap: 0.75rem;
+    text-align: center;
+    background: linear-gradient(135deg, #e2e8f0 0%, #f1f5f9 100%);
+    color: #64748b;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+  }
+
+  .project-card .card-img-placeholder i {
+    font-size: 3rem;
+    opacity: 0.5;
+  }
+
+  .project-card .card-img-placeholder .placeholder-initials {
+    font-size: 1.25rem;
+    font-weight: 700;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  html[data-theme='dark'] .project-card .card-img-placeholder {
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+    color: #94a3b8;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
   }
   
   .card-title {

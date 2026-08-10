@@ -83,12 +83,12 @@ Project Repo: <a href="https://github.com/dordazrodriguez/CryptoTradingSystem" t
       </div>
     </div>
     <div class="col-md-6 mb-4">
-      <div class="screenshot-item" data-image="https://raw.githubusercontent.com/dordazrodriguez/CryptoTradingSystem/main/Screenshots/alpaca_paper_trade_dashboard.png" data-caption="Alpaca Paper Trade Dashboard" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
+      <div class="screenshot-item" data-image="https://raw.githubusercontent.com/dordazrodriguez/CryptoTradingSystem/main/Screenshots/alpaca_paper_trade_dashboard.png" data-caption="Alpaca Paper Trade Dashboard - API Placed Trade" style="cursor: pointer; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 8px rgba(0,0,0,0.1); transition: transform 0.2s, box-shadow 0.2s;">
         <div style="position: relative;">
-          <img src="https://raw.githubusercontent.com/dordazrodriguez/CryptoTradingSystem/main/Screenshots/alpaca_paper_trade_dashboard.png" alt="Alpaca Paper Trade Dashboard" class="img-fluid" style="width: 100%; height: auto; display: block;">
+          <img src="https://raw.githubusercontent.com/dordazrodriguez/CryptoTradingSystem/main/Screenshots/alpaca_paper_trade_dashboard.png" alt="Alpaca Paper Trade Dashboard - API Placed Trade" class="img-fluid" style="width: 100%; height: auto; display: block;">
           <div class="screenshot-overlay" style="position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: rgba(0,0,0,0.5); display: flex; align-items: center; justify-content: center; opacity: 0; transition: opacity 0.3s ease; pointer-events: none;"></div>
         </div>
-        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Alpaca Paper Trade Dashboard</p>
+        <p class="text-center mt-2 mb-0" style="font-size: 0.9rem; color: #666; padding: 0.5rem;">Alpaca Paper Trade Dashboard - API Placed Trade</p>
       </div>
     </div>
     <div class="col-md-6 mb-4">

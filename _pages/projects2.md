@@ -313,6 +313,16 @@ horizontal: false
   </div>
 </div>
 
+<!-- Hide projects grid until JS sorting completes to prevent flash of unsorted content -->
+<style>
+  #projects-grid {
+    visibility: hidden;
+  }
+  #projects-grid.projects-ready {
+    visibility: visible;
+  }
+</style>
+
 <!-- Add Font Awesome if not already included -->
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 
@@ -2330,6 +2340,12 @@ horizontal: false
   function initializeProjects() {
     // Sort projects first, before any other operations
     let projectCardsArray = sortProjects();
+    
+    // Reveal the grid now that sorting is complete
+    const projectsGrid = document.getElementById('projects-grid');
+    if (projectsGrid) {
+      projectsGrid.classList.add('projects-ready');
+    }
     
     if (!projectCardsArray || projectCardsArray.length === 0) {
       // If sort didn't work, try again after a short delay

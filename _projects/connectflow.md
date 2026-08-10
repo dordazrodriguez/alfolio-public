@@ -236,6 +236,13 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
     margin: auto 0;
   }
   
+  .modal-image-container img.zoom-50 {
+    max-width: none;
+    max-height: none;
+    width: 50%;
+    cursor: zoom-in;
+  }
+
   .modal-image-container img.zoom-100 {
     max-width: none;
     max-height: none;
@@ -576,15 +583,16 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
   const zoomLevelSpan = document.getElementById('modal-zoom-level');
   
   const zoomLevels = [
+    { class: 'zoom-50', label: '50%' },
     { class: '', label: 'Fit' },
     { class: 'zoom-100', label: '100%' },
     { class: 'zoom-150', label: '150%' },
     { class: 'zoom-200', label: '200%' }
   ];
-  let currentZoom = 0;
+  let currentZoom = 1;
   
   function applyZoom() {
-    modalImage.classList.remove('zoom-100', 'zoom-150', 'zoom-200');
+    modalImage.classList.remove('zoom-50', 'zoom-100', 'zoom-150', 'zoom-200');
     const zoomClass = zoomLevels[currentZoom].class;
     if (zoomClass) {
       modalImage.classList.add(zoomClass);
@@ -595,7 +603,7 @@ ConnectFlow is a modern **Unified Communications as a Service (UCaaS)** platform
   }
   
   function resetZoom() {
-    currentZoom = 0;
+    currentZoom = 1;
     applyZoom();
   }
   

@@ -24,6 +24,20 @@ horizontal: false
     --cat-ai: #d946ef;
     --cat-production: #14b8a6;
     --cat-default: #94a3b8;
+
+    /* Muted text colors used for subtle badge pills (light mode) */
+    --cat-financial-text: #047857;
+    --cat-quant-text: #1d4ed8;
+    --cat-dev-text: #b45309;
+    --cat-devops-text: #4338ca;
+    --cat-cybersecurity-text: #b91c1c;
+    --cat-web-text: #0e7490;
+    --cat-full-stack-text: #6d28d9;
+    --cat-data-science-text: #be185d;
+    --cat-ml-text: #7e22ce;
+    --cat-ai-text: #a21caf;
+    --cat-production-text: #0f766e;
+    --cat-default-text: #475569;
   }
 
   .body {
@@ -89,31 +103,32 @@ horizontal: false
   .project-category-badge {
     display: inline-block;
     font-size: 0.65rem;
-    font-weight: 700;
+    font-weight: 600;
     line-height: 1;
     padding: 0.3rem 0.55rem;
     border-radius: 999px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: #fff;
-    background: var(--cat-default);
+    color: var(--cat-default-text);
+    background: color-mix(in srgb, var(--cat-default) 14%, transparent);
+    border: 1px solid color-mix(in srgb, var(--cat-default) 28%, transparent);
   }
 
-  .project-category-badge.cat-financial { background: var(--cat-financial); }
-  .project-category-badge.cat-quant { background: var(--cat-quant); }
-  .project-category-badge.cat-dev { background: var(--cat-dev); color: #1f2937; }
-  .project-category-badge.cat-devops { background: var(--cat-devops); }
-  .project-category-badge.cat-cybersecurity { background: var(--cat-cybersecurity); }
-  .project-category-badge.cat-web { background: var(--cat-web); color: #1f2937; }
-  .project-category-badge.cat-full-stack { background: var(--cat-full-stack); }
-  .project-category-badge.cat-data-science { background: var(--cat-data-science); }
-  .project-category-badge.cat-ml { background: var(--cat-ml); }
-  .project-category-badge.cat-ai { background: var(--cat-ai); }
-  .project-category-badge.cat-production { background: var(--cat-production); }
+  .project-category-badge.cat-financial { color: var(--cat-financial-text); background: color-mix(in srgb, var(--cat-financial) 14%, transparent); border-color: color-mix(in srgb, var(--cat-financial) 28%, transparent); }
+  .project-category-badge.cat-quant { color: var(--cat-quant-text); background: color-mix(in srgb, var(--cat-quant) 14%, transparent); border-color: color-mix(in srgb, var(--cat-quant) 28%, transparent); }
+  .project-category-badge.cat-dev { color: var(--cat-dev-text); background: color-mix(in srgb, var(--cat-dev) 16%, transparent); border-color: color-mix(in srgb, var(--cat-dev) 30%, transparent); }
+  .project-category-badge.cat-devops { color: var(--cat-devops-text); background: color-mix(in srgb, var(--cat-devops) 14%, transparent); border-color: color-mix(in srgb, var(--cat-devops) 28%, transparent); }
+  .project-category-badge.cat-cybersecurity { color: var(--cat-cybersecurity-text); background: color-mix(in srgb, var(--cat-cybersecurity) 14%, transparent); border-color: color-mix(in srgb, var(--cat-cybersecurity) 28%, transparent); }
+  .project-category-badge.cat-web { color: var(--cat-web-text); background: color-mix(in srgb, var(--cat-web) 14%, transparent); border-color: color-mix(in srgb, var(--cat-web) 28%, transparent); }
+  .project-category-badge.cat-full-stack { color: var(--cat-full-stack-text); background: color-mix(in srgb, var(--cat-full-stack) 14%, transparent); border-color: color-mix(in srgb, var(--cat-full-stack) 28%, transparent); }
+  .project-category-badge.cat-data-science { color: var(--cat-data-science-text); background: color-mix(in srgb, var(--cat-data-science) 14%, transparent); border-color: color-mix(in srgb, var(--cat-data-science) 28%, transparent); }
+  .project-category-badge.cat-ml { color: var(--cat-ml-text); background: color-mix(in srgb, var(--cat-ml) 14%, transparent); border-color: color-mix(in srgb, var(--cat-ml) 28%, transparent); }
+  .project-category-badge.cat-ai { color: var(--cat-ai-text); background: color-mix(in srgb, var(--cat-ai) 14%, transparent); border-color: color-mix(in srgb, var(--cat-ai) 28%, transparent); }
+  .project-category-badge.cat-production { color: var(--cat-production-text); background: color-mix(in srgb, var(--cat-production) 14%, transparent); border-color: color-mix(in srgb, var(--cat-production) 28%, transparent); }
 
-  /* Tone down bright category badges in dark mode */
+  /* Lighten badge text and boost background tint slightly for legibility in dark mode */
   html[data-theme="dark"] .project-category-badge {
-    filter: brightness(0.88) saturate(0.9);
+    filter: brightness(1.35) saturate(1.05);
   }
 
 </style>

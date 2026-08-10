@@ -109,26 +109,19 @@ horizontal: false
     border-radius: 7.5px;
     text-transform: uppercase;
     letter-spacing: 0.03em;
-    color: var(--cat-default-text);
-    background: color-mix(in srgb, var(--cat-default) 14%, transparent);
-    border: 1px solid color-mix(in srgb, var(--cat-default) 28%, transparent);
+    background-color: transparent;
+    border: 1px solid;
+    transition: all 0.2s ease;
   }
 
-  .project-category-badge.cat-financial { color: var(--cat-financial-text); background: color-mix(in srgb, var(--cat-financial) 14%, transparent); border-color: color-mix(in srgb, var(--cat-financial) 28%, transparent); }
-  .project-category-badge.cat-quant { color: var(--cat-quant-text); background: color-mix(in srgb, var(--cat-quant) 14%, transparent); border-color: color-mix(in srgb, var(--cat-quant) 28%, transparent); }
-  .project-category-badge.cat-dev { color: var(--cat-dev-text); background: color-mix(in srgb, var(--cat-dev) 16%, transparent); border-color: color-mix(in srgb, var(--cat-dev) 30%, transparent); }
-  .project-category-badge.cat-devops { color: var(--cat-devops-text); background: color-mix(in srgb, var(--cat-devops) 14%, transparent); border-color: color-mix(in srgb, var(--cat-devops) 28%, transparent); }
-  .project-category-badge.cat-cybersecurity { color: var(--cat-cybersecurity-text); background: color-mix(in srgb, var(--cat-cybersecurity) 14%, transparent); border-color: color-mix(in srgb, var(--cat-cybersecurity) 28%, transparent); }
-  .project-category-badge.cat-web { color: var(--cat-web-text); background: color-mix(in srgb, var(--cat-web) 14%, transparent); border-color: color-mix(in srgb, var(--cat-web) 28%, transparent); }
-  .project-category-badge.cat-full-stack { color: var(--cat-full-stack-text); background: color-mix(in srgb, var(--cat-full-stack) 14%, transparent); border-color: color-mix(in srgb, var(--cat-full-stack) 28%, transparent); }
-  .project-category-badge.cat-data-science { color: var(--cat-data-science-text); background: color-mix(in srgb, var(--cat-data-science) 14%, transparent); border-color: color-mix(in srgb, var(--cat-data-science) 28%, transparent); }
-  .project-category-badge.cat-ml { color: var(--cat-ml-text); background: color-mix(in srgb, var(--cat-ml) 14%, transparent); border-color: color-mix(in srgb, var(--cat-ml) 28%, transparent); }
-  .project-category-badge.cat-ai { color: var(--cat-ai-text); background: color-mix(in srgb, var(--cat-ai) 14%, transparent); border-color: color-mix(in srgb, var(--cat-ai) 28%, transparent); }
-  .project-category-badge.cat-production { color: var(--cat-production-text); background: color-mix(in srgb, var(--cat-production) 14%, transparent); border-color: color-mix(in srgb, var(--cat-production) 28%, transparent); }
+  html[data-theme='light'] .project-category-badge {
+    color: #475569;
+    border-color: rgba(0, 0, 0, 0.15);
+  }
 
-  /* Lighten badge text and boost background tint slightly for legibility in dark mode */
-  html[data-theme="dark"] .project-category-badge {
-    filter: brightness(1.35) saturate(1.05);
+  html[data-theme='dark'] .project-category-badge {
+    color: #cbd5e1;
+    border-color: rgba(255, 255, 255, 0.15);
   }
 
 </style>

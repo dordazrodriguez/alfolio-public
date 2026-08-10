@@ -1408,10 +1408,10 @@ body.toc-panel-open {
   }
 }
 
-/* Wider container for blog pages (about 14% spacing on each side) */
+/* Wider container for blog pages (about 6% spacing on each side) */
 body.blog-page .container[role="main"] {
-  max-width: 1200px;
-  width: 72%;
+  max-width: 1400px;
+  width: 88%;
 }
 
 /* On small screens, let blog content use nearly the full width */

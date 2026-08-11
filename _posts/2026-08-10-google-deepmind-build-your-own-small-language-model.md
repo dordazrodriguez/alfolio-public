@@ -11,7 +11,11 @@ description: "Completing Course 01 of the Google DeepMind AI Research Foundation
 
 Completed [**Build Your Own Small Language Model**](https://www.skills.google/paths/3135/course_templates/1341) as part of the [Google DeepMind AI Research Foundations](https://www.skills.google/paths/3135) learning path. This course covers the fundamentals of language modeling — from probability distributions and n-gram models to transformer-based architectures and dataset preparation for training small language models (SLMs).
 
+**Badge:** 
+
 [![Google Skills Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="250" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
+
+[View badge on Google Skills](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
 
 ## Labs Completed
 

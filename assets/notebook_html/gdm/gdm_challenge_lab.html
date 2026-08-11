@@ -1,0 +1,1318 @@
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><p><small><small>This Notebook is made available subject to the licence and terms set out in the <a href = "http://www.github.com/google-deepmind/ai-foundations">AI Research Foundations GitHub README file</a>.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://storage.googleapis.com/dm-educational/assets/ai_foundations/GDM-Labs-banner-image-C1-white-bg.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Build-Your-Own-Small-Language-Model:-Challenge-Lab">Build Your Own Small Language Model: Challenge Lab<a class="anchor-link" href="#Build-Your-Own-Small-Language-Model:-Challenge-Lab">&#182;</a></h1>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Challenge-Scenario">Challenge Scenario<a class="anchor-link" href="#Challenge-Scenario">&#182;</a></h2><h3 id="Cymbal-Chat:-Developing-a-chatbot-for-the-Arabic-speaking-market.">Cymbal Chat: Developing a chatbot for the Arabic speaking market.<a class="anchor-link" href="#Cymbal-Chat:-Developing-a-chatbot-for-the-Arabic-speaking-market.">&#182;</a></h3><p>Cymbal Chat is an AI language modeling small startup. They would like to expand the languages that they cover to also include Arabic. It has a very different grammar than English, and uses a different character set than what their AI researchers are used to. You are going to help them with their first steps: exploring the use of character-based language models.</p>
+<p><br /></p>
+<hr>
+<blockquote><p><strong>ℹ️ Info</strong></p>
+<p>Sometimes character-based language models may work better for Arabic NLP tasks than word-based models [1]. It is because subwords can be attached to the beginning or end of words to add meaning. For example, a noun (book) can be modified as:</p>
+<ul>
+<li><strong>كتاب (kitāb)</strong> - a book</li>
+<li><strong>كتابي (kitāb-ī)</strong> - my book</li>
+<li><strong>كتابك (kitāb-uk)</strong> - your (masc.) book</li>
+<li><strong>كتابه (kitāb-uh)</strong> - his book</li>
+</ul>
+<p>Arabic is read from <em>right to left</em>, and here the modifiers were added to the end of the host word (book).</p>
+<h2 id="They-can-also-be-added-before-the-host-word,-for-example-conjunctions-like-%22%D9%88-%22-(wa-,-meaning-'and')-and-%22%D9%81-%22-(fa-,-meaning-'so'-or-'then'),-as-well-as-prepositions-such-as-%22%D8%A8-%22-(bi-,-meaning-'with'-or-'in')-and-%22%D9%84-%22-(li-,-meaning-'for'-or-'to').">They can also be added before the host word, for example conjunctions like "&#1608; " (wa-, meaning 'and') and "&#1601; " (fa-, meaning 'so' or 'then'), as well as prepositions such as "&#1576; " (bi-, meaning 'with' or 'in') and "&#1604; " (li-, meaning 'for' or 'to').<a class="anchor-link" href="#They-can-also-be-added-before-the-host-word,-for-example-conjunctions-like-%22%D9%88-%22-(wa-,-meaning-'and')-and-%22%D9%81-%22-(fa-,-meaning-'so'-or-'then'),-as-well-as-prepositions-such-as-%22%D8%A8-%22-(bi-,-meaning-'with'-or-'in')-and-%22%D9%84-%22-(li-,-meaning-'for'-or-'to').">&#182;</a></h2>
+</blockquote>
+<p><br /></p>
+<p>Exploring the use of character-based language models will involve these Tasks:</p>
+<ul>
+<li><strong>Task 1.</strong> <em>Define helper functions and load data.</em></li>
+<li><strong>Task 2.</strong> <em>Character tokenizer</em>: Create a simple character level tokenizer for Arabic text.</li>
+<li><strong>Task 3.</strong> <em>N-gram text generator</em>: Develop an n-gram based text generator as a baseline against which to evaluate a more sophisticated model.</li>
+<li><strong>Task 4.</strong> <em>Data preparation</em>: Prepare an Arabic dataset so that it can be used for training a character-based transformer language model on restricted resources.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-1.--Define-helper-functions-and-load-data">Task 1.  Define helper functions and load data<a class="anchor-link" href="#Task-1.--Define-helper-functions-and-load-data">&#182;</a></h2><p>You will use a small dataset of short children's stories in Arabic to explore the use of character-based language models for Cymbal Chat.</p>
+<p>For this task, you will import the libraries required for this lab and load and display the dataset of Arabic stories.</p>
+<p>✅ All code cells have already been written for you in all parts of this task. <strong>You are not required to add or modify code for Task 1.</strong></p>
+<p><br /></p>
+<hr>
+<blockquote><p>💻 <strong>Your task</strong>:</p>
+<h2 id="Run-the-cells-in-Task-1-to-load-a-small-children's-stories-dataset.">Run the cells in <strong>Task 1</strong> to load a small children's stories dataset.<a class="anchor-link" href="#Run-the-cells-in-Task-1-to-load-a-small-children's-stories-dataset.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="err">!</span> <span class="n">gcloud</span> <span class="n">auth</span> <span class="n">application</span><span class="o">-</span><span class="n">default</span> <span class="n">login</span> <span class="o">--</span><span class="n">no</span><span class="o">-</span><span class="n">launch</span><span class="o">-</span><span class="n">browser</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>
+You are running on a Google Compute Engine virtual machine.
+The service credentials associated with this virtual machine
+will automatically be used by Application Default
+Credentials, so it is not necessary to use this command.
+
+If you decide to proceed anyway, your user credentials may be visible
+to others with access to this virtual machine. Are you sure you want
+to authenticate with your personal account?
+
+Do you want to continue (Y/n)?  Y
+
+Go to the following link in your browser, and complete the sign-in prompts:
+
+    https://accounts.google.com/o/oauth2/auth?response_type=code&amp;client_id=764086051850-6qr4p6gpi6hn506pt8ejuq83di341hur.apps.googleusercontent.com&amp;redirect_uri=https%3A%2F%2Fsdk.cloud.google.com%2Fapplicationdefaultauthcode.html&amp;scope=openid+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fuserinfo.email+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fcloud-platform+https%3A%2F%2Fwww.googleapis.com%2Fauth%2Fsqlservice.login&amp;state=OcbBbDSE01xhwMxXmsQd7z0D9fsVTa&amp;prompt=consent&amp;token_usage=remote&amp;access_type=offline&amp;code_challenge=8NkxKSLTdSqskc22tIVdl8KCCzBXxnl0g7SW4BN7CFM&amp;code_challenge_method=S256
+
+Once finished, enter the verification code provided in your browser: 4/0AXEQxIBxfTmXKivpRSOQOEDUxN7IHleeAgijUolnfbFIAKfu3liUEfpaDi2NBDvqHU0M_w
+
+Credentials saved to file: [/content/.config/application_default_credentials.json]
+
+These credentials will be used by any library that requests Application Default Credentials (ADC).
+
+Quota project &#34;qwiklabs-gcp-01-3ab5ba670300&#34; was added to ADC which can be used by Google client libraries for billing and quota. Note that some services may still bill the project owning the resource.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Install logging packages for lab grading</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">google</span><span class="o">-</span><span class="n">cloud</span><span class="o">-</span><span class="n">logging</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span>
+<span class="o">%</span><span class="n">pip</span> <span class="n">install</span> <span class="o">--</span><span class="n">upgrade</span> <span class="n">protobuf</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">null</span> <span class="mi">2</span><span class="o">&gt;&amp;</span><span class="mi">1</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Restart-the-kernel-(Runtime-session)">Restart the kernel (Runtime session)<a class="anchor-link" href="#Restart-the-kernel-(Runtime-session)">&#182;</a></h3><p>To load the newly installed packages, you must restart the kernel.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">IPython</span>
+
+<span class="n">app</span> <span class="o">=</span> <span class="n">IPython</span><span class="o">.</span><span class="n">Application</span><span class="o">.</span><span class="n">instance</span><span class="p">()</span>
+<span class="n">app</span><span class="o">.</span><span class="n">kernel</span><span class="o">.</span><span class="n">do_shutdown</span><span class="p">(</span><span class="kc">True</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[3]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>{&#39;status&#39;: &#39;ok&#39;, &#39;restart&#39;: True}</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<div class="alert alert-block alert-warning">
+⚠️ The kernel is going to restart. Please wait until it is finished before continuing to the next step. If you encounter the message <b>Your session crashed for an unknown reason.</b>, safely disregard it and proceed to the next section. ⚠️
+</div>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Packages used.</span>
+<span class="kn">from</span> <span class="nn">collections</span> <span class="kn">import</span> <span class="n">Counter</span><span class="p">,</span> <span class="n">defaultdict</span>
+<span class="kn">import</span> <span class="nn">random</span>
+<span class="kn">import</span> <span class="nn">re</span>
+<span class="kn">from</span> <span class="nn">typing</span> <span class="kn">import</span> <span class="n">Any</span><span class="p">,</span> <span class="n">Literal</span>
+<span class="kn">import</span> <span class="nn">itertools</span>
+
+<span class="kn">import</span> <span class="nn">keras</span>
+<span class="kn">import</span> <span class="nn">numpy</span> <span class="k">as</span> <span class="nn">np</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">logging</span> <span class="k">as</span> <span class="n">gcp_logging</span>
+<span class="kn">from</span> <span class="nn">google.cloud.logging.handlers</span> <span class="kn">import</span> <span class="n">CloudLoggingHandler</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Instantiate the Google Cloud Logging client</span>
+<span class="kn">import</span> <span class="nn">logging</span>
+<span class="kn">from</span> <span class="nn">google.cloud</span> <span class="kn">import</span> <span class="n">logging</span> <span class="k">as</span> <span class="n">gcp_logging</span>
+<span class="kn">from</span> <span class="nn">google.cloud.logging.handlers</span> <span class="kn">import</span> <span class="n">CloudLoggingHandler</span>
+
+<span class="c1"># Instantiate the Google Cloud Logging client</span>
+<span class="n">client</span> <span class="o">=</span> <span class="n">gcp_logging</span><span class="o">.</span><span class="n">Client</span><span class="p">()</span>
+
+<span class="c1"># Create a specific logger for cloud logging</span>
+<span class="n">logger</span> <span class="o">=</span> <span class="n">logging</span><span class="o">.</span><span class="n">getLogger</span><span class="p">(</span><span class="s1">'my_cloud_logger'</span><span class="p">)</span>
+
+<span class="c1"># Prevent this logger from sending messages to its parent (the root logger),</span>
+<span class="c1"># which has the default console handler</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">propagate</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1"># Create and add the Cloud Logging handler</span>
+<span class="n">handler</span> <span class="o">=</span> <span class="n">CloudLoggingHandler</span><span class="p">(</span><span class="n">client</span><span class="p">)</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">addHandler</span><span class="p">(</span><span class="n">handler</span><span class="p">)</span>
+
+<span class="c1"># Set the logging level</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Helper-functions">Helper functions<a class="anchor-link" href="#Helper-functions">&#182;</a></h3><hr>
+<blockquote><p><strong>ℹ️ Info: Working with Arabic text</strong></p>
+<p>An Arabic sentence like</p>
+<p>ذَهَبَ الطَالبُ الى المَدْرَسَة</p>
+<p>(meaning <em>"the student went to school"</em>) is read from <em>right to left</em>. The first character in the string is printed on the far right where one starts reading, and programatically still has string index <code>0</code>. The string can contain:</p>
+<ul>
+<li><p><strong>Bidirectional control characters</strong> that states that the text should be displayed right-to-left on a screen. (These additional control characters do not change Python indexing.)</p>
+</li>
+<li><p><strong>Diacritic characters</strong> or markings that are placed above or below letters to indicate, for instance, short vowel sounds. They can help to disambiguate text.</p>
+</li>
+</ul>
+<hr>
+</blockquote>
+<p><br /></p>
+<p>The helper functions <code>clean_bidi_chars</code> and <code>remove_diacritics</code> will be used to preprocess text by removing bidirectional control characters, as well as diacritic markings that are not essential for this task.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">clean_bidi_chars</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">   </span><span class="sd">"""Remove Unicode bidirectional control characters from text.</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">        text: Input text that may contain BiDi control characters.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">       Text with all bidirectional control characters removed.</span>
+<span class="sd">   """</span>
+   <span class="n">bidi_chars</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\u202A-\u202E\u2066-\u2069]"</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">bidi_chars</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">remove_diacritics</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">   </span><span class="sd">"""Remove Arabic diacritic characters to simplify text.</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">       text: Arabic text that may contain diacritical marks.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">       Text with all Arabic diacritics and tatweel removed.</span>
+<span class="sd">   """</span>
+   <span class="n">arabic_diacritics</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">compile</span><span class="p">(</span><span class="sa">r</span><span class="s2">"[\u064B-\u065F\u0670\u0640]"</span><span class="p">)</span>
+   <span class="k">return</span> <span class="n">arabic_diacritics</span><span class="o">.</span><span class="n">sub</span><span class="p">(</span><span class="s2">""</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+
+<span class="k">def</span> <span class="nf">display_arabic</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">   </span><span class="sd">"""Format Arabic text terminals with limited right-to-left support.</span>
+
+<span class="sd">   Args:</span>
+<span class="sd">       text: Arabic text to format for display.</span>
+
+<span class="sd">   Returns:</span>
+<span class="sd">       Text wrapped with RTL (right-to-left) override characters for improved</span>
+<span class="sd">       terminal rendering.</span>
+<span class="sd">   """</span>
+   <span class="k">return</span> <span class="s2">"</span><span class="se">\u202E</span><span class="s2">"</span> <span class="o">+</span> <span class="n">text</span> <span class="o">+</span> <span class="s2">"</span><span class="se">\u202C</span><span class="s2">"</span>
+
+
+<span class="n">sentence</span> <span class="o">=</span> <span class="s2">"ذَهَبَ الطَالبُ الى المَدْرَسَة"</span>  <span class="c1"># The student went to school</span>
+<span class="n">sentence_bidi_clean</span> <span class="o">=</span> <span class="n">clean_bidi_chars</span><span class="p">(</span><span class="n">sentence</span><span class="p">)</span>
+<span class="n">sentence_without_diacritics</span> <span class="o">=</span> <span class="n">remove_diacritics</span><span class="p">(</span><span class="n">sentence_bidi_clean</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"EXAMPLE"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text:           </span><span class="si">{</span><span class="n">sentence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Processed text: </span><span class="si">{</span><span class="n">display_arabic</span><span class="p">(</span><span class="n">sentence_without_diacritics</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>EXAMPLE
+Text:           ذَهَبَ الطَالبُ الى المَدْرَسَة
+Processed text: ‮ذهب الطالب الى المدرسة‬
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Load-and-display-the-dataset.">Load and display the dataset.<a class="anchor-link" href="#Load-and-display-the-dataset.">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[4]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Load dataset of Arabic stories.</span>
+<span class="n">url</span> <span class="o">=</span> <span class="s2">"https://storage.googleapis.com/dm-educational/assets/ai_foundations/200-stories-ar.json"</span>
+<span class="n">df</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span><span class="n">url</span><span class="p">)</span>
+
+<span class="c1"># Extract dataset from dataframe and preprocess text.</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">story</span> <span class="ow">in</span> <span class="n">df</span><span class="p">[</span><span class="s2">"story_ar"</span><span class="p">]</span><span class="o">.</span><span class="n">to_list</span><span class="p">():</span>
+    <span class="n">story</span> <span class="o">=</span> <span class="n">clean_bidi_chars</span><span class="p">(</span><span class="n">story</span><span class="p">)</span>
+    <span class="n">story</span> <span class="o">=</span> <span class="n">remove_diacritics</span><span class="p">(</span><span class="n">story</span><span class="p">)</span>
+    <span class="n">dataset</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">story</span><span class="p">)</span>
+
+<span class="n">first_story</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First story after preprocessing:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">display_arabic</span><span class="p">(</span><span class="n">first_story</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First story after preprocessing:
+	‮الشمس طلعت! بطة صغيرة تستيقظ. تحب اللعب. ترى مزارعا قرب بركتها. المزارع لطيف. يلوح للبطة.
+
+البطة تتهادى إلى صديقها، أرنب ناعم. الأرنب يأكل جزرة. تقول البطة: &#34;مرحبا! هل تريد اللعب؟&#34; الأرنب يومئ برأسه. هما سعيدان.
+
+يريان صخرة ملساء ومسطحة. تبدو مكانا ممتعا للتزلج! يحاول الأرنب التزلج لكنه يقفز بدلا من ذلك. البطة تنزلق قليلا. من الممتع المحاولة!
+
+قريبا، حان وقت الغداء. البطة تأكل بذورا لذيذة. الأرنب يأكل المزيد من الجزر. يأخذان قيلولة في الشمس الدافئة. هما صديقان حميمان.‬
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-2.-Character-Tokenizer">Task 2. Character Tokenizer<a class="anchor-link" href="#Task-2.-Character-Tokenizer">&#182;</a></h2><p>You need to convert natural language text to character-tokens and back again. For example, the text</p>
+<p><code>text = "الشمس طلعت"</code></p>
+<p>(meaning: <em>"The sun is out"</em>) should be split into a list of character tokens.  The first three character tokens are:</p>
+
+<pre><code>tokens[0] == "ا"
+tokens[1] == "ل"
+tokens[2] == "ش"</code></pre>
+<p>Remember that the text literaral is formatted to appear on screen <em>right-to-left</em>. When the tokens are joined, the original text should be recreated.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complete-a-simple-Arabic-character-tokenizer.">Complete a simple Arabic character tokenizer.<a class="anchor-link" href="#Complete-a-simple-Arabic-character-tokenizer.">&#182;</a></h3><p>In this section, you will complete two methods in the <code>SimpleArabicCharacterTokenizer</code> class to
+convert natural language text to character-tokens and back.</p>
+<p><br /></p>
+<hr>
+<blockquote><p>💻 <strong>Your task</strong>:</p>
+<p>Complete the <strong><code>character_tokenize</code></strong> method.</p>
+<p>Given text input like <code>text = "الشمس طلعت"</code> (meaning: <em>"The sun is out"</em>), the method should return a list of character level tokens, <code>tokens</code>, each a <code>str</code> object of length one. These must be the characters of the input text in the same order. For the example text, it means <code>tokens[0]</code> is <code>"ا"</code>.</p>
+<p><em>Note that if you print <code>tokens</code> to standard output it may also appear in right-to-left order. Like this:</em></p>
+
+<pre><code>["ا", "ل", "ش", "م", "س", " ", "ط", "ل", "ع", "ت"]</code></pre>
+<h2 id="This-is-a-consequence-of-the-right-to-left-encoding-of-the-Arabic-characters-but-it-does-not-affect-the-reference-order-of-the-elements."><em>This is a consequence of the right-to-left encoding of the Arabic characters but it does not affect the reference order of the elements.</em><a class="anchor-link" href="#This-is-a-consequence-of-the-right-to-left-encoding-of-the-Arabic-characters-but-it-does-not-affect-the-reference-order-of-the-elements.">&#182;</a></h2><p>💻 <strong>Your task</strong>:</p>
+<p>Complete the <strong><code>join_text</code></strong> method.</p>
+<h2 id="Given-a-list-of-tokens,-this-should-return-a-string-containing-the-characters-appearing-in-the-input-tokens.">Given a list of tokens, this should return a string containing the characters appearing in the input tokens.<a class="anchor-link" href="#Given-a-list-of-tokens,-this-should-return-a-string-containing-the-characters-appearing-in-the-input-tokens.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[5]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">SimpleArabicCharacterTokenizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""A simple character tokenizer."""</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="k">pass</span>
+
+    <span class="k">def</span> <span class="nf">character_tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Splits a given Arabic text into character tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: Text to split into character tokens.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tokens after splitting `text`.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Tokenize the string into character tokens.</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">tokens</span>
+
+    <span class="k">def</span> <span class="nf">join_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Combines a list of tokens into a single string.</span>
+
+<span class="sd">        The combined tokens are combined simply into a single string.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text_list: List of tokens to be joined.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            String with all tokens joined together without intervening characters.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Join the list of character tokens into a string.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-your-tokenizer">Test your tokenizer<a class="anchor-link" href="#Test-your-tokenizer">&#182;</a></h3><p>You can experiment with your implementation of <code>SimpleArabicCharacterTokenizer</code> by running the cell below.</p>
+<p>✅ All the code has been written for you in this part. <strong>You are not required to add or modify code.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[6]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Test your tokenizer on the first line of the first story from the dataset.</span>
+
+<span class="c1"># Create tokenizer.</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SimpleArabicCharacterTokenizer</span><span class="p">()</span>
+
+<span class="c1"># Get first line of first story.</span>
+<span class="n">first_story</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">first_line</span> <span class="o">=</span> <span class="n">first_story</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">"</span><span class="se">\n</span><span class="s2">"</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First line of dataset:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">first_line</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Tokenize the line of text.</span>
+<span class="n">first_line_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">character_tokenize</span><span class="p">(</span><span class="n">first_line</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First line tokens:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">first_line_tokens</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Join the tokens to reform the line of text.</span>
+<span class="n">first_line_rejoined</span> <span class="o">=</span>  <span class="n">tokenizer</span><span class="o">.</span><span class="n">join_text</span><span class="p">(</span><span class="n">first_line_tokens</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"First line rejoined:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">first_line_rejoined</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Do not remove or modify this logging call, it will be used for tracking purposes</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Task 2: First line rejoined: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">first_line_tokens</span><span class="p">)</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>First line of dataset:
+	الشمس طلعت! بطة صغيرة تستيقظ. تحب اللعب. ترى مزارعا قرب بركتها. المزارع لطيف. يلوح للبطة.
+First line tokens:
+	[&#39;ا&#39;, &#39;ل&#39;, &#39;ش&#39;, &#39;م&#39;, &#39;س&#39;, &#39; &#39;, &#39;ط&#39;, &#39;ل&#39;, &#39;ع&#39;, &#39;ت&#39;, &#39;!&#39;, &#39; &#39;, &#39;ب&#39;, &#39;ط&#39;, &#39;ة&#39;, &#39; &#39;, &#39;ص&#39;, &#39;غ&#39;, &#39;ي&#39;, &#39;ر&#39;, &#39;ة&#39;, &#39; &#39;, &#39;ت&#39;, &#39;س&#39;, &#39;ت&#39;, &#39;ي&#39;, &#39;ق&#39;, &#39;ظ&#39;, &#39;.&#39;, &#39; &#39;, &#39;ت&#39;, &#39;ح&#39;, &#39;ب&#39;, &#39; &#39;, &#39;ا&#39;, &#39;ل&#39;, &#39;ل&#39;, &#39;ع&#39;, &#39;ب&#39;, &#39;.&#39;, &#39; &#39;, &#39;ت&#39;, &#39;ر&#39;, &#39;ى&#39;, &#39; &#39;, &#39;م&#39;, &#39;ز&#39;, &#39;ا&#39;, &#39;ر&#39;, &#39;ع&#39;, &#39;ا&#39;, &#39; &#39;, &#39;ق&#39;, &#39;ر&#39;, &#39;ب&#39;, &#39; &#39;, &#39;ب&#39;, &#39;ر&#39;, &#39;ك&#39;, &#39;ت&#39;, &#39;ه&#39;, &#39;ا&#39;, &#39;.&#39;, &#39; &#39;, &#39;ا&#39;, &#39;ل&#39;, &#39;م&#39;, &#39;ز&#39;, &#39;ا&#39;, &#39;ر&#39;, &#39;ع&#39;, &#39; &#39;, &#39;ل&#39;, &#39;ط&#39;, &#39;ي&#39;, &#39;ف&#39;, &#39;.&#39;, &#39; &#39;, &#39;ي&#39;, &#39;ل&#39;, &#39;و&#39;, &#39;ح&#39;, &#39; &#39;, &#39;ل&#39;, &#39;ل&#39;, &#39;ب&#39;, &#39;ط&#39;, &#39;ة&#39;, &#39;.&#39;]
+First line rejoined:
+	الشمس طلعت! بطة صغيرة تستيقظ. تحب اللعب. ترى مزارعا قرب بركتها. المزارع لطيف. يلوح للبطة.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to the <strong>Task 2. Character Tokenizer</strong> section of the lab instructions and click <strong>Check my progress</strong> to verify the objective.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-3.-Generating-text-from-an-n-gram-model">Task 3. Generating text from an n-gram model<a class="anchor-link" href="#Task-3.-Generating-text-from-an-n-gram-model">&#182;</a></h2><p>Cymbal Chat wishes to create simple baseline for text generation, using an n-gram model. They already have code to build an n-gram model, which they adapted from <em>Lab: Experiment with N-Gram Models</em> from course <em>01 Build Your Own Small Language Model</em>.</p>
+<p>For Task 3, you will write code to generate text from their n-gram model, given a prompt. Your instructions will appear in the "💻 <strong>Your task</strong>" box after their n-gram model functions. First, run Cymbal Chat's functions:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="N-gram-model-functions">N-gram model functions<a class="anchor-link" href="#N-gram-model-functions">&#182;</a></h3><p>Cymbal Chat already have code to build an n-gram model. Their function <code>build_ngram_model</code> takes a corpus of text documents and a simple Arabic character tokenizer and builds an n-gram model from the data.</p>
+<p>Run the cell with Cymbal Chat's functions that build an n-gram model. <strong>You are not required to modify any of these functions.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[7]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">generate_character_ngrams</span><span class="p">(</span>
+        <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">SimpleArabicCharacterTokenizer</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">tuple</span><span class="p">[</span><span class="nb">str</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Generates character n-grams from a given text.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: The input text string.</span>
+<span class="sd">        n: The size of the n-grams.</span>
+<span class="sd">        tokenizer: A tokenizer that converts text into character tokens.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of n-grams, each represented as a list of character tokens.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Tokenize text.</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">character_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+    <span class="c1"># Construct the list of n-grams.</span>
+    <span class="n">ngrams</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="n">num_of_tokens</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+    <span class="c1"># The last n-gram will be tokens[num_of_tokens - n + 1: num_of_tokens + 1].</span>
+    <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="n">num_of_tokens</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="p">):</span>
+        <span class="n">ngrams</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="nb">tuple</span><span class="p">(</span><span class="n">tokens</span><span class="p">[</span><span class="n">i</span><span class="p">:</span><span class="n">i</span><span class="o">+</span><span class="n">n</span><span class="p">]))</span>
+
+    <span class="k">return</span> <span class="n">ngrams</span>
+
+<span class="k">def</span> <span class="nf">get_character_ngram_counts</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">SimpleArabicCharacterTokenizer</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="n">Counter</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Computes the character n-gram counts from a dataset.</span>
+
+<span class="sd">    This function takes a list of text strings (paragraphs or sentences) as</span>
+<span class="sd">    input, constructs n-grams from each text, and creates a dictionary where:</span>
+
+<span class="sd">    * Tokens are individual characters.</span>
+<span class="sd">    * Keys represent n-1 token long contexts `context`.</span>
+<span class="sd">    * Values are a Counter object `counts` such that `counts[next_token]` is the</span>
+<span class="sd">    * count of `next_token` following `context`.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataset: The list of text strings in the dataset.</span>
+<span class="sd">        n: The size of the n-grams to generate (e.g., 2 for bigrams, 3 for</span>
+<span class="sd">            trigrams).</span>
+<span class="sd">        tokenizer: A tokenizer that converts text into character tokens.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary where keys are (n-1)-token contexts and values are Counter</span>
+<span class="sd">        objects storing the counts of each next token for that context.</span>
+<span class="sd">    """</span>
+    <span class="n">ngram_counts</span> <span class="o">=</span> <span class="n">defaultdict</span><span class="p">(</span><span class="n">Counter</span><span class="p">)</span>
+
+    <span class="c1"># Loop through all paragraphs.</span>
+    <span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+        <span class="c1"># Loop through all n-grams for the paragraph.</span>
+        <span class="k">for</span> <span class="n">ngram</span> <span class="ow">in</span> <span class="n">generate_character_ngrams</span><span class="p">(</span><span class="n">paragraph</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">):</span>
+            <span class="c1"># Extract the context. This will be all but the last token.</span>
+            <span class="n">context</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">ngram</span><span class="p">[:</span><span class="o">-</span><span class="mi">1</span><span class="p">])</span>
+            <span class="c1"># Extract the next token. This will be the last token of the n-gram.</span>
+            <span class="n">next_token</span> <span class="o">=</span> <span class="n">ngram</span><span class="p">[</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+            <span class="c1"># Increment the counter for the context - next_token pair by 1.</span>
+            <span class="n">ngram_counts</span><span class="p">[</span><span class="n">context</span><span class="p">][</span><span class="n">next_token</span><span class="p">]</span> <span class="o">+=</span> <span class="mi">1</span>
+
+    <span class="k">return</span> <span class="nb">dict</span><span class="p">(</span><span class="n">ngram_counts</span><span class="p">)</span>
+
+<span class="k">def</span> <span class="nf">build_ngram_model</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">n</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">SimpleArabicCharacterTokenizer</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Builds an n-gram language model.</span>
+
+<span class="sd">    This function takes a list of text strings (paragraphs or sentences) as</span>
+<span class="sd">    input, generates n-grams from each text using the function get_ngram_counts</span>
+<span class="sd">    and converts them into probabilities. The resulting model is a dictionary,</span>
+<span class="sd">    where keys are (n-1)-token contexts and values are dictionaries mapping</span>
+<span class="sd">    possible next tokens to their conditional probabilities given the context.</span>
+<span class="sd">    When a conditional probability is requested for an unseen context the</span>
+<span class="sd">    model returns the marginal probability of that token.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataset: A list of text strings representing the dataset.</span>
+<span class="sd">        n: The size of the n-grams (e.g., 2 for a bigram model).</span>
+<span class="sd">        tokenizer: A tokenizer that converts text into character tokens.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A dictionary representing the n-gram language model with fallback, where</span>
+<span class="sd">        keys are (n-1)-tokens contexts and values are dictionaries mapping</span>
+<span class="sd">        possible next tokens to their conditional probabilities.</span>
+<span class="sd">    """</span>
+    <span class="c1"># A dictionary to store P(B | A).</span>
+    <span class="n">ngram_model</span> <span class="o">=</span> <span class="p">{}</span>
+
+    <span class="c1"># Use the ngram_counts as computed by the get_ngram_counts function.</span>
+    <span class="n">ngram_counts</span> <span class="o">=</span> <span class="n">get_character_ngram_counts</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+
+    <span class="c1"># Compute Count(A) and P(B | A ) for observed contexts A.</span>
+    <span class="k">for</span> <span class="n">context</span><span class="p">,</span> <span class="n">next_tokens</span> <span class="ow">in</span> <span class="n">ngram_counts</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+        <span class="n">context_total_count</span> <span class="o">=</span> <span class="nb">sum</span><span class="p">(</span><span class="n">next_tokens</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+        <span class="n">ngram_model</span><span class="p">[</span><span class="n">context</span><span class="p">]</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">count</span> <span class="ow">in</span> <span class="n">next_tokens</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+            <span class="n">ngram_model</span><span class="p">[</span><span class="n">context</span><span class="p">][</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">count</span> <span class="o">/</span> <span class="n">context_total_count</span>
+
+    <span class="k">return</span> <span class="n">ngram_model</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complete-a-function-that-generates-text-from-an-n-gram-model">Complete a function that generates text from an n-gram model<a class="anchor-link" href="#Complete-a-function-that-generates-text-from-an-n-gram-model">&#182;</a></h3><hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the <code>generate_text_from_ngram_model</code> function.</p>
+<p>You should add code to the <code>generate_text_from_ngram_model</code> function so that text can be generated using an n-gram model, <code>ngram_model</code>. Given a prompt like <code>start_prompt = "يوم واحد"</code>, an additional <code>n_tokens</code> should be generated, either:</p>
+<ul>
+<li>by randomly sampling the next token (<code>sampling_mode = "random"</code>), or</li>
+<li>by greedily picking the token with highest probability (<code>sampling_mode = "greedy"</code>)</li>
+</ul>
+<p>at each step.</p>
+<h2 id="Further-instructions-are-marked-in-the-generate_text_from_ngram_model-function-that-you-should-complete.-The-argmax-function-is-useful-for-greedy-sampling.">Further instructions are marked in the <code>generate_text_from_ngram_model</code> function that you should complete. The <code>argmax</code> function is useful for greedy sampling.<a class="anchor-link" href="#Further-instructions-are-marked-in-the-generate_text_from_ngram_model-function-that-you-should-complete.-The-argmax-function-is-useful-for-greedy-sampling.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[8]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">argmax</span><span class="p">(</span><span class="n">arr</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">float</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">int</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""Get the index of the largest element in list of float elements."""</span>
+    <span class="k">return</span> <span class="nb">max</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">arr</span><span class="p">)),</span> <span class="n">key</span><span class="o">=</span><span class="n">arr</span><span class="o">.</span><span class="fm">__getitem__</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[9]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="kn">import</span> <span class="nn">random</span>
+
+<span class="k">def</span> <span class="nf">generate_text_from_ngram_model</span><span class="p">(</span>
+        <span class="n">start_prompt</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+        <span class="n">n_tokens</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">ngram_model</span><span class="p">:</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">dict</span><span class="p">[</span><span class="nb">str</span><span class="p">,</span> <span class="nb">float</span><span class="p">]],</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">SimpleArabicCharacterTokenizer</span><span class="p">,</span>
+        <span class="n">sampling_mode</span><span class="p">:</span> <span class="n">Literal</span><span class="p">[</span><span class="s2">"random"</span><span class="p">,</span> <span class="s2">"greedy"</span><span class="p">]</span> <span class="o">=</span> <span class="s2">"random"</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+
+    <span class="c1"># Tokenize the starting prompt.</span>
+    <span class="n">start_tokens</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">character_tokenize</span><span class="p">(</span><span class="n">start_prompt</span><span class="p">)</span>
+    <span class="n">generated_tokens</span> <span class="o">=</span> <span class="n">start_tokens</span><span class="o">.</span><span class="n">copy</span><span class="p">()</span>
+
+    <span class="c1"># Determine n from the model keys (length of context)</span>
+    <span class="n">example_context</span> <span class="o">=</span> <span class="nb">next</span><span class="p">(</span><span class="nb">iter</span><span class="p">(</span><span class="n">ngram_model</span><span class="p">))</span>
+    <span class="n">context_length</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">example_context</span><span class="p">)</span>
+
+    <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">n_tokens</span><span class="p">):</span>
+
+        <span class="c1"># Build context from most recent tokens</span>
+        <span class="n">context</span> <span class="o">=</span> <span class="s2">""</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">generated_tokens</span><span class="p">[</span><span class="o">-</span><span class="n">context_length</span><span class="p">:])</span>
+
+        <span class="c1"># If context not found, stop generation</span>
+        <span class="k">if</span> <span class="n">context</span> <span class="ow">not</span> <span class="ow">in</span> <span class="n">ngram_model</span><span class="p">:</span>
+            <span class="k">break</span>
+
+        <span class="n">next_token_probs</span> <span class="o">=</span> <span class="n">ngram_model</span><span class="p">[</span><span class="n">context</span><span class="p">]</span>
+
+        <span class="k">if</span> <span class="n">sampling_mode</span> <span class="o">==</span> <span class="s2">"random"</span><span class="p">:</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">next_token_probs</span><span class="o">.</span><span class="n">keys</span><span class="p">())</span>
+            <span class="n">probabilities</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="n">next_token_probs</span><span class="o">.</span><span class="n">values</span><span class="p">())</span>
+            <span class="n">next_token</span> <span class="o">=</span> <span class="n">random</span><span class="o">.</span><span class="n">choices</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">weights</span><span class="o">=</span><span class="n">probabilities</span><span class="p">,</span> <span class="n">k</span><span class="o">=</span><span class="mi">1</span><span class="p">)[</span><span class="mi">0</span><span class="p">]</span>
+
+        <span class="k">elif</span> <span class="n">sampling_mode</span> <span class="o">==</span> <span class="s2">"greedy"</span><span class="p">:</span>
+            <span class="n">next_token</span> <span class="o">=</span> <span class="nb">max</span><span class="p">(</span><span class="n">next_token_probs</span><span class="p">,</span> <span class="n">key</span><span class="o">=</span><span class="n">next_token_probs</span><span class="o">.</span><span class="n">get</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"sampling_mode must be either 'random' or 'greedy'"</span><span class="p">)</span>
+
+        <span class="n">generated_tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">next_token</span><span class="p">)</span>
+
+    <span class="c1"># Convert tokens back to text</span>
+    <span class="n">generated_text</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">join_text</span><span class="p">(</span><span class="n">generated_tokens</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">generated_text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-your-text-generator">Test your text generator<a class="anchor-link" href="#Test-your-text-generator">&#182;</a></h3><p>You can experiment with your implementation of <code>generate_text_from_ngram_model</code> by running this cell.</p>
+<p>✅ All the code has been written for you in this part. <strong>You are not required to add or modify code.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[10]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Train n-gram model from dataset.</span>
+<span class="n">n</span> <span class="o">=</span> <span class="mi">4</span> <span class="c1"># Size of n-grams.</span>
+<span class="n">ngram_model</span> <span class="o">=</span> <span class="n">build_ngram_model</span><span class="p">(</span><span class="n">dataset</span><span class="p">,</span> <span class="n">n</span><span class="p">,</span> <span class="n">tokenizer</span><span class="p">)</span>
+
+<span class="c1"># Generate text.</span>
+<span class="n">start_prompt</span> <span class="o">=</span> <span class="s2">"يوم واحد"</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Start prompt is:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">start_prompt</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="n">n_tokens</span> <span class="o">=</span> <span class="mi">15</span> <span class="c1"># Specify the number of new tokens to generate.</span>
+<span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SimpleArabicCharacterTokenizer</span><span class="p">()</span>
+
+<span class="n">generated_text</span> <span class="o">=</span> <span class="n">generate_text_from_ngram_model</span><span class="p">(</span>
+    <span class="n">start_prompt</span><span class="p">,</span>
+    <span class="n">n_tokens</span><span class="p">,</span>
+    <span class="n">ngram_model</span><span class="p">,</span>
+    <span class="n">tokenizer</span><span class="p">,</span>
+    <span class="n">sampling_mode</span><span class="o">=</span><span class="s2">"random"</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Text generated is:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">display_arabic</span><span class="p">(</span><span class="n">generated_text</span><span class="p">)</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Do not remove or modify this logging call, it will be used for tracking purposes</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Task 3: The total word count for the generated text is: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">generated_text</span><span class="o">.</span><span class="n">split</span><span class="p">())</span><span class="si">}</span><span class="s1">'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Start prompt is:
+	يوم واحد
+Text generated is:
+	‮يوم واحدة. قاليوما أيته‬
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to the <strong>Task 3. Generate Text from an n-gram Model</strong> section of the lab instructions and click <strong>Check my progress</strong> to verify the objective.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Task-4.-Preparing-dataset-for-training-character-based-language-model">Task 4. Preparing dataset for training character-based language model<a class="anchor-link" href="#Task-4.-Preparing-dataset-for-training-character-based-language-model">&#182;</a></h2><p>Cymbal Chat wants to develop better language models. To <code>encode</code> tokens into indices and to <code>decode</code> indices back to text tokens, Cymbal Chat extended the <code>SimpleArabicCharacterTokenizer</code> that you developed previously. They adapted code from <em>Lab: Prepare The Dataset For Training an SLM</em> and <em>Lab: Train Your Own Small Language Model</em> from the course <em>01 Build Your Own Small Language Model</em>. They called their class <code>EnhancedTokenizer</code>.</p>
+<p>The input to their transformer models will be capped to a maximum number of tokens that the model can process. This number is called the model's <strong>context length</strong>. However, some of the stories that Cymbal Chat want to train on, have more tokens than their model's context length. This will be a problem.</p>
+<p>For Task 4, you have to write code that will break token sequences up into overlapping segments that will each fit in the context length.
+This will support different sizes of transformer models including some with a limited maximum number of tokens. Your instructions will appear in the "💻 <strong>Your task</strong>" box after Cymbal Chat's enhanced tokenizer class. First, run Cymbal Chat's code:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="An-enhanced-character-based-tokenizer">An enhanced character-based tokenizer<a class="anchor-link" href="#An-enhanced-character-based-tokenizer">&#182;</a></h3><p>Cymbal Chat's <code>EnhancedTokenizer</code> class includes padding and unknown tokens with the vocabulary from the simple Arabic character tokenizer.</p>
+<p>Run the cell with Cymbal Chat's tokenizer class. <strong>You are not required to modify the class or any of its methods.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[11]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">class</span> <span class="nc">EnhancedTokenizer</span><span class="p">(</span><span class="n">SimpleArabicCharacterTokenizer</span><span class="p">):</span>
+<span class="w">    </span><span class="sd">"""</span>
+<span class="sd">    Tokenizer provides two key additional functions:</span>
+<span class="sd">    `encode` method to convert the text into a sequence of indices and the</span>
+<span class="sd">    `decode` method to convert indices back into text.</span>
+
+<span class="sd">    """</span>
+    <span class="c1"># Define constants.</span>
+    <span class="n">UNKNOWN_TOKEN</span> <span class="o">=</span> <span class="s2">"&lt;UNK&gt;"</span>
+    <span class="n">PAD_TOKEN</span> <span class="o">=</span> <span class="s2">"&lt;PAD&gt;"</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">vocabulary</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Initializes the tokenizer with texts in corpus or with a vocabulary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">          corpus: Input text dataset</span>
+<span class="sd">          vocabulary: A pre-defined vocabulary. If None,</span>
+<span class="sd">              the vocabulary is automatically inferred from the texts.</span>
+<span class="sd">        """</span>
+        <span class="nb">super</span><span class="p">(</span><span class="n">EnhancedTokenizer</span><span class="p">)</span><span class="o">.</span><span class="fm">__init__</span><span class="p">()</span>
+        <span class="k">if</span> <span class="n">vocabulary</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Build the vocabulary from scratch.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">corpus</span><span class="p">]</span>
+
+            <span class="c1"># Convert input text sequence to tokens.</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+                <span class="n">tokens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">character_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">))</span>
+
+            <span class="c1"># Create a vocabulary comprising of unique tokens.</span>
+            <span class="n">vocabulary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_vocabulary</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+            <span class="c1"># Add special unknown and pad tokens to the vocabulary list.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span> <span class="o">=</span> <span class="p">(</span>
+                <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_TOKEN</span><span class="p">]</span> <span class="o">+</span> <span class="n">vocabulary</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">UNKNOWN_TOKEN</span><span class="p">]</span>
+            <span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">vocabulary</span>
+
+        <span class="c1"># Size of vocabulary.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">)</span>
+
+        <span class="c1"># Create token-to-index and index-to-token mappings.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Loop through all tokens in the vocabulary. enumerate automatically</span>
+        <span class="c1"># assigns a unique index to each token.</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+
+        <span class="c1"># Map the special tokens to their IDs.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">pad_token_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">PAD_TOKEN</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">unknown_token_id</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">UNKNOWN_TOKEN</span><span class="p">]</span>
+
+    <span class="k">def</span> <span class="nf">build_vocabulary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Create a vocabulary list from the list of tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tokens: The list of tokens in the dataset.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of unique tokens (vocabulary) in the dataset.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Build vocabulary of tokens.</span>
+        <span class="n">vocabulary</span> <span class="o">=</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">)))</span>
+        <span class="k">return</span> <span class="n">vocabulary</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Encodes a text sequence into a list of indices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: The input text to be encoded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of indices corresponding to the tokens in the input text.</span>
+<span class="sd">        """</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+
+        <span class="c1"># Convert tokens into indices.</span>
+        <span class="c1"># Replacing out of vocabulary tokens with "&lt;UNK&gt;".</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">character_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="k">if</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">:</span>
+                <span class="n">token_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">token_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">unknown_token_id</span>
+            <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">indices</span>
+
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Decodes a list (or single index) of integers back into tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            indices: A single index or a list of indices to be</span>
+<span class="sd">                decoded into tokens.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A string of decoded tokens corresponding to the input indices.</span>
+<span class="sd">        """</span>
+        <span class="c1"># Map a sequence of encoded indices back to a string of decoded tokens.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="s2">""</span>
+
+        <span class="c1"># Map indices to tokens.</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">unknown_token_id</span><span class="p">)</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+        <span class="c1"># Join the decoded tokens into a single string.</span>
+        <span class="n">text</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">join_text</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+        <span class="k">return</span> <span class="n">text</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complete-a-function-that-segments-an-encoded-sequence">Complete a function that segments an encoded sequence<a class="anchor-link" href="#Complete-a-function-that-segments-an-encoded-sequence">&#182;</a></h3><hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the <code>segment_encoded_sequence</code> function.</p>
+<p>This function takes an encoded sequence of token ids, <code>sequence</code>, as input. It should segment the sequence into subsequences of at most <code>max_length</code> length with specified overlap <code>n_overlap</code>.</p>
+<p>For example, a text string might be encoded into the sequence of token indices:</p>
+
+<pre><code>[17, 40, 30, 41, 29, 2, 33, 40, 35, 20]</code></pre>
+<p>If a model's input context length is only three tokens, <code>max_length=3</code>, then the longest subsequence is three tokens long. If one token overlaps between subsequences, <code>n_overlap=1</code>, then <code>segment_encoded_sequence</code> should return the following <code>subsequences</code> list of lists:</p>
+
+<pre><code>[ [17, 40, 30],
+  [30, 41, 29],
+  [29, 2, 33],
+  [33, 40, 35],
+  [35, 20] ]</code></pre>
+<p>It is clear that the original sequence <code>[17, 40, 30, 41, 29, 2, 33, 40, 35, 20]</code> can be reconstructed by simple concatenation of the subsequences with overlaps removed.</p>
+<h2 id="Detailed-instructions-are-marked-in-the-segment_encoded_sequence-function-that-you-should-complete.">Detailed instructions are marked in the <code>segment_encoded_sequence</code> function that you should complete.<a class="anchor-link" href="#Detailed-instructions-are-marked-in-the-segment_encoded_sequence-function-that-you-should-complete.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">segment_encoded_sequence</span><span class="p">(</span>
+        <span class="n">sequence</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">],</span>
+        <span class="n">max_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_overlap</span><span class="p">:</span> <span class="nb">int</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]]:</span>
+<span class="w">    </span><span class="sd">"""Segment a long encoded sequence into overlapping subsequences.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        sequence: List of token indices to segment.</span>
+<span class="sd">        max_length: Maximum length for each subsequence.</span>
+<span class="sd">        n_overlap: Number of tokens to overlap between consecutive segments.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        List of subsequences. All but the last have exactly max_length tokens.</span>
+<span class="sd">    """</span>
+    <span class="n">step</span> <span class="o">=</span> <span class="n">max_length</span> <span class="o">-</span> <span class="n">n_overlap</span>
+    <span class="k">if</span> <span class="n">step</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">:</span>
+        <span class="k">raise</span> <span class="ne">ValueError</span><span class="p">(</span><span class="s2">"n_overlap must be less than max_length"</span><span class="p">)</span>
+
+    <span class="n">subsequences</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="n">i</span> <span class="o">=</span> <span class="mi">0</span>
+    <span class="k">while</span> <span class="n">i</span> <span class="o">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+        <span class="n">segment</span> <span class="o">=</span> <span class="n">sequence</span><span class="p">[</span><span class="n">i</span> <span class="p">:</span> <span class="n">i</span> <span class="o">+</span> <span class="n">max_length</span><span class="p">]</span>
+        <span class="n">subsequences</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">segment</span><span class="p">)</span>
+        <span class="c1"># Stop once we have consumed the rest of the sequence.</span>
+        <span class="k">if</span> <span class="n">i</span> <span class="o">+</span> <span class="n">max_length</span> <span class="o">&gt;=</span> <span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">):</span>
+            <span class="k">break</span>
+        <span class="n">i</span> <span class="o">+=</span> <span class="n">step</span>
+
+    <span class="k">return</span> <span class="n">subsequences</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-your-segmenter">Test your segmenter<a class="anchor-link" href="#Test-your-segmenter">&#182;</a></h3><p>You can experiment with your implementation of <code>segment_encoded_sequence</code> by running this cell.</p>
+<p>✅ All the code has been written for you in this part. <strong>You are not required to add or modify code.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[13]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Build enhanced tokenizer.</span>
+<span class="n">enhanced_tokenizer</span> <span class="o">=</span> <span class="n">EnhancedTokenizer</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+
+<span class="c1"># Get the first few token ids of the first story for a test.</span>
+<span class="n">text</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="n">sequence</span> <span class="o">=</span> <span class="n">enhanced_tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)[:</span><span class="mi">50</span><span class="p">]</span>
+<span class="n">subsequences</span> <span class="o">=</span> <span class="n">segment_encoded_sequence</span><span class="p">(</span><span class="n">sequence</span><span class="p">,</span> <span class="mi">16</span><span class="p">,</span> <span class="mi">4</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"An encoded sequence:</span><span class="se">\n\t</span><span class="si">{</span><span class="n">sequence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">()</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Segmented subsequences:"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">subsequence</span> <span class="ow">in</span> <span class="n">subsequences</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\t</span><span class="si">{</span><span class="n">subsequence</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Do not remove or modify this logging call, it will be used for tracking purposes</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s1">'Task 4: The total count in an encoded sequence is </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">sequence</span><span class="p">)</span><span class="si">}</span><span class="s1">, and the aggregate length of all segmented subsequences is </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="n">itertools</span><span class="o">.</span><span class="n">chain</span><span class="o">.</span><span class="n">from_iterable</span><span class="p">(</span><span class="n">subsequences</span><span class="p">)))</span><span class="si">}</span><span class="s1">.'</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>An encoded sequence:
+	[17, 40, 30, 41, 29, 2, 33, 40, 35, 20, 3, 2, 18, 33, 19, 2, 31, 36, 46, 27, 19, 2, 20, 29, 20, 46, 38, 34, 7, 2, 20, 23, 18, 2, 17, 40, 40, 35, 18, 7, 2, 20, 27, 45, 2, 41, 28, 17, 27, 35]
+
+Segmented subsequences:
+	[17, 40, 30, 41, 29, 2, 33, 40, 35, 20, 3, 2, 18, 33, 19, 2]
+	[18, 33, 19, 2, 31, 36, 46, 27, 19, 2, 20, 29, 20, 46, 38, 34]
+	[20, 46, 38, 34, 7, 2, 20, 23, 18, 2, 17, 40, 40, 35, 18, 7]
+	[40, 35, 18, 7, 2, 20, 27, 45, 2, 41, 28, 17, 27, 35]
+	[27, 35]
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to the sub-section <strong>Build segment_encoded_sequence</strong> in the section <strong>Task 4. Prepare dataset for training character-based language model</strong>  of the lab instructions and click <strong>Check my progress</strong> to verify the objective.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Complete-a-function-that-creates-training-inputs-and-targets">Complete a function that creates training inputs and targets<a class="anchor-link" href="#Complete-a-function-that-creates-training-inputs-and-targets">&#182;</a></h3><p>Now that you can segment a long sequence of token ids into subsequences of a maximum length, the last task is to take a dataset (of type <code>list[str]</code>) and turn it into training inputs and targets:</p>
+<ul>
+<li><code>inputs</code>: an array of token sequences, each of length <code>context_length</code>.</li>
+<li><code>targets</code>: an array of target sequences (inputs shifted by one position), each of length <code>context_length</code>.</li>
+</ul>
+<p><br /></p>
+<hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the <code>create_training_sequences</code> function.</p>
+<p>The function should encode and segment the complete dataset, convert subsequences to padded <code>numpy</code> arrays and then prepare <code>input</code> and <code>target</code> arrays for training a transformer model.</p>
+<p>Your task is to add code to create a list of lists called <code>encoded_tokens</code> from an input <code>dataset</code>. Each inner list in <code>encoded_tokens</code> represents a sequence of scalars (e.g., integers for tokenized text)</p>
+<h2 id="Code-to-then-pad-and-format-encoded_tokens-into-inputs-and-targets-is-provided-for-you.">Code to then pad and format <code>encoded_tokens</code> into <code>inputs</code> and <code>targets</code> is provided for you.<a class="anchor-link" href="#Code-to-then-pad-and-format-encoded_tokens-into-inputs-and-targets-is-provided-for-you.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="k">def</span> <span class="nf">create_training_sequences</span><span class="p">(</span>
+        <span class="n">dataset</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span>
+        <span class="n">context_length</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">n_overlap</span><span class="p">:</span> <span class="nb">int</span><span class="p">,</span>
+        <span class="n">tokenizer</span><span class="p">:</span> <span class="n">EnhancedTokenizer</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">tuple</span><span class="p">[</span><span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Create training input-target sequence pairs from text dataset.</span>
+
+<span class="sd">    Encodes text data into token sequences, segments them into fixed-length</span>
+<span class="sd">    overlapping windows, and creates input-target pairs for language modeling</span>
+<span class="sd">    where targets are inputs shifted by one position.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        dataset: List of text strings to process into training sequences.</span>
+<span class="sd">        context_length: Maximum sequence length for model input.</span>
+<span class="sd">        n_overlap: Number of tokens to overlap between consecutive segments.</span>
+<span class="sd">        tokenizer: Tokenizer object with encode method for text-to-tokens</span>
+<span class="sd">            conversion.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        Tuple of (inputs, targets) where:</span>
+<span class="sd">        - inputs: Array of token sequences of length context_length.</span>
+<span class="sd">        - targets: Array of target sequences (inputs shifted by one position).</span>
+<span class="sd">    """</span>
+
+    <span class="n">segmentation_length</span> <span class="o">=</span> <span class="n">context_length</span> <span class="o">+</span> <span class="mi">1</span>
+    <span class="c1"># The segments are one token longer than the model's maximum input length,</span>
+    <span class="c1"># because the target (next) tokens to predict are the input tokens shifted</span>
+    <span class="c1"># by one position.</span>
+
+    <span class="n">pad_token_id</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">pad_token_id</span>
+    <span class="n">encoded_tokens</span> <span class="o">=</span> <span class="p">[]</span>
+
+    <span class="c1"># Add your code here to:</span>
+    <span class="c1">#</span>
+    <span class="c1"># 1. Iterate over the entries in the dataset.</span>
+    <span class="c1">#</span>
+    <span class="c1"># 2. For each dataset entry (text), encode the text into a sequence of token</span>
+    <span class="c1">#    ids.</span>
+    <span class="c1">#</span>
+    <span class="c1"># 3. Segment the sequence of token ids into overlapping segments or parts.</span>
+    <span class="c1">#</span>
+    <span class="c1"># 4. Include the segments in the list of encoded tokens.</span>
+    <span class="c1">#</span>
+    <span class="c1"># 5. Ensure that `encoded_tokens` is a list of lists, where each inner list</span>
+    <span class="c1">#    represents a sequence of scalars (e.g., integers for tokenized text).</span>
+
+    <span class="c1"># ---------------------------------------------------------</span>
+    <span class="c1"># 1. Encode each dataset entry</span>
+    <span class="c1"># 2. Segment into overlapping windows of length segmentation_length</span>
+    <span class="c1"># 3. Collect all segments into encoded_tokens</span>
+    <span class="c1"># ---------------------------------------------------------</span>
+    <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+
+        <span class="c1"># Encode text into token IDs</span>
+        <span class="n">token_ids</span> <span class="o">=</span> <span class="n">tokenizer</span><span class="o">.</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+
+        <span class="c1"># Segment into overlapping windows</span>
+        <span class="n">segments</span> <span class="o">=</span> <span class="n">segment_encoded_sequence</span><span class="p">(</span>
+            <span class="n">token_ids</span><span class="p">,</span>
+            <span class="n">max_length</span><span class="o">=</span><span class="n">segmentation_length</span><span class="p">,</span>
+            <span class="n">n_overlap</span><span class="o">=</span><span class="n">n_overlap</span>
+        <span class="p">)</span>
+
+        <span class="c1"># Add segments to encoded_tokens</span>
+        <span class="n">encoded_tokens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">segments</span><span class="p">)</span>
+
+    <span class="c1"># Create padded sequences one token longer than the maximum input length.</span>
+    <span class="n">padded_sequences</span> <span class="o">=</span> <span class="n">keras</span><span class="o">.</span><span class="n">preprocessing</span><span class="o">.</span><span class="n">sequence</span><span class="o">.</span><span class="n">pad_sequences</span><span class="p">(</span>
+            <span class="n">encoded_tokens</span><span class="p">,</span>
+            <span class="n">maxlen</span><span class="o">=</span><span class="n">segmentation_length</span><span class="p">,</span>
+            <span class="n">padding</span><span class="o">=</span><span class="s2">"post"</span><span class="p">,</span>
+            <span class="n">value</span><span class="o">=</span><span class="n">pad_token_id</span><span class="p">)</span>
+
+    <span class="c1"># Create inputs and targets from padded sequences.</span>
+    <span class="n">inputs</span> <span class="o">=</span> <span class="n">padded_sequences</span><span class="p">[:,</span> <span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">]</span>
+    <span class="n">targets</span> <span class="o">=</span> <span class="n">padded_sequences</span><span class="p">[:,</span> <span class="mi">1</span><span class="p">:]</span>
+    <span class="k">return</span> <span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Test-your-training-sequence-creation-function">Test your training sequence creation function<a class="anchor-link" href="#Test-your-training-sequence-creation-function">&#182;</a></h3><p>You can experiment with your implementation of <code>create_training_sequence</code> by running this cell.</p>
+<p>✅ All the code has been written for you in this part. <strong>You are not required to add or modify code.</strong></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-ipython3"><pre><span></span><span class="c1"># Specify data constraints.</span>
+<span class="n">context_length</span> <span class="o">=</span> <span class="mi">256</span>
+<span class="n">n_overlap</span> <span class="o">=</span> <span class="mi">8</span>
+<span class="n">inputs</span><span class="p">,</span> <span class="n">targets</span> <span class="o">=</span> <span class="n">create_training_sequences</span><span class="p">(</span>
+    <span class="n">dataset</span><span class="p">,</span>
+    <span class="n">context_length</span><span class="p">,</span>
+    <span class="n">n_overlap</span><span class="p">,</span>
+    <span class="n">enhanced_tokenizer</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"inputs shape: </span><span class="si">{</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, targets shape: </span><span class="si">{</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="c1"># Do not remove or modify this logging call, it will be used for tracking purposes</span>
+<span class="n">logger</span><span class="o">.</span><span class="n">info</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Task 4: The shape of the inputs is </span><span class="si">{</span><span class="n">inputs</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">, and the shape of the targets is </span><span class="si">{</span><span class="n">targets</span><span class="o">.</span><span class="n">shape</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Go to the sub-section <strong>Build create_training_sequences</strong> in the section <strong>Task 4. Prepare dataset for training character-based language model</strong>  of the lab instructions and click <strong>Check my progress</strong> to verify the objective.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><p>This is the end of the Challenge Lab for the <strong>Build your own Small Language Model</strong> course. In this challenge lab, you have:</p>
+<ul>
+<li>Developed a character-based tokenizer for Arabic text.</li>
+<li>Built a function to generate text from an n-gram model, both by random and greedy sampling.</li>
+<li>Implemented functions to segment and prepare character encoded data for the training of transformer-based language models of varying sizes.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="References">References<a class="anchor-link" href="#References">&#182;</a></h2><p>[1] Mohamed, M. and Al-Azani, S. (2025). Enhancing Arabic NLP Tasks through Character-Level Models and Data Augmentation. In Proceedings of the 31st International Conference on Computational Linguistics (pp. 2744-2757).  Retrieved from <a href="https://aclanthology.org/2025.coling-main.186.pdf">https://aclanthology.org/2025.coling-main.186.pdf</a></p>
+
+</div>
+</div>
+</div>
+
+

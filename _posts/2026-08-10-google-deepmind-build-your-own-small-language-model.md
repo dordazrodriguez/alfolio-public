@@ -2,7 +2,7 @@
 layout: post
 title: "Google DeepMind: Build Your Own Small Language Model"
 date: 2026-08-10
-tags: [AI, ML, NLP, DeepMind, LLM, education]
+tags: [technology, AI, ML, NLP, DeepMind, LLM, education]
 categories: [experience]
 description: "Completing Course 01 of the Google DeepMind AI Research Foundations path — building a small language model from scratch."
 ---
@@ -11,7 +11,7 @@ description: "Completing Course 01 of the Google DeepMind AI Research Foundation
 
 Completed [**Build Your Own Small Language Model**](https://www.skills.google/paths/3135/course_templates/1341) as part of the [Google DeepMind AI Research Foundations](https://www.skills.google/paths/3135) learning path. This course covers the fundamentals of language modeling — from probability distributions and n-gram models to transformer-based architectures and dataset preparation for training small language models (SLMs).
 
-**Badge:** [Google Skills Credential](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
+[![Google Skills Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="120" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
 
 ## Labs Completed
 
@@ -25,9 +25,11 @@ Explored the foundations of probability distributions for language modeling. Lea
 - How probability distributions relate to language model outputs
 
 <details>
-<summary><b>Download notebook</b></summary>
+<summary><b>📖 View notebook</b></summary>
 
-[📄 gdm_lab_1_1_create_your_own_probability_distribution.ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_1_create_your_own_probability_distribution.ipynb' | relative_url }})
+<iframe src="{{ '/assets/notebook_html/gdm/gdm_lab_1_1_create_your_own_probability_distribution.html' | relative_url }}" width="100%" height="600" frameborder="0"></iframe>
+
+[📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_1_create_your_own_probability_distribution.ipynb' | relative_url }})
 
 </details>
 
@@ -44,9 +46,11 @@ Built character-level and word-level n-gram language models from scratch. Implem
 - Limitations of n-gram models (sparsity, context window)
 
 <details>
-<summary><b>Download notebook</b></summary>
+<summary><b>📖 View notebook</b></summary>
 
-[📄 gdm_lab_1_2_experiment_with_n_gram_models.ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_2_experiment_with_n_gram_models.ipynb' | relative_url }})
+<iframe src="{{ '/assets/notebook_html/gdm/gdm_lab_1_2_experiment_with_n_gram_models.html' | relative_url }}" width="100%" height="600" frameborder="0"></iframe>
+
+[📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_2_experiment_with_n_gram_models.ipynb' | relative_url }})
 
 </details>
 
@@ -63,9 +67,11 @@ Compared the performance of n-gram models against transformer-based language mod
 - Trade-offs between model complexity and quality
 
 <details>
-<summary><b>Download notebook</b></summary>
+<summary><b>📖 View notebook</b></summary>
 
-[📄 gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.ipynb' | relative_url }})
+<iframe src="{{ '/assets/notebook_html/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.html' | relative_url }}" width="100%" height="600" frameborder="0"></iframe>
+
+[📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.ipynb' | relative_url }})
 
 </details>
 
@@ -96,9 +102,11 @@ def segment_encoded_sequence(sequence, max_length, n_overlap):
 ```
 
 <details>
-<summary><b>Download notebook</b></summary>
+<summary><b>📖 View notebook</b></summary>
 
-[📄 gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb' | relative_url }})
+<iframe src="{{ '/assets/notebook_html/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.html' | relative_url }}" width="100%" height="600" frameborder="0"></iframe>
+
+[📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb' | relative_url }})
 
 </details>
 

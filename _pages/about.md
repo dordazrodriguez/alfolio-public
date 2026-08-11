@@ -53,8 +53,8 @@ I'm currently pursuing a **B.S. in Computer Science** at Western Governors Unive
 - **Bloomberg Terminal Certified**
 - **FINRA - Securities Industry Essentials (SIE)**
 - **CompTIA Security+** (In Progress)
-- **Google DeepMind AI Research Foundations** — Build Your Own Small Language Model ([Course Path](https://www.skills.google/paths/3135)) ([Badge](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425))
-- **Google DeepMind AI Research Foundations** — Train A Small Language Model ([Course Path](https://www.skills.google/paths/3135)) ([Badge](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065))
+- **Google DeepMind AI Research Foundations** — Build Your Own Small Language Model ([Course Path](https://www.skills.google/paths/3135)) ([![Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="50" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425))
+- **Google DeepMind AI Research Foundations** — Train A Small Language Model ([Course Path](https://www.skills.google/paths/3135)) ([![Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="50" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065))
 
 ## Philosophy & Approach
 

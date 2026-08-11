@@ -1,0 +1,1331 @@
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<blockquote><p><p><small><small>This Notebook is made available subject to the licence and terms set out in the <a href = "http://www.github.com/google-deepmind/ai-foundations">AI Research Foundations Github README file</a>.</p>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p><img src="https://storage.googleapis.com/dm-educational/assets/ai_foundations/GDM-Labs-banner-image-C1-white-bg.png"></p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h1 id="Lab:-Prepare-The-Dataset-For-Training-an-SLM">Lab: Prepare The Dataset For Training an SLM<a class="anchor-link" href="#Lab:-Prepare-The-Dataset-For-Training-an-SLM">&#182;</a></h1><p><a href='https://colab.research.google.com/github/google-deepmind/ai-foundations/blob/master/course_1/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb' target='_parent'><img src='https://colab.research.google.com/assets/colab-badge.svg' alt='Open In Colab'/></a></p>
+<p>Prepare the dataset so that a transformer model can process it.</p>
+<p>30 minutes</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Overview">Overview<a class="anchor-link" href="#Overview">&#182;</a></h2><p>This lab guides you through preparing a text dataset for training a small language model (SLM). The SLM that you will train is a transformer model. Transformer models and, more generally, neural network models, require data to be in a specific format so that they can process them. Specifically, when processing texts, you first have to tokenize the text into tokens. Then, you have to translate these tokens into unique numeric IDs before you can process them with a transformer model.</p>
+<p>In this lab, you will focus on these necessary <strong>pre-processing steps</strong> such as tokenization, vocabulary creation, and mapping tokens to their IDs. This will build the foundation for training your SLM in the next lab.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="What-you-will-learn:">What you will learn:<a class="anchor-link" href="#What-you-will-learn:">&#182;</a></h3><p>By the end of this lab, you will know:</p>
+<ul>
+<li>The data format requirements of transformer models and how to map tokens to token IDs and vice versa.</li>
+<li>How to prepare a dataset for training a transformer model.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Tasks">Tasks<a class="anchor-link" href="#Tasks">&#182;</a></h3><p>As in previous labs, you will load the Africa Galore dataset and tokenize it using a space tokenizer. You will then build all the ingredients necessary for converting a dataset such that it can be used for training a transformer model.</p>
+<p><strong>In this lab, you will</strong>:</p>
+<ul>
+<li>Load the dataset and tokenize it.</li>
+<li>Construct a list of all tokens in the dataset.</li>
+<li>Construct a list of unique tokens in the dataset.</li>
+<li>Create a mapping of tokens to token IDs and a mapping of token IDs to tokens.</li>
+<li>Define functions that can translate between tokens and their corresponding IDs.</li>
+<li>Define a Python class that encapsulates all methods necessary for preparing the data for a transformer model.</li>
+</ul>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="How-to-use-Google-Colaboratory-(Colab)">How to use Google Colaboratory (Colab)<a class="anchor-link" href="#How-to-use-Google-Colaboratory-(Colab)">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Google Colaboratory (also known as Google Colab) is a platform that allows you to run Python code in your browser. The code is written in <strong>cells</strong> that are excuted on a remote server.</p>
+<p>To run a cell, hover over a cell and click on the <code>run</code> button to its left. The run button is the circle with the triangle (▶). Alternatively, you can also click on a cell and use the keyboard combination Ctrl+Return (or ⌘+Return if you are using a Mac).</p>
+<p>To try this out, run the following cell. This should print today's day of the week below it.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[2]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="kn">from</span> <span class="nn">datetime</span> <span class="kn">import</span> <span class="n">datetime</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Today is </span><span class="si">{</span><span class="n">datetime</span><span class="o">.</span><span class="n">today</span><span class="p">()</span><span class="si">:</span><span class="s2">%A</span><span class="si">}</span><span class="s2">."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Today is Monday.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that the <em>order in which you run the cells matters</em>. When you are working through a lab, make sure to always run <em>all</em> cells in order. Otherwise, the code might not work. If you take a break while working on a lab, Colab may disconnect you. In that case, you have to execute all cells again before  continuing your work. To make this easier, you can select the cell you are currently working on and then choose <strong>Runtime → Run before</strong>  from the menu above (or use the keyboard combination Ctrl/⌘ + F8). This will re-execute all cells before the current one.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Imports">Imports<a class="anchor-link" href="#Imports">&#182;</a></h2>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>In this lab, you will use the <a href="http://pandas.pydata.org">Pandas</a> package for reading the dataset. Run the following cell to import these packages.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[1]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="o">%%</span><span class="n">capture</span>
+<span class="err">!</span><span class="n">pip</span> <span class="n">install</span> <span class="s2">"git+https://github.com/google-deepmind/ai-foundations.git@main"</span>
+
+<span class="kn">import</span> <span class="nn">re</span> <span class="c1"># Used for splitting strings on spaces.</span>
+
+<span class="c1"># Packages used.</span>
+<span class="kn">import</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span> <span class="c1"># For reading the dataset.</span>
+<span class="kn">import</span> <span class="nn">textwrap</span> <span class="c1"># For adding linebreaks to paragraphs.</span>
+
+<span class="c1"># For providing feedback.</span>
+<span class="kn">from</span> <span class="nn">ai_foundations.feedback.course_1</span> <span class="kn">import</span> <span class="n">slm</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Loading-and-tokenizing-the-dataset">Loading and tokenizing the dataset<a class="anchor-link" href="#Loading-and-tokenizing-the-dataset">&#182;</a></h2><p>As in the previous labs, you will again use the <a href="https://storage.googleapis.com/dm-educational/assets/ai_foundations/africa_galore.json">Africa Galore</a> dataset for the activities in this lab.</p>
+<p>Run the following cell to download the dataset and print its first paragraph.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[3]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">africa_galore</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_json</span><span class="p">(</span>
+    <span class="s2">"https://storage.googleapis.com/dm-educational/assets/ai_foundations/africa_galore.json"</span>
+<span class="p">)</span>
+<span class="n">dataset</span> <span class="o">=</span> <span class="n">africa_galore</span><span class="p">[</span><span class="s2">"description"</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Loaded Africa Galore dataset with </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span><span class="si">}</span><span class="s2"> paragraphs."</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="se">\n</span><span class="s2">First paragraph:"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">textwrap</span><span class="o">.</span><span class="n">fill</span><span class="p">(</span><span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]))</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Loaded Africa Galore dataset with 232 paragraphs.
+
+First paragraph:
+The Lagos air was thick with humidity, but the energy in the club was
+electric. The band launched into a hypnotic Afrobeat groove, the drums
+pounding out a complex polyrhythm, the horns blaring a soaring melody,
+and the bass laying down a deep, funky foundation. A woman named Imani
+moved effortlessly to the music, her body swaying in time with the
+rhythm. The music seemed to flow through her, a powerful current of
+energy and joy. All around her, people were dancing, singing, and
+clapping, caught up in the infectious rhythm. The music was more than
+just entertainment; it was a celebration of life, a connection to
+their shared heritage, a vibrant expression of the soul of Lagos.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>As with n-gram language models, you also have to tokenize sequences before you can use them to train a transformer model. You will again use a space tokenizer that splits sequences on spaces.</p>
+<p>Run the following cell to define and test the space tokenizer that is implemented by the function <code>space_tokenize</code>. This function is almost identical to the function you have already seen. Instead of the string <code>split</code> function, it uses the <a href="https://docs.python.org/3/library/re.html#re.split"><code>re.split</code></a> function, since it's better at handling texts that contain multiple spaces.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[24]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">space_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Splits a string into a list of tokens.</span>
+
+<span class="sd">    Splits text on space.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: The input text.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of tokens. Returns empty list if text is empty or all spaces.</span>
+<span class="sd">    """</span>
+    <span class="c1"># Use `re` package so that splitting on multiple spaces also works.</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="sa">r</span><span class="s2">" +"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+    <span class="k">return</span> <span class="n">tokens</span>
+
+
+<span class="c1"># Tokenize an example text with the `space_tokenize` function.</span>
+<span class="n">t</span> <span class="o">=</span> <span class="n">space_tokenize</span><span class="p">(</span><span class="s2">"Kanga, a colorful printed cloth is more than just fabric."</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-1:-Build-a-list-of-all-tokens-in-the-dataset">Coding Activity 1: Build a list of all tokens in the dataset<a class="anchor-link" href="#Coding-Activity-1:-Build-a-list-of-all-tokens-in-the-dataset">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the following cell to construct a <code>tokens</code> list that contains all tokens in the dataset in the order that they appear in.</p>
+<p>You will have to loop through all paragraphs in the dataset and then extract all tokens for each paragraph and add them to the <code>tokens</code> list.</p>
+<h2 id="Once-you-have-completed-your-implementation,-run-the-next-two-cells-to-build-the-list-and-test-your-code.">Once you have completed your implementation, run the next two cells to build the list and test your code.<a class="anchor-link" href="#Once-you-have-completed-your-implementation,-run-the-next-two-cells-to-build-the-list-and-test-your-code.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[32]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+
+<span class="c1"># Loop through all paragraphs in the dataset</span>
+<span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+    <span class="c1"># Tokenize each paragraph and extend the tokens list</span>
+    <span class="n">tokens</span><span class="o">.</span><span class="n">extend</span><span class="p">(</span><span class="n">space_tokenize</span><span class="p">(</span><span class="n">paragraph</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"Total number of tokens in the Africa Galore dataset: </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total number of tokens in the Africa Galore dataset: 19,065
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[33]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># @title Run this cell to test your code</span>
+
+<span class="n">slm</span><span class="o">.</span><span class="n">test_build_tokens_list</span><span class="p">(</span><span class="n">tokens</span><span class="p">,</span> <span class="n">space_tokenize</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>✅ Nice! Your answer looks correct.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To remind yourself what the tokenized dataset looks like, run the following cell to print the first 30 tokens of the first paragraph in the dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[34]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">tokens</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[34]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;The&#39;,
+ &#39;Lagos&#39;,
+ &#39;air&#39;,
+ &#39;was&#39;,
+ &#39;thick&#39;,
+ &#39;with&#39;,
+ &#39;humidity,&#39;,
+ &#39;but&#39;,
+ &#39;the&#39;,
+ &#39;energy&#39;,
+ &#39;in&#39;,
+ &#39;the&#39;,
+ &#39;club&#39;,
+ &#39;was&#39;,
+ &#39;electric.&#39;,
+ &#39;The&#39;,
+ &#39;band&#39;,
+ &#39;launched&#39;,
+ &#39;into&#39;,
+ &#39;a&#39;,
+ &#39;hypnotic&#39;,
+ &#39;Afrobeat&#39;,
+ &#39;groove,&#39;,
+ &#39;the&#39;,
+ &#39;drums&#39;,
+ &#39;pounding&#39;,
+ &#39;out&#39;,
+ &#39;a&#39;,
+ &#39;complex&#39;,
+ &#39;polyrhythm,&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-2:-Build-the-vocabulary">Coding Activity 2: Build the vocabulary<a class="anchor-link" href="#Coding-Activity-2:-Build-the-vocabulary">&#182;</a></h3><p>Transformer models use a fixed set of tokens that they can process and generate. This set of tokens is known as the <strong>vocabulary</strong>. In many cases, this vocabulary is set to the list of unique tokens that appear in the data that the model is being trained on.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the <code>build_vocabulary</code> function that should return the list of
+unique tokens that appear in <code>tokens</code>.
+&gt;</p>
+<h2 id="Once-you-have-implemented-this-function,-run-the-two-cells-to-define-the-function-and-test-your-code.">Once you have implemented this function, run the two cells to define the function and test your code.<a class="anchor-link" href="#Once-you-have-implemented-this-function,-run-the-two-cells-to-define-the-function-and-test-your-code.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[45]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">build_vocabulary</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+    <span class="c1"># Build a vocabulary list from the set of tokens.</span>
+    <span class="n">unique_tokens</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+    <span class="n">vocabulary</span> <span class="o">=</span> <span class="n">unique_tokens</span>  <span class="c1"># Changed this line</span>
+    <span class="k">return</span> <span class="n">vocabulary</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[46]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># @title Run this cell to test your code</span>
+<span class="n">slm</span><span class="o">.</span><span class="n">test_build_vocabulary</span><span class="p">(</span><span class="n">build_vocabulary</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>✅ Nice! Your answer looks correct.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You can now use the function that you have implemented to construct the vocabulary for the Africa Galore dataset.</p>
+<p>Run the cell below to create the vocabulary and print its size, that is, the number of unique tokens in the dataset.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[47]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">build_vocabulary</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+<span class="n">vocabulary_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">)</span>
+
+<span class="nb">print</span><span class="p">(</span>
+    <span class="s2">"Total number of unique tokens in the Africa Galore dataset:"</span>
+    <span class="sa">f</span><span class="s2">" </span><span class="si">{</span><span class="n">vocabulary_size</span><span class="si">:</span><span class="s2">,</span><span class="si">}</span><span class="s2">"</span>
+<span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>Total number of unique tokens in the Africa Galore dataset: 5,260
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To get a sense of what the vocabulary looks like, run the following cell that prints the first 30 entries of the vocabulary.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[48]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">vocabulary</span><span class="p">[:</span><span class="mi">30</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[48]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[&#39;&#39;,
+ &#39;garnished&#39;,
+ &#39;Africa).&#39;,
+ &#39;mince&#39;,
+ &#39;nature.&#39;,
+ &#39;teas,&#39;,
+ &#39;dyeing,&#39;,
+ &#39;nut&#39;,
+ &#39;perfection,&#39;,
+ &#39;liquid,&#39;,
+ &#39;sunshine&#39;,
+ &#39;ancestors,&#39;,
+ &#39;inch)&#39;,
+ &#39;soak&#39;,
+ &#39;spent&#39;,
+ &#39;slowly&#39;,
+ &#39;milk&#39;,
+ &#39;in&#39;,
+ &#39;social,&#39;,
+ &#39;unavailable&#39;,
+ &#39;percussion&#39;,
+ &#39;week,&#39;,
+ &#39;diversity&#39;,
+ &#39;(fermented&#39;,
+ &#39;Town&#39;,
+ &#39;King&#39;,
+ &#39;rhinoceros,&#39;,
+ &#39;Injera,&#39;,
+ &#39;sun-drenched&#39;,
+ &#39;destination.&#39;]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Note that, unlike when you printed the first 30 tokens in the dataset, there are no duplicate entries. Every token appears exactly once in the vocabulary.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Convert-the-tokens-into-token-IDs-(indices)">Convert the tokens into token IDs (indices)<a class="anchor-link" href="#Convert-the-tokens-into-token-IDs-(indices)">&#182;</a></h2><p>As discussed above, in order to train a transformer on a text dataset, you have to turn the text data into a list of <strong>token IDs</strong>. These IDs are numbers such that each token maps uniquely to a different number. The IDs should always be consecutive. That means that, if the vocabulary has size $k$, then each token should map to an ID between 0 and $k-1$.</p>
+<p>In practice, the translation between tokens and IDs is implemented using two dictionaries:</p>
+<ol>
+<li><strong><code>token_to_index</code></strong>: This dictionary maps each token in the vocabulary to its corresponding ID (index). The index must be between 0 and the vocabulary size $k-1$.</li>
+<li><strong><code>index_to_token</code></strong>: This dictionary maps an ID (index) back to its corresponding token (a string). Given an index between 0 and $k-1$, it returns the token at that position.</li>
+</ol>
+<p>When you need to convert a token to a number, use <code>token_to_index</code>.
+And when you need to convert a number back to a token, use <code>index_to_token</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Build-token_to_index">Build <code>token_to_index</code><a class="anchor-link" href="#Build-token_to_index">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The following cell shows you how to implement the construction of the <code>token_to_index</code> mapping from the vocabulary. If you are not familiar with the <a href="https://docs.python.org/3/library/functions.html#enumerate"><code>enumerate</code></a> function in Python, print the <code>index</code> and <code>token</code> on each iteration to get a sense of what it is doing and why this code is creating the correct mapping.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[49]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Build the `token_to_index` dictionary.</span>
+<span class="n">token_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="n">vocabulary</span><span class="p">):</span>
+    <span class="n">token_to_index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-3:-Build-index_to_token">Coding Activity 3: Build <code>index_to_token</code><a class="anchor-link" href="#Coding-Activity-3:-Build-index_to_token">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Next, create a dictionary below called <code>index_to_token</code>, where the index is the key and the token is the value. This dictionary should be the reverse of the <code>token_to_index</code> dictionary. After implementing the dictionary, run the cell and verify that the tokens and their corresponding indexes match between <code>token_to_index</code> and <code>index_to_token</code>:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<hr>
+<blockquote><p>💻 <strong>Your task:</strong></p>
+<p>Complete the following cell such that it constructs the <code>index_to_token</code> mapping that maps all token IDs to their corresponding strings versions of the tokens.</p>
+<p><strong>Hint</strong>: It may be useful to iterate through the entries in <code>token_to_index</code> using  <code>token_to_index.items()</code> to obtain the pairs of indices and tokens.</p>
+<h2 id="Once-you-have-implemented-this-function,-run-the-two-cells-to-construct-the-dictionary-and-test-your-code.">Once you have implemented this function, run the two cells to construct the dictionary and test your code.<a class="anchor-link" href="#Once-you-have-implemented-this-function,-run-the-two-cells-to-construct-the-dictionary-and-test-your-code.">&#182;</a></h2>
+</blockquote>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[52]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Create a dictionary that maps an index (a number) back to</span>
+<span class="c1"># its corresponding token in the vocab.</span>
+<span class="n">index_to_token</span> <span class="o">=</span> <span class="p">{}</span>
+
+<span class="c1"># Add your code here.</span>
+<span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">token_to_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">index_to_token</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[53]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># @title Run this cell to test your code</span>
+<span class="n">slm</span><span class="o">.</span><span class="n">test_index_to_token</span><span class="p">(</span><span class="n">index_to_token</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>✅ Nice! Your answer looks correct.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To see how <code>token_to_index</code> and <code>index_to_token</code> are inverse mappings, take a look at ten entries of both dictionaries:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[54]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="s2">"token_to_index:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+
+<span class="n">count</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">first_ten_indices</span> <span class="o">=</span> <span class="p">[]</span>
+<span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">token_id</span> <span class="ow">in</span> <span class="n">token_to_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"'</span><span class="si">{</span><span class="n">token</span><span class="si">}</span><span class="s2">': </span><span class="si">{</span><span class="n">token_id</span><span class="si">}</span><span class="s2">"</span><span class="p">)</span>
+    <span class="n">first_ten_indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_id</span><span class="p">)</span>
+    <span class="n">count</span> <span class="o">+=</span> <span class="mi">1</span>
+    <span class="k">if</span> <span class="n">count</span> <span class="o">==</span> <span class="mi">10</span><span class="p">:</span>
+        <span class="k">break</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">"</span><span class="se">\n\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">"index_to_token:</span><span class="se">\n</span><span class="s2">"</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">token_id</span> <span class="ow">in</span> <span class="n">first_ten_indices</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">"</span><span class="si">{</span><span class="n">token_id</span><span class="si">}</span><span class="s2">: '</span><span class="si">{</span><span class="n">index_to_token</span><span class="p">[</span><span class="n">token_id</span><span class="p">]</span><span class="si">}</span><span class="s2">'"</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>token_to_index:
+
+&#39;&#39;: 0
+&#39;garnished&#39;: 1
+&#39;Africa).&#39;: 2
+&#39;mince&#39;: 3
+&#39;nature.&#39;: 4
+&#39;teas,&#39;: 5
+&#39;dyeing,&#39;: 6
+&#39;nut&#39;: 7
+&#39;perfection,&#39;: 8
+&#39;liquid,&#39;: 9
+
+
+
+index_to_token:
+
+0: &#39;&#39;
+1: &#39;garnished&#39;
+2: &#39;Africa).&#39;
+3: &#39;mince&#39;
+4: &#39;nature.&#39;
+5: &#39;teas,&#39;
+6: &#39;dyeing,&#39;
+7: &#39;nut&#39;
+8: &#39;perfection,&#39;
+9: &#39;liquid,&#39;
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You should see above that the first ten tokens all have IDs between zero and ten and these IDs map back to exactly the same ten tokens.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Encode-and-decode-functions">Encode and decode functions<a class="anchor-link" href="#Encode-and-decode-functions">&#182;</a></h2><p>Rather than manually translating between lists of tokens and lists of token indices, it can be much easier to convert between these two representations of your data by implementing an <code>encode</code> and a <code>decode</code> function.</p>
+<ul>
+<li>The <code>encode</code> function takes a string of text and returns the corresponding indices of the tokens.</li>
+<li>The <code>decode</code> function takes a list of indices and returns the text associated with it.</li>
+</ul>
+<p>The following cell provides an implementation of these two functions. Run it to define both of them.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[55]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Encodes a text sequence into a list of indices based on the vocabulary.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        text: The input text to be encoded.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        A list of indices corresponding to the tokens in the input text.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># Convert tokens into indices.</span>
+    <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">space_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+        <span class="n">token_index</span> <span class="o">=</span> <span class="n">token_to_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+        <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_index</span><span class="p">)</span>
+
+    <span class="k">return</span> <span class="n">indices</span>
+
+
+<span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="n">indices</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">    </span><span class="sd">"""Decodes a list (or single index) of integers back into tokens.</span>
+
+<span class="sd">    Args:</span>
+<span class="sd">        indices: A single index or a list of indices to be decoded into tokens.</span>
+
+<span class="sd">    Returns:</span>
+<span class="sd">        str: A string of decoded tokens corresponding to the input indices.</span>
+<span class="sd">    """</span>
+
+    <span class="c1"># If a single integer is passed, convert it into a list.</span>
+    <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+    <span class="c1"># Map indices to tokens.</span>
+    <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+    <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+        <span class="n">token</span> <span class="o">=</span> <span class="n">index_to_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+    <span class="c1"># Join the decoded tokens into a single string.</span>
+    <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To verify that these functions are working as expected, you can encode a text so that its tokens are mapped to indices and then decode those indices. The decoding step should return the original text.</p>
+<p>The following cell prints again the first paragraph in the dataset:</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[58]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">text</span> <span class="o">=</span> <span class="n">dataset</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">text</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>The Lagos air was thick with humidity, but the energy in the club was electric. The band launched into a hypnotic Afrobeat groove, the drums pounding out a complex polyrhythm, the horns blaring a soaring melody, and the bass laying down a deep, funky foundation. A woman named Imani moved effortlessly to the music, her body swaying in time with the rhythm. The music seemed to flow through her, a powerful current of energy and joy. All around her, people were dancing, singing, and clapping, caught up in the infectious rhythm. The music was more than just entertainment; it was a celebration of life, a connection to their shared heritage, a vibrant expression of the soul of Lagos.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Run the following cell to encode the paragraph above and look at the first ten indices.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[57]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)[:</span><span class="mi">10</span><span class="p">]</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[57]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>[5234, 2521, 182, 1283, 3539, 2589, 5192, 1211, 4547, 3024]</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>Now decode these indices to obtain the first ten tokens of the original paragraph. This should be the same as the beginning of the original paragraph above.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[59]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">decode</span><span class="p">(</span><span class="n">encode</span><span class="p">(</span><span class="n">text</span><span class="p">)[:</span><span class="mi">10</span><span class="p">])</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt output_prompt">Out[59]:</div>
+
+
+
+
+<div class="output_text output_subarea output_execute_result">
+<pre>&#39;The Lagos air was thick with humidity, but the energy&#39;</pre>
+</div>
+
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Package-the-methods-from-above-in-a-Python-class">Package the methods from above in a Python class<a class="anchor-link" href="#Package-the-methods-from-above-in-a-Python-class">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>You have now implemented the most important pre-processing steps for preparing a dataset to be used for training a transformer model.</p>
+<p>In order to save you from always having to go through these steps and implement these functions whenever you want to train a model, it can be useful to define a class, e.g., <code>SimpleWordTokenizer</code>, that includes methods for extracting the vocabulary, building the <code>token_to_index</code> and <code>index_to_token</code> mappings, and implementing the <code>encode</code> and <code>decode</code> methods.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>The <code>SimpleWordTokenizer</code> class below provides a solid foundation for understanding tokenization methods used for preparing the input for language models. As you continue to explore the world of language models further, you will come across other tokenization techniques that follow a similar structure.</p>
+<p>Make sure to go through each component of this class to remind yourself which steps are involved in constructing the vocabulary and translating between tokens and their corresponding IDs.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[60]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="k">class</span> <span class="nc">SimpleWordTokenizer</span><span class="p">:</span>
+<span class="w">    </span><span class="sd">"""A simple word tokenizer that can be initialized with a corpus of texts</span>
+<span class="sd">       or using a provided vocabulary list.</span>
+
+<span class="sd">    The tokenizer splits the text sequence based on spaces,</span>
+<span class="sd">    using the `encode` method to convert the text into a sequence of indices</span>
+<span class="sd">    and the `decode` method to convert indices back into text.</span>
+
+<span class="sd">    Typical usage example:</span>
+
+<span class="sd">        corpus = "Hello there!"</span>
+<span class="sd">        tokenizer = SimpleWordTokenizer(corpus)</span>
+<span class="sd">        print(tokenizer.encode('Hello'))</span>
+
+<span class="sd">    """</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">corpus</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">],</span> <span class="n">vocabulary</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">|</span> <span class="kc">None</span> <span class="o">=</span> <span class="kc">None</span><span class="p">):</span>
+<span class="w">        </span><span class="sd">"""Initializes the tokenizer with texts in corpus or with a vocabulary.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            corpus: Input text dataset.</span>
+<span class="sd">            vocabulary: A pre-defined vocabulary. If None,</span>
+<span class="sd">                the vocabulary is automatically inferred from the texts.</span>
+<span class="sd">        """</span>
+
+        <span class="k">if</span> <span class="n">vocabulary</span> <span class="ow">is</span> <span class="kc">None</span><span class="p">:</span>
+            <span class="c1"># Build the vocabulary from scratch.</span>
+            <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">corpus</span><span class="p">,</span> <span class="nb">str</span><span class="p">):</span>
+                <span class="n">corpus</span> <span class="o">=</span> <span class="p">[</span><span class="n">corpus</span><span class="p">]</span>
+
+            <span class="c1"># Convert text sequence to tokens.</span>
+            <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">text</span> <span class="ow">in</span> <span class="n">corpus</span><span class="p">:</span>
+                <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">space_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+                    <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+            <span class="c1"># Create a vocabulary comprising of unique tokens.</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">build_vocabulary</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+
+        <span class="k">else</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span> <span class="o">=</span> <span class="n">vocabulary</span>
+
+        <span class="c1"># Size of vocabulary.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">vocabulary_size</span> <span class="o">=</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">)</span>
+
+        <span class="c1"># Create token-to-index and index-to-token mappings.</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span> <span class="o">=</span> <span class="p">{}</span>
+        <span class="c1"># Loop through all tokens in the vocabulary. enumerate automatically</span>
+        <span class="c1"># assigns a unique index to each token.</span>
+        <span class="k">for</span> <span class="n">index</span><span class="p">,</span> <span class="n">token</span> <span class="ow">in</span> <span class="nb">enumerate</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">vocabulary</span><span class="p">):</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="p">[</span><span class="n">token</span><span class="p">]</span> <span class="o">=</span> <span class="n">index</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+
+    <span class="k">def</span> <span class="nf">space_tokenize</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Splits a given text on space into tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: Text to split on space.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of tokens after splitting `text`.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Use re.split such that multiple spaces are treated as a single</span>
+        <span class="c1"># separator.</span>
+        <span class="k">return</span> <span class="n">re</span><span class="o">.</span><span class="n">split</span><span class="p">(</span><span class="s2">" +"</span><span class="p">,</span> <span class="n">text</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">join_text</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text_list</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Combines a list of tokens into a single string, with tokens separated</span>
+<span class="sd">           by spaces.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text_list: List of tokens to be joined.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            String with all tokens joined with a space.</span>
+
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="s2">" "</span><span class="o">.</span><span class="n">join</span><span class="p">(</span><span class="n">text_list</span><span class="p">)</span>
+
+    <span class="k">def</span> <span class="nf">build_vocabulary</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Create a vocabulary list from the list of tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            tokens: The list of tokens in the dataset.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            List of unique tokens (vocabulary) in the dataset.</span>
+<span class="sd">        """</span>
+        <span class="k">return</span> <span class="nb">sorted</span><span class="p">(</span><span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">)))</span>
+
+    <span class="k">def</span> <span class="nf">encode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">text</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">]:</span>
+<span class="w">        </span><span class="sd">"""Encodes a text sequence into a list of indices.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            text: The input text to be encoded.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            A list of indices corresponding to the tokens in the input text.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># Convert tokens into indices.</span>
+        <span class="n">indices</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">space_tokenize</span><span class="p">(</span><span class="n">text</span><span class="p">):</span>
+            <span class="n">token_index</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">token_to_index</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+            <span class="n">indices</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token_index</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">indices</span>
+
+    <span class="k">def</span> <span class="nf">decode</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">indices</span><span class="p">:</span> <span class="nb">int</span> <span class="o">|</span> <span class="nb">list</span><span class="p">[</span><span class="nb">int</span><span class="p">])</span> <span class="o">-&gt;</span> <span class="nb">str</span><span class="p">:</span>
+<span class="w">        </span><span class="sd">"""Decodes a list (or single index) of integers back into tokens.</span>
+
+<span class="sd">        Args:</span>
+<span class="sd">            indices: A single index or a list of indices to be decoded into</span>
+<span class="sd">                tokens.</span>
+
+<span class="sd">        Returns:</span>
+<span class="sd">            str: A string of decoded tokens corresponding to the input indices.</span>
+<span class="sd">        """</span>
+
+        <span class="c1"># If a single integer is passed, convert it into a list.</span>
+        <span class="k">if</span> <span class="nb">isinstance</span><span class="p">(</span><span class="n">indices</span><span class="p">,</span> <span class="nb">int</span><span class="p">):</span>
+            <span class="n">indices</span> <span class="o">=</span> <span class="p">[</span><span class="n">indices</span><span class="p">]</span>
+
+        <span class="c1"># Map indices to tokens.</span>
+        <span class="n">tokens</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">indices</span><span class="p">:</span>
+            <span class="n">token</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">index_to_token</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+
+        <span class="c1"># Join the decoded tokens into a single string.</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">join_text</span><span class="p">(</span><span class="n">tokens</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<p>To observe that this class performs the same processing as your previous implementations, run the following cell. This cell runs some tests that verify that the first paragraph from the dataset remains the same after encoding and then decoding it using the <code>SimpleWordTokenizer</code>.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[61]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="n">tokenizer</span> <span class="o">=</span> <span class="n">SimpleWordTokenizer</span><span class="p">(</span><span class="n">dataset</span><span class="p">)</span>
+<span class="n">slm</span><span class="o">.</span><span class="n">test_simple_word_tokenizer</span><span class="p">(</span><span class="n">tokenizer</span><span class="p">,</span> <span class="n">vocabulary</span><span class="p">,</span> <span class="n">dataset</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+<div class="output_wrapper">
+<div class="output">
+
+
+<div class="output_area">
+
+    <div class="prompt"></div>
+
+
+<div class="output_subarea output_stream output_stdout output_text">
+<pre>✅ Nice! The tokenizer seems to be working correctly.
+</pre>
+</div>
+</div>
+
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Summary">Summary<a class="anchor-link" href="#Summary">&#182;</a></h2><p>This is the end of the <strong>Prepare The Dataset For Training a SLM</strong> lab.</p>
+<p>This lab guided you through the steps necessary for preparing a text dataset to be used for training a small language model (SLM). You focused on:</p>
+<ul>
+<li><p><strong>Loading and exploring the dataset:</strong> You examined the structure and content of the Africa Galore dataset and inspected example paragraphs in the dataset.</p>
+</li>
+<li><p><strong>Tokenizing the text:</strong> You used a simple word-level tokenization method to split the text into individual tokens and created a vocabulary of unique tokens.</p>
+</li>
+<li><p><strong>Creating numerical representations:</strong> You mapped each token to a unique numerical index by creating <code>token_to_index</code> and <code>index_to_token</code> dictionaries, which enable the conversion between tokens and token IDs.</p>
+</li>
+<li><p><strong>Packaging the steps in a tokenizer class:</strong> You examined a consolidated version of the tokenization and encoding/decoding logic in a reusable <code>SimpleWordTokenizer</code> class. This class streamlines the process of converting text into numerical data that can be fed into a language model and converting the output of a language model to human-readable texts.</p>
+</li>
+</ul>
+<p>In the next lab, you will use this tokenizer class to tokenize the data and use this data to train a small language model.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h2 id="Solutions">Solutions<a class="anchor-link" href="#Solutions">&#182;</a></h2><p>The following cells provide reference solutions to the coding activities above. If you really get stuck after trying to solve the activities yourself, you may want to consult these solutions.</p>
+<p>However, we recommend that you <em>only</em> look at the solutions after you have tried to solve the activities above <em>multiple times</em>. The best way to learn challenging concepts in computer science and artificial intelligence is to debug your code piece-by-piece until it works rather than copying existing solutions.</p>
+<p>If you feel stuck, you may want to first try to debug your code, for example, by adding additional print statements to see what your code is doing at every step. This will provide you with a much deeper understanding of the code and the materials. It will also make you practice how to solve challenging coding problems beyond this course.</p>
+<p>To view the solutions for an activity, click on the arrow to the left of the activity name. If you consult the solutions, do not copy and paste them into the cells above. Instead, look at them and then type them manually into the cell. This will help you understand where you went wrong.</p>
+
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-1">Coding Activity 1<a class="anchor-link" href="#Coding-Activity-1">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[62]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Add this code to the cell in the coding activity above to build the list of</span>
+<span class="c1"># tokens.</span>
+<span class="k">for</span> <span class="n">paragraph</span> <span class="ow">in</span> <span class="n">dataset</span><span class="p">:</span>
+    <span class="k">for</span> <span class="n">token</span> <span class="ow">in</span> <span class="n">space_tokenize</span><span class="p">(</span><span class="n">paragraph</span><span class="p">):</span>
+        <span class="n">tokens</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">token</span><span class="p">)</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-2">Coding Activity 2<a class="anchor-link" href="#Coding-Activity-2">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[63]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Complete implementation of the build_vocab function.</span>
+<span class="k">def</span> <span class="nf">build_vocabulary</span><span class="p">(</span><span class="n">tokens</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">])</span><span class="o">-&gt;</span> <span class="nb">list</span><span class="p">[</span><span class="nb">str</span><span class="p">]:</span>
+
+    <span class="c1"># Build a vocabulary list from the set of tokens.</span>
+    <span class="n">vocab</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">set</span><span class="p">(</span><span class="n">tokens</span><span class="p">))</span>
+    <span class="k">return</span> <span class="n">vocab</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+<div class="cell border-box-sizing text_cell rendered"><div class="prompt input_prompt">
+</div><div class="inner_cell">
+<div class="text_cell_render border-box-sizing rendered_html">
+<h3 id="Coding-Activity-3">Coding Activity 3<a class="anchor-link" href="#Coding-Activity-3">&#182;</a></h3>
+</div>
+</div>
+</div>
+<div class="cell border-box-sizing code_cell rendered">
+<div class="input">
+<div class="prompt input_prompt">In&nbsp;[&nbsp;]:</div>
+<div class="inner_cell">
+    <div class="input_area">
+<div class=" highlight hl-python"><pre><span></span><span class="c1"># Add this code to the cell in the coding activity above to build the</span>
+<span class="c1"># index_to_token mapping.</span>
+<span class="k">for</span> <span class="n">token</span><span class="p">,</span> <span class="n">index</span> <span class="ow">in</span> <span class="n">token_to_index</span><span class="o">.</span><span class="n">items</span><span class="p">():</span>
+    <span class="n">index_to_token</span><span class="p">[</span><span class="n">index</span><span class="p">]</span> <span class="o">=</span> <span class="n">token</span>
+</pre></div>
+
+    </div>
+</div>
+</div>
+
+</div>
+
+

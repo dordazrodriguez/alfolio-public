@@ -293,8 +293,8 @@ jekyll-archives:
     tag: "/blog/tag/:name/"
     category: "/blog/category/:name/"
 
-# display_tags: ["finance", "technology", "business", "code", "data", "cybersecurity"] # these tags will be displayed on the front page of your blog
-display_tags: ["finance", "technology", "business", "code", "data", "cybersecurity"] # these tags will be displayed on the front page of your blog
+# display_tags: ["finance", "technology", "business", "code", "data", "cybersecurity", "AI", "ML"] # these tags will be displayed on the front page of your blog
+display_tags: ["finance", "technology", "business", "code", "data", "cybersecurity", "AI", "ML"] # these tags will be displayed on the front page of your blog
 display_categories: ["experience"] # these categories will be displayed on the front page of your blog
 
 # -----------------------------------------------------------------------------

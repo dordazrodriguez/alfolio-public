@@ -53,6 +53,7 @@ I'm currently pursuing a **B.S. in Computer Science** at Western Governors Unive
 - **Bloomberg Terminal Certified**
 - **FINRA - Securities Industry Essentials (SIE)**
 - **CompTIA Security+** (In Progress)
+- **Google DeepMind AI Research Foundations** — Build Your Own Small Language Model ([Course Path](https://www.skills.google/paths/3135))
 
 ## Philosophy & Approach
 

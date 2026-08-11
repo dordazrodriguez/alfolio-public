@@ -28,7 +28,7 @@ Explored the foundations of probability distributions for language modeling. Lea
 - Sampling from distributions
 - How probability distributions relate to language model outputs
 
-� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_1_create_your_own_probability_distribution.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_1_create_your_own_probability_distribution.ipynb' | relative_url }})
+� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_1_create_your_own_probability_distribution.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_lab_1_1_create_your_own_probability_distribution.ipynb)
 
 ---
 
@@ -42,7 +42,7 @@ Built character-level and word-level n-gram language models from scratch. Implem
 - Text generation via random sampling and greedy argmax
 - Limitations of n-gram models (sparsity, context window)
 
-� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_2_experiment_with_n_gram_models.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_2_experiment_with_n_gram_models.ipynb' | relative_url }})
+� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_2_experiment_with_n_gram_models.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_lab_1_2_experiment_with_n_gram_models.ipynb)
 
 ---
 
@@ -56,7 +56,7 @@ Compared the performance of n-gram models against transformer-based language mod
 - Performance comparison: n-gram vs. transformer
 - Trade-offs between model complexity and quality
 
-� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.ipynb' | relative_url }})
+� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_lab_1_3_compare_n_gram_models_and_transformer_language_models.ipynb)
 
 ---
 
@@ -84,7 +84,7 @@ def segment_encoded_sequence(sequence, max_length, n_overlap):
     return subsequences
 ```
 
-� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb' | relative_url }})
+� [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_lab_1_4_prepare_the_dataset_for_training_a_slm.ipynb)
 
 ---
 

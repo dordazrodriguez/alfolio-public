@@ -17,7 +17,7 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 
 [View badge on Google Skills](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
 
-[View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_challenge_lab.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb]({{ '/assets/notebooks/gdm/gdm_challenge_lab.ipynb' | relative_url }})
+[View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_challenge_lab.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_challenge_lab.ipynb)
 
 ---
 

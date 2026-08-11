@@ -237,7 +237,6 @@ exclude:
   - README.md
   - readme_preview/
   - vendor
-  - assets/notebooks/
 keep_files:
   - CNAME
   - .nojekyll

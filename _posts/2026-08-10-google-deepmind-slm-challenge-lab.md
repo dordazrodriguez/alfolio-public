@@ -19,6 +19,18 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 
 [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_challenge_lab.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_challenge_lab.ipynb)
 
+### Embedded Notebook
+
+{::nomarkdown}
+{% assign jupyter_path = "assets/notebooks/gdm/gdm_challenge_lab.ipynb" %}
+{% capture notebook_exists %}{% file_exists assets/notebooks/gdm/gdm_challenge_lab.ipynb %}{% endcapture %}
+{% if notebook_exists == "true" %}
+  {% jupyter_notebook jupyter_path %}
+{% else %}
+  <p>Sorry, the notebook you are looking for does not exist.</p>
+{% endif %}
+{:/nomarkdown}
+
 ---
 
 ## Scenario

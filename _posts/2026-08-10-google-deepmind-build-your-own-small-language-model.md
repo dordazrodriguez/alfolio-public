@@ -13,7 +13,7 @@ Completed [**Build Your Own Small Language Model**](https://www.skills.google/pa
 
 **Badge:** 
 
-[![Google Skills Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="250" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
+[![Google Skills Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="300" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
 
 [View badge on Google Skills](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26551425)
 

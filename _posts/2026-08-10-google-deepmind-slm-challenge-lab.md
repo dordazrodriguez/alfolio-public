@@ -13,7 +13,7 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 
 **Badge:** 
 
-[![Google Skills Badge]({{ '/assets/img/gdm-badge-train.png' | relative_url }}){: width="250" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
+[![Google Skills Badge]({{ '/assets/img/gdm-badge-train.png' | relative_url }}){: width="300" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
 
 [View badge on Google Skills](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
 

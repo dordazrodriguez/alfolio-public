@@ -1,15 +1,17 @@
 ---
 layout: post
-title: "Google DeepMind SLM Challenge Lab: Arabic Character-Based Language Model"
+title: "Google DeepMind: Train A Small Language Model — Challenge Lab"
 date: 2026-08-10
 tags: [AI, ML, NLP, DeepMind, LLM, Arabic, education]
 categories: [experience]
-description: "Challenge lab for the Build Your Own Small Language Model course — building a character-based Arabic language model for Cymbal Chat."
+description: "Challenge lab for the Train A Small Language Model course — building and training a character-based Arabic language model for Cymbal Chat."
 ---
 
 ## Challenge Lab Overview
 
-Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_templates/1453/labs/600981) for the *Build Your Own Small Language Model* course. The scenario: **Cymbal Chat**, an AI startup, wants to expand their chatbot to support Arabic — a language with very different grammar and character set compared to English. The task was to build a character-based language model pipeline for Arabic text.
+Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_templates/1453/labs/600981) for the *Train A Small Language Model* course. The scenario: **Cymbal Chat**, an AI startup, wants to expand their chatbot to support Arabic — a language with very different grammar and character set compared to English. The task was to build and train a character-based language model pipeline for Arabic text.
+
+**Badge:** [Google Skills Credential](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
 
 <details>
 <summary><b>Download notebook</b></summary>

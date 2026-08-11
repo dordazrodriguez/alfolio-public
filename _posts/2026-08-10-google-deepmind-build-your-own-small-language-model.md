@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Google DeepMind: Build Your Own Small Language Model"
+title: "Google DeepMind: Building a Small Language Model"
 date: 2026-08-10
 tags: [technology, AI, ML, NLP, DeepMind, LLM, education]
 categories: [experience]

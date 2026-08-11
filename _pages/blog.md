@@ -910,6 +910,67 @@ pagination:
   .filter-collapse-toggle:hover .filter-chevron {
     opacity: 1;
   }
+
+  /* Tighter filter section overrides */
+  #blog-filter-section {
+    margin-bottom: 1rem !important;
+  }
+
+  #blog-filter-section .card-body {
+    padding: 0.75rem !important;
+  }
+
+  #blog-filter-section .mb-3,
+  #blog-filter-section .row .col-md-6,
+  .filter-section-horizontal .mb-3 {
+    margin-bottom: 0.5rem !important;
+  }
+
+  .filter-section-horizontal > .mb-3:last-child {
+    margin-bottom: 0 !important;
+  }
+
+  .filter-heading-horizontal {
+    margin-bottom: 0.35rem !important;
+    padding-bottom: 0.25rem !important;
+    font-size: 0.8rem;
+    gap: 0.35rem;
+  }
+
+  .filter-btn {
+    padding: 0.25rem 0.55rem !important;
+    font-size: 0.8rem !important;
+  }
+
+  .filter-section-toggle {
+    padding: 0.5rem 0.25rem !important;
+    margin-bottom: 0.25rem !important;
+  }
+
+  .search-input-wrapper .form-control {
+    padding-top: 0.5rem !important;
+    padding-bottom: 0.5rem !important;
+    font-size: 0.85rem;
+  }
+
+  .search-btn {
+    padding: 0.45rem !important;
+    min-width: 34px !important;
+  }
+
+  #blog-search-tags {
+    margin-top: 0.4rem !important;
+  }
+
+  .filter-scroll-horizontal {
+    max-height: 95px;
+  }
+
+  .active-filter,
+  .search-tag {
+    padding: 0.3rem 0.55rem !important;
+    font-size: 0.8rem !important;
+  }
 </style>
 
 <script>

@@ -21,15 +21,7 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 
 ### Embedded Notebook
 
-{::nomarkdown}
-{% assign jupyter_path = "assets/notebooks/gdm/gdm_challenge_lab.ipynb" %}
-{% capture notebook_exists %}{% file_exists assets/notebooks/gdm/gdm_challenge_lab.ipynb %}{% endcapture %}
-{% if notebook_exists == "true" %}
-  {% jupyter_notebook jupyter_path %}
-{% else %}
-  <p>Sorry, the notebook you are looking for does not exist.</p>
-{% endif %}
-{:/nomarkdown}
+<iframe src="{{ '/assets/notebook_html/gdm/gdm_challenge_lab.html' | relative_url }}" width="100%" height="800" frameborder="0" style="border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;" loading="lazy" allowfullscreen></iframe>
 
 ---
 

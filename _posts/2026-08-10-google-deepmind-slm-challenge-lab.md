@@ -2,7 +2,7 @@
 layout: post
 title: "Google DeepMind: Train A Small Language Model — Challenge Lab"
 date: 2026-08-10
-tags: [AI, ML, NLP, DeepMind, LLM, Arabic, education]
+tags: [technology, AI, ML, NLP, DeepMind, LLM, Arabic, education]
 categories: [experience]
 description: "Challenge lab for the Train A Small Language Model course — building and training a character-based Arabic language model for Cymbal Chat."
 ---

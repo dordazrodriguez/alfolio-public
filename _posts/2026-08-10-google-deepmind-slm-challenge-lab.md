@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Google DeepMind: Train A Small Language Model — Challenge Lab"
+title: "Google DeepMind: Training A Small Language Model — Challenge Lab"
 date: 2026-08-10
 tags: [technology, AI, ML, NLP, DeepMind, LLM, Arabic, education]
 categories: [experience]
@@ -11,7 +11,7 @@ description: "Challenge lab for the Train A Small Language Model course — buil
 
 Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_templates/1453/labs/600981) for the *Train A Small Language Model* course. The scenario: **Cymbal Chat**, an AI startup, wants to expand their chatbot to support Arabic — a language with very different grammar and character set compared to English. The task was to build and train a character-based language model pipeline for Arabic text.
 
-**Badge:** [![Google Skills Badge]({{ '/assets/img/gdm-badge.png' | relative_url }}){: width="120" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
+**Badge:** [![Google Skills Badge]({{ '/assets/img/gdm-badge-train.png' | relative_url }}){: width="120" }](https://www.skills.google/public_profiles/35711ba7-11ee-411f-b8ff-09a6e696eb3f/badges/26553065)
 
 <details>
 <summary><b>📖 View notebook</b></summary>

@@ -22,8 +22,9 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 <!-- ### Embedded Notebook
 
 <iframe src="{{ '/assets/notebooks/gdm/gdm_challenge_lab.ipynb' | relative_url }}" width="100%" height="800" frameborder="0" style="border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;" loading="lazy" allowfullscreen></iframe>
+-->
 
---- -->
+--- 
 
 ## Scenario
 

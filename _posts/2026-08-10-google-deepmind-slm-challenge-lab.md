@@ -19,9 +19,9 @@ Completed the [**Challenge Lab**](https://www.skills.google/paths/3135/course_te
 
 [View notebook in browser]({{ '/assets/notebook_html/gdm/gdm_challenge_lab.html' | relative_url }}){: target="_blank" } · [📄 Download .ipynb](https://raw.githubusercontent.com/dordazrodriguez/alfolio-public/main/assets/notebooks/gdm/gdm_challenge_lab.ipynb)
 
-### Embedded Notebook
+<!-- ### Embedded Notebook
 
-<iframe src="{{ '/assets/notebooks/gdm/gdm_challenge_lab.ipynb' | relative_url }}" width="100%" height="800" frameborder="0" style="border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;" loading="lazy" allowfullscreen></iframe>
+<iframe src="{{ '/assets/notebooks/gdm/gdm_challenge_lab.ipynb' | relative_url }}" width="100%" height="800" frameborder="0" style="border: 1px solid rgba(0,0,0,0.1); border-radius: 8px;" loading="lazy" allowfullscreen></iframe> -->
 
 ---
 

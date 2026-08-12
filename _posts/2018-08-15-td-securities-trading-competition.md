@@ -5,6 +5,7 @@ date: 2018-08-15 10:00:00
 description: Selected as one of 32 students worldwide to compete in TD Securities' prestigious trading competition in New York.
 tags: finance trading competition wall-street td-securities high-frequency
 categories: experience
+featured: true
 toc:
   sidebar: left
 ---

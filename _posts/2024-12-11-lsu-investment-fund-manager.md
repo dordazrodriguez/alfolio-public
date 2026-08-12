@@ -5,6 +5,7 @@ date: 2020-12-11 18:00:00
 description: A deep dive into my role as Investment Fund Manager at LSU Investment Fund, where I contributed to 16.7% AUM growth and learned to leverage Bloomberg Terminal for equity research
 tags: finance investment bloomberg equity-research portfolio-management trading
 categories: experience
+featured: true
 toc:
   sidebar: left
 ---

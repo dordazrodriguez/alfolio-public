@@ -57,62 +57,36 @@ pagination:
 
   {% assign featured_posts = site.posts | where: "featured", "true" %}
   {% if featured_posts.size > 0 %}
-    <br>
-    <div class="container featured-posts">
-      {% assign is_even = featured_posts.size | modulo: 2 %}
-      <div class="row row-cols-{% if featured_posts.size <= 2 or is_even == 0 %}2{% else %}3{% endif %}">
+    <div class="featured-posts-compact">
+      <div class="featured-posts-scroll">
         {% for post in featured_posts %}
-          <div class="col mb-4">
-            <a href="{{ post.url | relative_url }}">
-              <div class="card hoverable">
-                <div class="row g-0">
-                  <div class="col-md-12">
-                    <div class="card-body">
-                      <div class="float-right">
-                        <i class="fa-solid fa-thumbtack fa-xs"></i>
-                      </div>
-                      <h3 class="card-title text-lowercase">{{ post.title }}</h3>
-                      <p class="card-text">{{ post.description }}</p>
-                      {% if post.external_source == blank %}
-                        {% assign read_time = post.content | number_of_words | divided_by: 180 | plus: 1 %}
-                      {% else %}
-                        {% assign read_time = post.feed_content | strip_html | number_of_words | divided_by: 180 | plus: 1 %}
-                      {% endif %}
-                      {% assign year = post.date | date: "%Y" %}
-                      <p class="post-meta">
-                        {{ read_time }} min read &nbsp; &middot; &nbsp;
-                        <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-                          <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
-                      </p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </a>
-          </div>
+          <a href="{{ post.url | relative_url }}" class="featured-post-card">
+            <i class="fa-solid fa-thumbtack fa-xs featured-pin"></i>
+            <span class="featured-title">{{ post.title }}</span>
+            <span class="featured-desc">{{ post.description }}</span>
+          </a>
         {% endfor %}
       </div>
     </div>
-    <hr>
   {% endif %}
 
-  <div class="container-fluid mt-4" style="max-width: 100%;">
+  <div class="container-fluid mt-2" style="max-width: 1200px;">
     <!-- Horizontal Filter Section -->
-    <div class="mb-4" id="blog-filter-section">
-      <button type="button" class="filter-collapse-toggle filter-section-toggle" id="blog-filter-section-toggle" aria-expanded="true" aria-controls="blog-filter-section-content">
+    <div class="mb-2" id="blog-filter-section">
+      <button type="button" class="filter-collapse-toggle filter-section-toggle" id="blog-filter-section-toggle" aria-expanded="false" aria-controls="blog-filter-section-content">
         <i class="fas fa-sliders-h"></i>
         <span>Filters</span>
         <i class="fas fa-chevron-down filter-chevron" style="margin-left: auto; transition: transform 0.3s ease; font-size: 0.75rem; opacity: 0.7;"></i>
       </button>
-      <div class="card shadow-sm filter-card-horizontal filter-collapse-content" id="blog-filter-section-content">
+      <div class="card shadow-sm filter-card-horizontal filter-collapse-content collapsed" id="blog-filter-section-content">
         <div class="card-body">
           <div class="filter-section-horizontal">
             <!-- Search Input -->
-            <div class="mb-3">
+            <div class="mb-2">
               <div class="search-container-horizontal">
                 <div class="search-input-wrapper">
                   <i class="fas fa-search search-icon"></i>
-                  <input type="text" id="blog-search-input" class="form-control" placeholder="Search posts... (Press Enter or comma to add tags)">
+                  <input type="text" id="blog-search-input" class="form-control" placeholder="Search posts...">
                 </div>
                 <div class="search-buttons">
                   <button class="search-btn" type="button" id="blog-clear-search" title="Clear search">
@@ -123,12 +97,12 @@ pagination:
               <div id="blog-search-tags" class="mt-2 d-flex flex-wrap"></div>
             </div>
 
-            <!-- Categories and Tags Row -->
+            <!-- Categories and Tags in a single row -->
             <div class="row">
-              <div class="col-md-6 mb-3">
+              <div class="col-md-12 mb-2">
                 <h6 class="filter-heading-horizontal filter-collapse-toggle" style="cursor: pointer; user-select: none; margin-bottom: 0.5rem;">
-                  <i class="fas fa-folder"></i>
-                  <span>Categories</span>
+                  <i class="fas fa-tags"></i>
+                  <span>Categories &amp; Tags</span>
                   <i class="fas fa-chevron-down filter-chevron" style="margin-left: auto; transition: transform 0.3s ease; font-size: 0.75rem; opacity: 0.7;"></i>
                 </h6>
                 <div class="filter-collapse-content" id="blog-category-filters-wrapper">
@@ -144,12 +118,7 @@ pagination:
                 </div>
               </div>
 
-              <div class="col-md-6 mb-3">
-                <h6 class="filter-heading-horizontal filter-collapse-toggle" style="cursor: pointer; user-select: none; margin-bottom: 0.5rem;">
-                  <i class="fas fa-tags"></i>
-                  <span>Tags</span>
-                  <i class="fas fa-chevron-down filter-chevron" style="margin-left: auto; transition: transform 0.3s ease; font-size: 0.75rem; opacity: 0.7;"></i>
-                </h6>
+              <div class="col-md-12 mb-2">
                 <div class="filter-collapse-content" id="blog-tag-filters-wrapper">
                   <div class="filter-scroll-horizontal">
                     <div class="d-flex flex-wrap" id="blog-tag-filters">
@@ -239,10 +208,7 @@ pagination:
                   {% endif %}
                 </p>
                 <p class="post-tags">
-                  <a href="{{ year | prepend: '/blog/' | prepend: site.baseurl}}">
-                    <i class="fa-solid fa-calendar fa-sm"></i> {{ year }} </a>
                   {% if tags != "" %}
-                    &nbsp; &middot; &nbsp;
                     {% for tag in post.tags %}
                       <a href="{{ tag | slugify | prepend: '/blog/tag/' | prepend: site.baseurl}}">
                         <i class="fa-solid fa-hashtag fa-sm"></i> {{ tag }}</a>
@@ -252,7 +218,7 @@ pagination:
                     {% endfor %}
                   {% endif %}
                   {% if categories != "" %}
-                    &nbsp; &middot; &nbsp;
+                    {% if tags != "" %}&nbsp; &middot; &nbsp;{% endif %}
                     {% for category in post.categories %}
                       <a href="{{ category | slugify | prepend: '/blog/category/' | prepend: site.baseurl}}">
                         <i class="fa-solid fa-tag fa-sm"></i> {{ category }}</a>
@@ -321,6 +287,104 @@ pagination:
       padding-left: 1rem;
       padding-right: 1rem;
     }
+  }
+
+  /* Compact featured posts */
+  .featured-posts-compact {
+    margin-bottom: 1rem;
+  }
+
+  .featured-posts-scroll {
+    display: flex;
+    gap: 0.75rem;
+    overflow-x: auto;
+    padding-bottom: 0.5rem;
+    scrollbar-width: thin;
+  }
+
+  .featured-posts-scroll::-webkit-scrollbar {
+    height: 4px;
+  }
+
+  .featured-posts-scroll::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.15);
+    border-radius: 4px;
+  }
+
+  html[data-theme='dark'] .featured-posts-scroll::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+  }
+
+  .featured-post-card {
+    flex: 0 0 320px;
+    display: flex;
+    flex-direction: column;
+    padding: 0.75rem 1rem;
+    border-radius: 8px;
+    text-decoration: none;
+    transition: all 0.2s ease;
+    border: 1px solid;
+  }
+
+  html[data-theme='light'] .featured-post-card {
+    background: rgba(0, 0, 0, 0.02);
+    border-color: rgba(0, 0, 0, 0.08);
+  }
+
+  html[data-theme='dark'] .featured-post-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+  }
+
+  .featured-post-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  html[data-theme='dark'] .featured-post-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .featured-pin {
+    color: #0284c7;
+    margin-bottom: 0.35rem;
+  }
+
+  html[data-theme='dark'] .featured-pin {
+    color: #38bdf8;
+  }
+
+  .featured-title {
+    font-weight: 600;
+    font-size: 0.9rem;
+    line-height: 1.3;
+    margin-bottom: 0.25rem;
+  }
+
+  html[data-theme='light'] .featured-title {
+    color: #0f172a;
+  }
+
+  html[data-theme='dark'] .featured-title {
+    color: #f8fafc;
+  }
+
+  .featured-desc {
+    font-size: 0.78rem;
+    line-height: 1.4;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+  }
+
+  html[data-theme='light'] .featured-desc {
+    color: #64748b;
+  }
+
+  html[data-theme='dark'] .featured-desc {
+    color: #94a3b8;
   }
 
   /* Force hide pagination when it has d-none class */
@@ -1625,6 +1689,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const heading = toggle.querySelector('span');
     if (heading) {
       const text = heading.textContent.trim();
+      if (text === 'Categories & Tags') return 'blog-categories-tags';
       if (text === 'Categories') return 'blog-categories';
       if (text === 'Tags') return 'blog-tags';
     }
@@ -1666,8 +1731,8 @@ document.addEventListener('DOMContentLoaded', function() {
     
     if (!sectionId || !content) return;
     
-    // Default states: Categories expanded, Tags expanded
-    const defaultExpanded = true;
+    // Default states: collapsed
+    const defaultExpanded = false;
     const isExpanded = loadCollapseState(sectionId, defaultExpanded);
     
     if (isExpanded) {
@@ -1712,10 +1777,10 @@ document.addEventListener('DOMContentLoaded', function() {
   const filterSectionContent = document.getElementById('blog-filter-section-content');
 
   if (filterSectionToggle && filterSectionContent) {
-    let filterExpanded = true;
+    let filterExpanded = false;
     try {
       const stored = localStorage.getItem('blog-filter-section-main');
-      if (stored === 'collapsed') filterExpanded = false;
+      if (stored === 'expanded') filterExpanded = true;
     } catch (e) {}
 
     if (filterExpanded) {

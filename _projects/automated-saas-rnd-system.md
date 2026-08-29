@@ -26,6 +26,7 @@ tags:
   - OpenAI
   - Gemini
   - OpenRouter
+  - DevOps
   - PostgreSQL
   - pgvector
   - Redis
@@ -39,7 +40,6 @@ tags:
   - Agglomerative Clustering
   - Full Stack
   - Production
-  - DevOps
   - AI
   - Automation
 importance: 1

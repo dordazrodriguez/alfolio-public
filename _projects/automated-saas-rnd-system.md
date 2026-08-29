@@ -86,6 +86,62 @@ show_date: true
   html[data-theme='dark'] .rnds-hero p[style*="color:#334155"] { color: #cbd5e1 !important; }
 </style>
 
+<!-- Top horizontal carousel — 5 screenshots as requested -->
+<div class="rnds-top-carousel" style="margin: 1.5rem 0 0.8rem;">
+  <div style="display:flex; align-items:center; justify-content:space-between; gap:1rem; margin-bottom:0.7rem;">
+    <h3 style="margin:0; font-size:1.05rem; font-weight:700; letter-spacing:-0.01em;">Preview</h3>
+    <span style="font-size:0.8rem; color:#64748b; white-space:nowrap;">← swipe / arrows →</span>
+  </div>
+  <div class="carousel-wrapper" style="position:relative;">
+    <button type="button" class="carousel-arrow carousel-prev" aria-label="Previous" style="position:absolute; left:-10px; top:50%; transform:translateY(-50%); z-index:2; width:38px; height:38px; border-radius:50%; border:1px solid rgba(0,0,0,0.12); background:rgba(255,255,255,0.96); box-shadow:0 2px 8px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.2rem; line-height:1;">‹</button>
+    <div class="carousel-track" id="rnds-carousel-track" style="display:flex; gap:1rem; overflow-x:auto; scroll-snap-type:x mandatory; scroll-behavior:smooth; -webkit-overflow-scrolling:touch; padding: 0.25rem 0.5rem 0.8rem; scrollbar-width:thin; scrollbar-color:#38bdf8 transparent;">
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/automated-rnd-system/dashboard-overview.png' | relative_url }}" data-caption="Dashboard — Autonomous SaaS R&D intelligence overview" style="flex:0 0 82%; max-width:520px; scroll-snap-align:start; cursor:pointer; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.06); background:var(--global-card-bg-color, #fff);">
+        <div style="position:relative;"><img src="{{ '/assets/img/projects/automated-rnd-system/dashboard-overview.png' | relative_url }}" alt="Dashboard" style="width:100%; height:260px; object-fit:cover; object-position:top; display:block;"><div class="screenshot-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;"><i class="fas fa-expand" style="color:white; font-size:1.6rem;"></i></div></div><p style="margin:0; padding:0.55rem 0.6rem; font-size:0.82rem; font-weight:600; text-align:center; color:#334155;">Dashboard</p>
+      </div>
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/automated-rnd-system/opportunities-ranked.png' | relative_url }}" data-caption="Opportunities — 12 scored, ranked opportunities" style="flex:0 0 82%; max-width:520px; scroll-snap-align:start; cursor:pointer; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.06); background:var(--global-card-bg-color, #fff);">
+        <div style="position:relative;"><img src="{{ '/assets/img/projects/automated-rnd-system/opportunities-ranked.png' | relative_url }}" alt="Opportunities" style="width:100%; height:260px; object-fit:cover; object-position:top; display:block;"><div class="screenshot-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;"><i class="fas fa-expand" style="color:white; font-size:1.6rem;"></i></div></div><p style="margin:0; padding:0.55rem 0.6rem; font-size:0.82rem; font-weight:600; text-align:center; color:#334155;">Opportunities — Ranked</p>
+      </div>
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/automated-rnd-system/opportunity-detail-invoice-agent.png' | relative_url }}" data-caption="Opportunity Detail — AI Invoice Agent 62.4" style="flex:0 0 82%; max-width:520px; scroll-snap-align:start; cursor:pointer; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.06); background:var(--global-card-bg-color, #fff);">
+        <div style="position:relative;"><img src="{{ '/assets/img/projects/automated-rnd-system/opportunity-detail-invoice-agent.png' | relative_url }}" alt="Invoice Agent" style="width:100%; height:260px; object-fit:cover; object-position:top; display:block;"><div class="screenshot-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;"><i class="fas fa-expand" style="color:white; font-size:1.6rem;"></i></div></div><p style="margin:0; padding:0.55rem 0.6rem; font-size:0.82rem; font-weight:600; text-align:center; color:#334155;">Detail — Invoice Agent 62.4</p>
+      </div>
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/automated-rnd-system/opportunity-detail-bookkeeping.png' | relative_url }}" data-caption="Opportunity Detail — AI Bookkeeping 50.6" style="flex:0 0 82%; max-width:520px; scroll-snap-align:start; cursor:pointer; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.06); background:var(--global-card-bg-color, #fff);">
+        <div style="position:relative;"><img src="{{ '/assets/img/projects/automated-rnd-system/opportunity-detail-bookkeeping.png' | relative_url }}" alt="Bookkeeping" style="width:100%; height:260px; object-fit:cover; object-position:top; display:block;"><div class="screenshot-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;"><i class="fas fa-expand" style="color:white; font-size:1.6rem;"></i></div></div><p style="margin:0; padding:0.55rem 0.6rem; font-size:0.82rem; font-weight:600; text-align:center; color:#334155;">Detail — Bookkeeping 50.6</p>
+      </div>
+      <div class="screenshot-item" data-image="{{ '/assets/img/projects/automated-rnd-system/problem-clusters.png' | relative_url }}" data-caption="Problem Clusters — 25 clusters" style="flex:0 0 82%; max-width:520px; scroll-snap-align:start; cursor:pointer; border-radius:10px; overflow:hidden; box-shadow:0 2px 10px rgba(0,0,0,0.08); border:1px solid rgba(0,0,0,0.06); background:var(--global-card-bg-color, #fff);">
+        <div style="position:relative;"><img src="{{ '/assets/img/projects/automated-rnd-system/problem-clusters.png' | relative_url }}" alt="Clusters" style="width:100%; height:260px; object-fit:cover; object-position:top; display:block;"><div class="screenshot-overlay" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.3s;"><i class="fas fa-expand" style="color:white; font-size:1.6rem;"></i></div></div><p style="margin:0; padding:0.55rem 0.6rem; font-size:0.82rem; font-weight:600; text-align:center; color:#334155;">Problem Clusters</p>
+      </div>
+    </div>
+    <button type="button" class="carousel-arrow carousel-next" aria-label="Next" style="position:absolute; right:-10px; top:50%; transform:translateY(-50%); z-index:2; width:38px; height:38px; border-radius:50%; border:1px solid rgba(0,0,0,0.12); background:rgba(255,255,255,0.96); box-shadow:0 2px 8px rgba(0,0,0,0.1); display:flex; align-items:center; justify-content:center; cursor:pointer; font-size:1.2rem; line-height:1;">›</button>
+  </div>
+</div>
+
+<style>
+  .rnds-top-carousel .carousel-track::-webkit-scrollbar { height: 6px; }
+  .rnds-top-carousel .carousel-track::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 999px; }
+  .rnds-top-carousel .carousel-track::-webkit-scrollbar-track { background: transparent; }
+  .rnds-top-carousel .screenshot-item:hover .screenshot-overlay { opacity:1 !important; }
+  html[data-theme='dark'] .rnds-top-carousel .screenshot-item p { color:#cbd5e1 !important; }
+  html[data-theme='dark'] .carousel-arrow { background:rgba(15,23,42,0.9) !important; color:#f1f5f9 !important; border-color:rgba(255,255,255,0.15) !important; }
+  @media (min-width: 768px) {
+    .rnds-top-carousel .carousel-track .screenshot-item { flex:0 0 48% !important; max-width:520px !important; }
+  }
+  @media (min-width: 1024px) {
+    .rnds-top-carousel .carousel-track .screenshot-item { flex:0 0 38% !important; }
+  }
+</style>
+
+<script>
+(function(){
+  const track = document.getElementById('rnds-carousel-track');
+  const prev = document.querySelector('.rnds-top-carousel .carousel-prev');
+  const next = document.querySelector('.rnds-top-carousel .carousel-next');
+  if(!track) return;
+  const scrollAmount = 560;
+  if(prev) prev.addEventListener('click', function(){ track.scrollBy({left: -scrollAmount, behavior: 'smooth'}); });
+  if(next) next.addEventListener('click', function(){ track.scrollBy({left: scrollAmount, behavior: 'smooth'}); });
+})();
+</script>
+
 ## Business Value
 
 - **Never run out of pipeline**: 24/7 signal mining from Reddit, Hacker News, GitHub, RSS feeds, web search, app-store reviews, Product Hunt, G2, job postings, and government data.
@@ -626,23 +682,6 @@ AutomatedSaaS_RnD_System/
   }
 })();
 </script>
-
-## Quick Start
-
-```bash
-# Clone & configure
-cp .env.example .env   # set LiteLLM keys (or use Ollama for zero cost)
-
-# Docker Compose (VPS)
-docker compose -f deployments/docker/docker-compose.yml up -d
-# API → http://localhost:8000/docs | Dashboard → http://localhost:3000
-
-# Local dev
-cd backend && pip install -e ".[dev]" && uvicorn app.main:app --reload
-cd frontend && npm install && npm run dev
-```
-
-Set `RND_MONTHLY_BUDGET_LIMIT=50` for budget alerts; use `Ollama` for Cheap tier to run at $0.
 
 ## Roadmap
 

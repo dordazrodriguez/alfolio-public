@@ -6,7 +6,6 @@ category:
   - 'Cybersecurity'
   - 'DevOps'
   - 'Dev'
-img: assets/img/projects/soc-lab/soc-architecture.png
 tags:
   - Docker
   - Docker Compose

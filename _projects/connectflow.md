@@ -35,6 +35,7 @@ tags:
   - Production
 link: "https://connectflow.gen-cloud.org"
 importance: 2
+featured: true
 date: 2026-08-09
 show_date: true
 ---

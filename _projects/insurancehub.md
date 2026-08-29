@@ -39,6 +39,7 @@ tags:
   - Production
 link: "https://insurancehub-copy-819556054794.us-west1.run.app"
 importance: 2
+featured: true
 date: 2026-08-09
 show_date: true
 ---

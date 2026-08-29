@@ -120,6 +120,8 @@ show_date: true
   .rnds-top-carousel .carousel-track::-webkit-scrollbar-thumb { background: #38bdf8; border-radius: 999px; }
   .rnds-top-carousel .carousel-track::-webkit-scrollbar-track { background: transparent; }
   .rnds-top-carousel .screenshot-item:hover .screenshot-overlay { opacity:1 !important; }
+  .rnds-top-carousel .carousel-track:focus { outline: 2px solid #38bdf8; outline-offset: 2px; border-radius: 10px; }
+  .rnds-top-carousel .carousel-track:focus-visible { outline: 2px solid #38bdf8; }
   html[data-theme='dark'] .rnds-top-carousel .screenshot-item p { color:#cbd5e1 !important; }
   html[data-theme='dark'] .carousel-arrow { background:rgba(15,23,42,0.9) !important; color:#f1f5f9 !important; border-color:rgba(255,255,255,0.15) !important; }
   @media (min-width: 768px) {
@@ -139,6 +141,14 @@ show_date: true
   const scrollAmount = 560;
   if(prev) prev.addEventListener('click', function(){ track.scrollBy({left: -scrollAmount, behavior: 'smooth'}); });
   if(next) next.addEventListener('click', function(){ track.scrollBy({left: scrollAmount, behavior: 'smooth'}); });
+  // Keyboard: left/right when carousel focused (as requested)
+  track.setAttribute('tabindex','0');
+  track.setAttribute('role','region');
+  track.setAttribute('aria-label','Screenshot carousel — focus then use left/right arrows to scroll, click to expand');
+  track.addEventListener('keydown', function(e){
+    if(e.key === 'ArrowLeft'){ e.preventDefault(); track.scrollBy({left: -scrollAmount, behavior:'smooth'}); }
+    else if(e.key === 'ArrowRight'){ e.preventDefault(); track.scrollBy({left: scrollAmount, behavior:'smooth'}); }
+  });
 })();
 </script>
 

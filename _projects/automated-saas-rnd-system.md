@@ -352,41 +352,48 @@ AutomatedSaaS_RnD_System/
     color: #cbd5e1;
   }
 
-  /* Image Modal Styles */
+  /* Image Modal Styles — expanded to ~100% viewport without overflow */
   #image-modal {
     display: none;
     position: fixed;
     z-index: 9999;
     left: 0;
     top: 0;
-    width: 100%;
-    height: 100%;
+    width: 100vw;
+    height: 100vh;
+    height: 100dvh;
     background-color: rgba(0, 0, 0, 0.95);
-    overflow-y: auto;
-    overflow-x: hidden;
+    overflow: hidden;
   }
   
   #image-modal.active {
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: flex-start;
-    padding: 2rem 1rem;
+    justify-content: center;
+    padding: 0.5rem;
   }
   
   .modal-image-container {
     position: relative;
-    max-width: 100%;
-    width: 100%;
+    width: 96vw;
+    height: 86vh;
+    height: 86dvh;
+    max-width: 96vw;
+    max-height: 86vh;
+    max-height: 86dvh;
     margin: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 1rem 0;
+    padding: 0;
   }
   
   .modal-image-container img {
-    max-width: 100%;
+    max-width: 96vw;
+    max-height: 86vh;
+    max-height: 86dvh;
+    width: auto;
     height: auto;
     object-fit: contain;
     border-radius: 8px;

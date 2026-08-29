@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Automated SaaS R&D System — Autonomous Venture Lab"
+title: "Automated SaaS Idea R&D System — Autonomous Venture Lab"
 description: "An autonomous market intelligence and venture R&D system that continuously mines Reddit, Hacker News, GitHub, RSS and the web for evidence of problems, clusters them, dispatches a 7-agent research swarm, and produces scored, testable SaaS opportunity reports with Markdown documentation."
 category:
   - 'AI'
@@ -8,6 +8,7 @@ category:
   - 'Full Stack'
   - 'Production'
   - 'Data Science'
+  - 'DevOps'
 img: assets/img/projects/automated-rnd-system/thumbnail.png
 additional_images:
   - assets/img/projects/automated-rnd-system/dashboard-overview.png
@@ -38,6 +39,7 @@ tags:
   - Agglomerative Clustering
   - Full Stack
   - Production
+  - DevOps
   - AI
   - Automation
 importance: 1
@@ -46,9 +48,57 @@ date: 2026-08-29
 show_date: true
 ---
 
-An autonomous **SaaS R&D lab** that can be left running on a VPS — continuously moving from **Signals → Problems → Opportunities → Business Hypotheses → Validation → Scoring → Reports → Learning**. Instead of a one-off idea generator, it tells you every week: *“Here are the 5 strongest opportunities I found, with evidence, ICP, competitors, TAM proxy, pricing, MVP timeline, and the cheapest experiment to validate them.”*
+<div class="rnds-hero" style="margin: 0.5rem 0 1.75rem; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(14,165,233,0.06));">
+  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(2,132,199,0.12); border:1px solid rgba(2,132,199,0.2); color:#0369a1;">Autonomous</span>
+    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.2); color:#047857;">VPS-First</span>
+    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.2); color:#7e22ce;">Zero-Cost Ollama Option</span>
+    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.2); color:#b45309;">Production-Grade</span>
+  </div>
+  <p style="font-size:1.15rem; line-height:1.6; margin:0; font-weight:500;">
+    An autonomous <strong>SaaS Idea R&D Lab</strong> that runs unattended on a VPS — continuously cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports → Learning</strong>. Not a one-off idea generator: every week it delivers the <em>5 strongest, evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, ARPU, MVP timeline, and the cheapest validation experiment.
+  </p>
+  <div style="margin-top:1rem; padding:0.85rem 1rem; border-left:4px solid #0ea5e9; background:rgba(255,255,255,0.7); border-radius:0 8px 8px 0; font-style:italic; color:#334155;">
+    “Here are the 5 strongest opportunities I found this week, with receipts — who will pay, what they pay today, what’s missing in the market, and how we test it in 7 days without writing production code.”
+  </div>
+</div>
 
-Built from the architecture in `AutomatedSaaS_RnD_System` (`/Users/david/Projects/AutomatedSaaS_RnD_System`), the system is designed VPS-first, zero-cost capable via Ollama free-tier models, and deployable via Docker Compose, Terraform (DigitalOcean / AWS ECS + RDS + ElastiCache).
+<div class="rnds-stats" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:0.75rem; margin: 1rem 0 1.5rem;">
+  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
+    <div style="font-size:1.6rem; font-weight:800; line-height:1;">1497</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Signals Mined</div>
+  </div>
+  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
+    <div style="font-size:1.6rem; font-weight:800; line-height:1;">487</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Problems Extracted</div>
+  </div>
+  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
+    <div style="font-size:1.6rem; font-weight:800; line-height:1;">25</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Problem Clusters</div>
+  </div>
+  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
+    <div style="font-size:1.6rem; font-weight:800; line-height:1;">12</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Scored Opportunities</div>
+  </div>
+  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
+    <div style="font-size:1.6rem; font-weight:800; line-height:1;">7</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Specialized AI Agents</div>
+  </div>
+</div>
+
+> **TL;DR for reviewers:** Production-grade, full-stack AI system (FastAPI + LangGraph + pgvector + Redis/Celery + Next.js) that **automates the entire venture research funnel** — from raw web signals to ranked, testable business cases — with cost-aware LLM routing, pgvector semantic clustering, and human-in-the-loop dashboard controls. Built to run for **months unattended**, compound evidence, and **de-risk building** by forcing a 7-agent red-team before any code.
+
+**At a glance**
+
+| | |
+|---|---|
+| **What it does** | Mines Reddit/HN/GitHub/RSS/web, extracts & clusters problems, runs 7-agent research (Market, Competitor, Customer, Pricing, Technical, Business Model, Red Team), scores 0–100, emits Markdown reports |
+| **Stack** | Python 3.12 + FastAPI, LangGraph, LiteLLM (Ollama/OpenRouter/Gemini/OpenAI), PostgreSQL 16 + pgvector, Redis + Celery Beat, Next.js 15 + Tailwind + shadcn/ui |
+| **Deploy** | Docker Compose (VPS-first) + Terraform for DigitalOcean / AWS ECS + RDS + ElastiCache; one-command `docker compose up` |
+| **Cost** | 3-tier routing (Cheap/Medium/Strong), per-agent spend tracking, `RND_MONTHLY_BUDGET_LIMIT` alerts, **$0 mode via local Ollama** |
+| **Control** | Dashboard Pipeline Controls (Full Cycle/Collect/Classify/Extract/Cluster/Research), Live Tasks, `POST /api/orchestrate`, exports (.md/.json/.csv) |
+
+<style>
+  html[data-theme='dark'] .rnds-hero { background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(14,165,233,0.08)) !important; border-color: rgba(255,255,255,0.12) !important; }
+  html[data-theme='dark'] .rnds-hero div[style*="background:rgba(255,255,255,0.7)"] { background: rgba(15,23,42,0.6) !important; color: #cbd5e1 !important; }
+  html[data-theme='dark'] .rnds-stats div { background: rgba(30,41,59,0.6) !important; border-color: rgba(255,255,255,0.08) !important; }
+  html[data-theme='dark'] .rnds-stats div div:last-child { color: #94a3b8 !important; }
+</style>
 
 ## Business Value
 

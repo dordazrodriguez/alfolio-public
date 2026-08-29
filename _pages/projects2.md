@@ -126,7 +126,7 @@ horizontal: false
 
 </style>
 
-<div class="container-fluid mt-4" style="max-width: 90%; margin-left: auto; margin-right: auto;">
+<div class="container-fluid mt-4" style="max-width: 98%; margin-left: auto; margin-right: auto;">
   <div class="row">
     <!-- Page Header -->
     <div class="col-12 mb-4 d-flex justify-content-between align-items-center">
@@ -1247,18 +1247,18 @@ horizontal: false
     display: none;
   }
   
-  /* Add these new styles for wider project cards */
+  /* Add these new styles for wider project cards — widened per request */
   .container-fluid {
-    max-width: 1400px;
+    max-width: 1920px;
     margin: 0 auto;
-    padding-left: 3rem;
-    padding-right: 3rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
   }
   
   @media (max-width: 991px) {
     .container-fluid {
-      padding-left: 2rem;
-      padding-right: 2rem;
+      padding-left: 1.25rem;
+      padding-right: 1.25rem;
     }
   }
   

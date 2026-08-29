@@ -285,9 +285,12 @@ horizontal: false
                   {% endif %}
                   <p class="card-text">{{ project.description }}</p>
                   <div class="d-flex flex-wrap badge-container" style="gap: 0.2rem; margin-bottom: 0.25rem;">
-                    {% for tag in project.tags %}
+                    {% for tag in project.tags limit:10 %}
                       <span class="badge badge-primary project-tag">{{ tag }}</span>
                     {% endfor %}
+                    {% if project.tags.size > 10 %}
+                      <span class="badge badge-primary project-tag" style="opacity:0.85;" title="{{ project.tags | join: ', ' }}">+{{ project.tags.size | minus: 10 }} more</span>
+                    {% endif %}
                   </div>
                 </div>
                 <div class="card-footer d-flex justify-content-between">

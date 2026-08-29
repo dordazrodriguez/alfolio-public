@@ -48,36 +48,22 @@ date: 2026-08-29
 show_date: true
 ---
 
-<div class="rnds-hero" style="margin: 0.5rem 0 1.75rem; padding: 1.25rem 1.5rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(14,165,233,0.06));">
-  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.75rem;">
+<div class="rnds-hero" style="margin: 0.5rem 0 1.2rem; padding: 1.4rem 1.6rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(14,165,233,0.06));">
+  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.85rem;">
     <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(2,132,199,0.12); border:1px solid rgba(2,132,199,0.2); color:#0369a1;">Autonomous</span>
     <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.2); color:#047857;">VPS-First</span>
     <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.2); color:#7e22ce;">Zero-Cost Ollama Option</span>
     <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.2); color:#b45309;">Production-Grade</span>
   </div>
-  <p style="font-size:1.15rem; line-height:1.6; margin:0; font-weight:500;">
-    An autonomous <strong>SaaS Idea R&D Lab</strong> that runs unattended on a VPS — continuously cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports → Learning</strong>. Not a one-off idea generator: every week it delivers the <em>5 strongest, evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, ARPU, MVP timeline, and the cheapest validation experiment.
+  <!-- ONE CLEAR LINE — the 10-second takeaway -->
+  <p style="font-size:1.55rem; line-height:1.25; margin:0; font-weight:800; letter-spacing:-0.02em; text-align:center; color:#0f172a;">
+    A 24/7 autonomous engine that finds, vets, and ranks profitable SaaS ideas — so you build only what the market will pay for.
   </p>
-  <div style="margin-top:1rem; padding:0.85rem 1rem; border-left:4px solid #0ea5e9; background:rgba(255,255,255,0.7); border-radius:0 8px 8px 0; font-style:italic; color:#334155;">
-    “Here are the 5 strongest opportunities I found this week, with receipts — who will pay, what they pay today, what’s missing in the market, and how we test it in 7 days without writing production code.”
-  </div>
-</div>
-
-<div class="rnds-stats" style="display:grid; grid-template-columns: repeat(auto-fit, minmax(140px,1fr)); gap:0.75rem; margin: 1rem 0 1.5rem;">
-  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
-    <div style="font-size:1.6rem; font-weight:800; line-height:1;">1497</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Signals Mined</div>
-  </div>
-  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
-    <div style="font-size:1.6rem; font-weight:800; line-height:1;">487</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Problems Extracted</div>
-  </div>
-  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
-    <div style="font-size:1.6rem; font-weight:800; line-height:1;">25</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Problem Clusters</div>
-  </div>
-  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
-    <div style="font-size:1.6rem; font-weight:800; line-height:1;">12</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Scored Opportunities</div>
-  </div>
-  <div style="padding:0.9rem 1rem; border-radius:10px; border:1px solid rgba(0,0,0,0.08); background:var(--global-card-bg-color, #fff); text-align:center;">
-    <div style="font-size:1.6rem; font-weight:800; line-height:1;">7</div><div style="font-size:0.8rem; color:#64748b; margin-top:0.2rem;">Specialized AI Agents</div>
+  <p style="font-size:1.02rem; line-height:1.6; margin:0.85rem 0 0; font-weight:500; color:#334155; text-align:center;">
+    An autonomous <strong>SaaS Idea R&D Lab</strong> cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports</strong> without human prompts. Every cycle delivers the <em>5 strongest evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, and the cheapest 7-day validation test.
+  </p>
+  <div style="margin-top:1rem; padding:0.85rem 1rem; border-left:4px solid #0ea5e9; background:rgba(255,255,255,0.7); border-radius:0 8px 8px 0; font-style:italic; color:#334155; font-size:0.95rem;">
+    “Here are the 5 strongest opportunities I found this week, with receipts — who will pay, what they pay today, what’s missing, and how we test it in 7 days without writing production code.”
   </div>
 </div>
 
@@ -96,8 +82,8 @@ show_date: true
 <style>
   html[data-theme='dark'] .rnds-hero { background: linear-gradient(135deg, rgba(56,189,248,0.12), rgba(14,165,233,0.08)) !important; border-color: rgba(255,255,255,0.12) !important; }
   html[data-theme='dark'] .rnds-hero div[style*="background:rgba(255,255,255,0.7)"] { background: rgba(15,23,42,0.6) !important; color: #cbd5e1 !important; }
-  html[data-theme='dark'] .rnds-stats div { background: rgba(30,41,59,0.6) !important; border-color: rgba(255,255,255,0.08) !important; }
-  html[data-theme='dark'] .rnds-stats div div:last-child { color: #94a3b8 !important; }
+  html[data-theme='dark'] .rnds-hero p[style*="color:#0f172a"] { color: #f1f5f9 !important; }
+  html[data-theme='dark'] .rnds-hero p[style*="color:#334155"] { color: #cbd5e1 !important; }
 </style>
 
 ## Business Value

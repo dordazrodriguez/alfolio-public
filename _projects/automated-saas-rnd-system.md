@@ -57,7 +57,7 @@ show_date: true
   </div>
   <!-- ONE CLEAR LINE — the 10-second takeaway -->
   <p style="font-size:1.55rem; line-height:1.25; margin:0; font-weight:800; letter-spacing:-0.02em; text-align:center; color:#0f172a;">
-    A 24/7 autonomous engine that finds, vets, and ranks profitable SaaS ideas — so you build only what the market will pay for.
+    A 24/7 autonomous engine that finds, vets, and ranks profitable SaaS ideas.
   </p>
   <p style="font-size:1.02rem; line-height:1.6; margin:0.85rem 0 0; font-weight:500; color:#334155; text-align:center;">
     An autonomous <strong>SaaS Idea R&D Lab</strong> cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports</strong> without human prompts. Every cycle delivers the <em>5 strongest evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, and the cheapest 7-day validation test.

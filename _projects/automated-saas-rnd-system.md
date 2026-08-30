@@ -49,12 +49,6 @@ show_date: true
 ---
 
 <div class="rnds-hero" style="margin: 0.5rem 0 1.2rem; padding: 1.4rem 1.6rem; border-radius: 12px; border: 1px solid rgba(0,0,0,0.08); background: linear-gradient(135deg, rgba(56,189,248,0.08), rgba(14,165,233,0.06));">
-  <div style="display:flex; flex-wrap:wrap; gap:0.5rem; margin-bottom:0.85rem;">
-    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(2,132,199,0.12); border:1px solid rgba(2,132,199,0.2); color:#0369a1;">Autonomous</span>
-    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(16,185,129,0.12); border:1px solid rgba(16,185,129,0.2); color:#047857;">VPS-First</span>
-    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(168,85,247,0.12); border:1px solid rgba(168,85,247,0.2); color:#7e22ce;">Zero-Cost Ollama Option</span>
-    <span style="font-size:0.75rem; font-weight:600; letter-spacing:0.04em; text-transform:uppercase; padding:0.3rem 0.6rem; border-radius:999px; background:rgba(245,158,11,0.12); border:1px solid rgba(245,158,11,0.2); color:#b45309;">Production-Grade</span>
-  </div>
   <!-- ONE CLEAR LINE — the 10-second takeaway -->
   <p style="font-size:1.55rem; line-height:1.25; margin:0; font-weight:800; letter-spacing:-0.02em; text-align:center; color:#0f172a;">
     A 24/7 autonomous engine that finds, vets, and ranks profitable SaaS ideas.

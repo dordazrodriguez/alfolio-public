@@ -67,8 +67,6 @@ show_date: true
   </div>
 </div>
 
-> **TL;DR for reviewers:** Production-grade, full-stack AI system (FastAPI + LangGraph + pgvector + Redis/Celery + Next.js) that **automates the entire venture research funnel** — from raw web signals to ranked, testable business cases — with cost-aware LLM routing, pgvector semantic clustering, and human-in-the-loop dashboard controls. Built to run for **months unattended**, compound evidence, and **de-risk building** by forcing a 7-agent red-team before any code.
-
 **At a glance**
 
 | | |

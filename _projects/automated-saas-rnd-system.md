@@ -56,9 +56,6 @@ show_date: true
   <p style="font-size:1.02rem; line-height:1.6; margin:0.85rem 0 0; font-weight:500; color:#334155; text-align:center;">
     An autonomous <strong>SaaS Idea R&D Lab</strong> cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports</strong> without human prompts. Every cycle delivers the <em>5 strongest evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, and the cheapest 7-day validation test.
   </p>
-  <div style="margin-top:1rem; padding:0.85rem 1rem; border-left:4px solid #0ea5e9; background:rgba(255,255,255,0.7); border-radius:0 8px 8px 0; font-style:italic; color:#334155; font-size:0.95rem;">
-    “Here are the 5 strongest opportunities I found this week, with receipts — who will pay, what they pay today, what’s missing, and how we test it in 7 days without writing production code.”
-  </div>
 </div>
 
 **At a glance**

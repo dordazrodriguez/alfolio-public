@@ -1,6 +1,6 @@
 ---
 layout: page
-title: "Automated SaaS Idea R&D System — Autonomous Venture Lab"
+title: "Automated SaaS R&D System — Autonomous Venture Lab"
 description: "An autonomous market intelligence and venture R&D system that continuously mines Reddit, Hacker News, GitHub, RSS and the web for evidence of problems, clusters them, dispatches a 7-agent research swarm, and produces scored, testable SaaS opportunity reports with Markdown documentation."
 category:
   - 'AI'
@@ -54,7 +54,7 @@ show_date: true
     A 24/7 autonomous engine that finds, vets, and ranks profitable SaaS ideas.
   </p>
   <p style="font-size:1.02rem; line-height:1.6; margin:0.85rem 0 0; font-weight:500; color:#334155; text-align:center;">
-    An autonomous <strong>SaaS Idea R&D Lab</strong> cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports</strong> without human prompts. Every cycle delivers the <em>5 strongest evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, and the cheapest 7-day validation test.
+    An autonomous <strong>SaaS R&D Lab</strong> cycling <strong>Signals → Problems → Clusters → Research → Scoring → Reports</strong> without human prompts. Every cycle delivers the <em>5 strongest evidence-backed opportunities</em> with ICP, competitors, TAM proxy, pricing, and the cheapest 7-day validation test.
   </p>
 </div>
 
@@ -143,11 +143,11 @@ show_date: true
 
 ## Business Value
 
-- **Never run out of pipeline**: 24/7 signal mining from Reddit, Hacker News, GitHub, RSS feeds, web search, app-store reviews, Product Hunt, G2, job postings, and government data.
-- **Evidence over vibes**: every opportunity is backed by scored signals, clustered problem evidence count, confidence, and testable hypotheses — not just LLM hallucinations.
-- **De-risk before building**: 7-agent research swarm tries to *disprove* the hypothesis (TAM, competitor gap, pricing, technical feasibility, red-team).
-- **Cheapest validation first**: each report includes testable hypotheses and MVP speed (weeks) so you can run a 1-week landing-page or concierge experiment before writing code.
-- **Cost controlled**: 3-tier LLM routing (Cheap/Medium/Strong), per-agent spend tracking, monthly budget alerts, and Ollama local fallback for zero API cost.
+- **Continuous opportunity pipeline**: Autonomous 24/7 signal acquisition across Reddit, Hacker News, GitHub, RSS, web search, app-store reviews, Product Hunt, G2, job boards, and government datasets — ensuring a persistent flow of validated problem candidates.
+- **Evidence-based prioritization**: Each opportunity is quantified with scored signals, clustered evidence volume, confidence intervals, and falsifiable hypotheses — grounded in empirical data rather than model speculation.
+- **Rigorous pre-build diligence**: A seven-agent research swarm adversarially stress-tests each thesis across market sizing (TAM/SAM/SOM), competitive landscape, pricing viability, technical feasibility, and red-team risk analysis.
+- **Capital-efficient validation**: Every report prescribes the lowest-cost validation path — with testable hypotheses and estimated MVP duration in weeks — enabling concierge or landing-page experiments within one week before engineering commitment.
+- **Governed operating cost**: Tiered LLM routing (Cheap/Medium/Strong), granular spend attribution per agent and model, automated budget guardrails, and local Ollama fallback for zero-marginal-cost inference.
 
 ## Architecture Overview
 
